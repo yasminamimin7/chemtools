@@ -814,9 +814,9 @@ elif menu == "📚 Panduan & Tips":
         st.dataframe(df_reaksi, use_container_width=True)
 
 st.divider()
-st.markdown(f"""
-<div style="text-align: center; color: {tema_aktif['text_color']}; opacity: 0.7;">
-    <p>🧪 <strong>ChemLab Mini Tools v2.0</strong> | Tema: <strong>{st.session_state.tema.upper()}</strong></p>
-    <p>© 2026 | Platform Pembelajaran Kimia Interaktif</p>
+st.markdown("""
+<div style="text-align: center; color: #888;">
+    <p>🧪 <strong>ChemLab Mini Tools</strong> | Dibuat untuk membantu pembelajaran kimia yang lebih interaktif</p>
+    <p>© 2026 | Versio 2.0</p>
 </div>
 """, unsafe_allow_html=True)
