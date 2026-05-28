@@ -872,7 +872,7 @@ if menu == "📊 Dashboard":
             "Tips Belajar": 10
         }
         
-        
+               fig = go.Figure(data=[ go.Bar(
             
                 x=list(aktivitas.keys()),
                 y=list(aktivitas.values()),
