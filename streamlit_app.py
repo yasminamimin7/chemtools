@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.graph_objects as go
 from datetime import datetime
 
 # ==================== CONFIG ====================
@@ -284,9 +285,15 @@ if menu == "📊 Dashboard":
             "Tips Belajar": 10
         }
         
-        
-        
-        
+        fig2 = go.Figure(data=[
+            go.Bar(
+                x=list(aktivitas.keys()),
+                y=list(aktivitas.values()),
+                marker=dict(color=tema_aktif['secondary'])
+            )
+        ])
+        fig2.update_layout(height=400, paper_bgcolor=tema_aktif['bg_color'], plot_bgcolor=tema_aktif['card_bg'], font=dict(color=tema_aktif['text_color']))
+        st.plotly_chart(fig2, use_container_width=True)
     
     st.divider()
     
@@ -731,6 +738,7 @@ elif menu == "🧠 Analisis Kesalahan Praktikum":
                 2. Gunakan pipet lebih kecil
                 3. Tambahkan indikator hati-hati
                 """)
+
 # ==================== PANDUAN & TIPS ====================
 elif menu == "📚 Panduan & Tips":
     st.header("📚 Panduan & Tips Belajar Kimia")
@@ -813,9 +821,9 @@ elif menu == "📚 Panduan & Tips":
         st.dataframe(df_reaksi, use_container_width=True)
 
 st.divider()
-st.markdown("""
-<div style="text-align: center; color: #888;">
-    <p>🧪 <strong>ChemLab Mini Tools</strong> | Dibuat untuk membantu pembelajaran kimia yang lebih interaktif</p>
-    <p>© 2026 | Versio 2.0</p>
+st.markdown(f"""
+<div style="text-align: center; color: {tema_aktif['text_color']}; opacity: 0.7;">
+    <p>🧪 <strong>ChemLab Mini Tools v2.0</strong> | Tema: <strong>{st.session_state.tema.upper()}</strong></p>
+    <p>© 2026 | Platform Pembelajaran Kimia Interaktif</p>
 </div>
 """, unsafe_allow_html=True)
