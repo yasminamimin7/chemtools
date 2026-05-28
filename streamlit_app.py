@@ -731,7 +731,6 @@ elif menu == "🧠 Analisis Kesalahan Praktikum":
                 2. Gunakan pipet lebih kecil
                 3. Tambahkan indikator hati-hati
                 """)
-
 # ==================== PANDUAN & TIPS ====================
 elif menu == "📚 Panduan & Tips":
     st.header("📚 Panduan & Tips Belajar Kimia")
