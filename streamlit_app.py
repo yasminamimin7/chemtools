@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import plotly.graph_objects as go
 from datetime import datetime
 
 # ==================== CONFIG ====================
@@ -208,7 +208,7 @@ with st.sidebar:
     • 🧮 Kalkulator pengenceran
     • 🎯 Game quiz warna reaksi
     • 🔧 Troubleshooting praktikum
-    • 🎨 6 tema warna berbeda
+    • 🎨 5 tema warna berbeda
     """)
 
 # ==================== DASHBOARD ====================
@@ -270,7 +270,7 @@ if menu == "📊 Dashboard":
                     marker=dict(colors=[tema_aktif['secondary'], tema_aktif['primary']])
                 )
             ])
-            fig.update_layout(height=400)
+            fig.update_layout(height=400, paper_bgcolor=tema_aktif['bg_color'], font=dict(color=tema_aktif['text_color']))
             st.plotly_chart(fig, use_container_width=True)
         else:
             st.info("📭 Belum ada data quiz. Mulai main quiz untuk melihat statistik!")
@@ -285,15 +285,15 @@ if menu == "📊 Dashboard":
             "Tips Belajar": 10
         }
         
-        fig = go.Figure(data=[
+        fig2 = go.Figure(data=[
             go.Bar(
                 x=list(aktivitas.keys()),
                 y=list(aktivitas.values()),
                 marker=dict(color=tema_aktif['secondary'])
             )
         ])
-        fig.update_layout(height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        fig2.update_layout(height=400, paper_bgcolor=tema_aktif['bg_color'], plot_bgcolor=tema_aktif['card_bg'], font=dict(color=tema_aktif['text_color']))
+        st.plotly_chart(fig2, use_container_width=True)
     
     st.divider()
     
@@ -432,7 +432,8 @@ elif menu == "📐 Kalkulator Pengenceran":
                             title="Perubahan Volume",
                             height=300,
                             paper_bgcolor=tema_aktif['bg_color'],
-                            plot_bgcolor=tema_aktif['card_bg']
+                            plot_bgcolor=tema_aktif['card_bg'],
+                            font=dict(color=tema_aktif['text_color'])
                         )
                         st.plotly_chart(fig, use_container_width=True)
                     else:
@@ -467,7 +468,8 @@ elif menu == "📐 Kalkulator Pengenceran":
                             title="Perubahan Konsentrasi",
                             height=300,
                             paper_bgcolor=tema_aktif['bg_color'],
-                            plot_bgcolor=tema_aktif['card_bg']
+                            plot_bgcolor=tema_aktif['card_bg'],
+                            font=dict(color=tema_aktif['text_color'])
                         )
                         st.plotly_chart(fig, use_container_width=True)
                     else:
