@@ -285,7 +285,7 @@ if menu == "📊 Dashboard":
         }
         
         
-        fig2.update_layout(height=400, paper_bgcolor=tema_aktif['bg_color'], plot_bgcolor=tema_aktif['card_bg'], font=dict(color=tema_aktif['text_color']))
+        
         st.plotly_chart(fig2, use_container_width=True)
     
     st.divider()
