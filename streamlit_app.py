@@ -284,13 +284,7 @@ if menu == "📊 Dashboard":
             "Tips Belajar": 10
         }
         
-        fig2 = go.Figure(data=[
-            go.Bar(
-                x=list(aktivitas.keys()),
-                y=list(aktivitas.values()),
-                marker=dict(color=tema_aktif['secondary'])
-            )
-        ])
+        
         fig2.update_layout(height=400, paper_bgcolor=tema_aktif['bg_color'], plot_bgcolor=tema_aktif['card_bg'], font=dict(color=tema_aktif['text_color']))
         st.plotly_chart(fig2, use_container_width=True)
     
