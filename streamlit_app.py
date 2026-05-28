@@ -874,7 +874,7 @@ if menu == "📊 Dashboard":
         
              
             
-                x=list(aktivitas.keys()),
+              
                 y=list(aktivitas.values()),
                 marker=dict(color=tema_aktif['secondary'])
             )
