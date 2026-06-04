@@ -915,7 +915,7 @@ elif menu == "📐 Kalkulator Pengenceran":
                 "Apa yang ingin dihitung?",
                 ["Volume Akhir (V2)", "Konsentrasi Akhir (M2)"]
             )
-                    if pilihan_hitung == "Volume Akhir (V2)":
+               
                 M2 = st.number_input("Konsentrasi Akhir (M2) [mol/L]", min_value=0.0, value=0.5, step=0.1)
                 hitung_btn = st.button("🔢 Hitung V2", use_container_width=True)
                 
