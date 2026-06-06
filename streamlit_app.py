@@ -80,9 +80,9 @@ st.markdown(f"""
     }}
 
     /* Text Colors */
-    h1, h2, h3, h4, h5, h6, p, label, span, div {{
-        color: {theme['text']} !important;
-    }}
+    h1, h2, h3, h4, h5, h6, p {
+    color: {theme['text']} !important;
+}
 
     /* Input Fields */
     div[data-baseweb="input"] input {{
@@ -126,6 +126,19 @@ st.markdown(f"""
         background-color: rgba(10, 25, 47, 0.9) !important;
         border-right: 2px solid {theme['primary']} !important;
     }}
+    /* Sidebar Text Fix */
+section[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
+section[data-testid="stSidebar"] label {
+    color: white !important;
+    font-weight: bold !important;
+}
+
+section[data-testid="stSidebar"] .stSelectbox div {
+    color: white !important;
+}
 
     /* Radio Buttons & Selectbox */
     div[role="radiogroup"] {{
@@ -211,8 +224,8 @@ with st.sidebar:
     
     # Main Menu
     st.markdown(f"<h3 style='color:{theme['accent']};'>📋 MENU UTAMA</h3>", unsafe_allow_html=True)
-    menu = st.selectbox(
-    "Pilih Fitur:",
+    menu = st.radio(
+    "",
     [
         "🏠 Beranda",
         "📊 Kalkulator Pengenceran",
@@ -223,7 +236,7 @@ with st.sidebar:
         "🧠 Analisis Kesalahan",
         "📚 Panduan Lengkap"
     ]
-    )    
+)
     st.divider()
 
     st.markdown(f"### 📌 Tentang Aplikasi")
