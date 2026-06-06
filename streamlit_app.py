@@ -18,31 +18,31 @@ if 'theme' not in st.session_state:
     st.session_state.theme = 'ocean'
 
 THEME_CONFIG = {
-  'ocean': {
-    'bg_gradient': 'linear-gradient(135deg, #1e3c72, #2a5298, #3b82f6, #60a5fa)',
+ 'ocean': {
+    'bg_gradient': 'linear-gradient(135deg, #1e3a5f, #2563eb, #3b82f6, #60a5fa)',
     'primary': '#60a5fa',
     'secondary': '#3b82f6',
-    'accent': '#93c5fd',
-    'text': '#f8fafc',
+    'accent': '#bfdbfe',
+    'text': '#ffffff',
     'input_bg': '#1e40af',
     'card_bg': 'rgba(255,255,255,0.12)',
 },
-  'sunset': {
-    'bg_gradient': 'linear-gradient(135deg, #4a1d12, #7c2d12, #9a3412, #c2410c)',
-    'primary': '#ea580c',
-    'secondary': '#c2410c',
-    'accent': '#fdba74',
-    'text': '#fff7ed',
-    'input_bg': '#7c2d12',
-    'card_bg': 'rgba(255,255,255,0.10)',
+ 'sunset': {
+    'bg_gradient': 'linear-gradient(135deg, #5b2c1d, #8b4513, #b85c38, #d97757)',
+    'primary': '#d97757',
+    'secondary': '#b85c38',
+    'accent': '#ffd6a5',
+    'text': '#ffffff',
+    'input_bg': '#7a3b20',
+    'card_bg': 'rgba(255,255,255,0.12)',
 },
     'forest': {
-    'bg_gradient': 'linear-gradient(135deg, #14532d, #166534, #16a34a, #4ade80)',
-    'primary': '#4ade80',
-    'secondary': '#16a34a',
-    'accent': '#bbf7d0',
-    'text': '#f0fdf4',
-    'input_bg': '#166534',
+    'bg_gradient': 'linear-gradient(135deg, #1b4332, #2d6a4f, #40916c, #52b788)',
+    'primary': '#52b788',
+    'secondary': '#40916c',
+    'accent': '#b7e4c7',
+    'text': '#ffffff',
+    'input_bg': '#2d6a4f',
     'card_bg': 'rgba(255,255,255,0.12)',
 },
 }
