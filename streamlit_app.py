@@ -188,15 +188,15 @@ header {{
         opacity: 0.5 !important;
     }}
     
-   [data-testid="collapsedControl"] {{
-        background: #2d9cdb !important;
-        border-radius: 8px !important;
+ [data-testid="collapsedControl"] {{
+    background-color: rgba(0,0,0,0.4) !important;
+    border: 2px solid white !important;
 }}
 
-[data-testid="collapsedControl"] svg {{
-    fill: white !important;
+[data-testid="collapsedControl"] * {{
     color: white !important;
-    opacity: 1 !important;
+    fill: white !important;
+    stroke: white !important;
 }}
    
 </style>
