@@ -53,10 +53,6 @@ theme = THEME_CONFIG[st.session_state.theme]
 # DYNAMIC STYLING
 # =========================
 st.markdown(f"""
-    button[kind="header"] {
-    color: white !important;
-    background: #2d9cdb !important;
-}
     <style>
     /* Background Animation */
     .stApp {{
@@ -189,6 +185,14 @@ st.markdown(f"""
         border: 1px solid {theme['primary']} !important;
         opacity: 0.5 !important;
     }}
+    /* Tombol buka/tutup sidebar */
+    [data-testid="collapsedControl"] {
+    color: white !important;
+    background: #2d9cdb !important;
+    border-radius: 8px !important;
+    padding: 5px !important;
+    opacity: 1 !important;
+}
     </style>
 """, unsafe_allow_html=True)
 
