@@ -70,12 +70,8 @@ st.markdown(f"""
     }}
 
     /* Glass Container */
-    .block-container {{
-        padding-top: 1rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        padding-bottom: 2rem;
-}}    
+    .block-container {
+        padding-top: 2.5 Rem;
         border-radius: 20px;
         background-color: {theme['card_bg']};
         box-shadow: 0px 8px 32px rgba(0,0,0,0.3);
