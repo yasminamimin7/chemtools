@@ -69,15 +69,16 @@ st.markdown(f"""
         100% {{background-position: 0% 50%;}}
     }}
 
-    /* Glass Container */
-    .block-container {{
-        padding-top: 2.5 Rem;
-        border-radius: 20px;
-        background-color: {theme['card_bg']};
-        box-shadow: 0px 8px 32px rgba(0,0,0,0.3);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(45, 156, 219, 0.2);
-    }}
+   /* Glass Container */
+.block-container {{
+    padding-top: 0rem !important;
+    padding-bottom: 1rem !important;
+    border-radius: 20px;
+    background-color: {theme['card_bg']};
+    box-shadow: 0px 8px 32px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(45, 156, 219, 0.2);
+}}
 
     /* Text Colors */
     h1, h2, h3, h4, h5, h6, p {{
