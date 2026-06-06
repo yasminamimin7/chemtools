@@ -223,9 +223,9 @@ menu = st.selectbox(
         "🧠 Analisis Kesalahan",
         "📚 Panduan Lengkap"
     ]
-)
+    )
     
-    st.divider()
+st.divider()
     st.markdown(f"### 📌 Tentang Aplikasi")
     st.info("""
     **ChemLab Mini Tools v3.0**
