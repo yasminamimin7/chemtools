@@ -211,7 +211,7 @@ with st.sidebar:
     
     # Main Menu
     st.markdown(f"<h3 style='color:{theme['accent']};'>📋 MENU UTAMA</h3>", unsafe_allow_html=True)
-   menu = st.selectbox(
+menu = st.selectbox(
     "Pilih Fitur:",
     [
         "🏠 Beranda",
