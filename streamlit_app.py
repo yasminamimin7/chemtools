@@ -182,7 +182,7 @@ st.markdown(f"""
     }}
     
     /* Tombol buka/tutup sidebar */
-    [data-testid= "collapsedControl"] {{
+    [data-testid="collapsedControl"] {{
         color: white !important;
         background: #2d9cdb !important;
         border-radius: 8px !important;
