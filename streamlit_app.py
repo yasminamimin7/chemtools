@@ -199,7 +199,7 @@ header {{
     opacity: 1 !important;
 }}
    
-    </style>
+</style>
 """, unsafe_allow_html=True)
 
 # =========================
