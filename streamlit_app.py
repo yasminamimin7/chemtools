@@ -7,7 +7,7 @@ from datetime import datetime
 # PAGE CONFIG
 # =========================
 st.set_page_config(
-    page_title="🧪 SPEKTRA 🔬",
+    page_title="🧪 SPEKTRA Mini Tools 🔬",
     layout="wide",
     initial_sidebar_state="expanded"
 )
