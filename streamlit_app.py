@@ -18,32 +18,32 @@ if 'theme' not in st.session_state:
     st.session_state.theme = 'ocean'
 
 THEME_CONFIG = {
-    'ocean': {
-    'bg_gradient': 'linear-gradient(135deg, #4facfe, #43e97b, #38bdf8, #60a5fa)',
-    'primary': '#38bdf8',
-    'secondary': '#60a5fa',
-    'accent': '#ffffff',
-    'text': '#ffffff',
-    'input_bg': '#dbeafe',
-    'card_bg': 'rgba(255,255,255,0.15)',
+  'ocean': {
+    'bg_gradient': 'linear-gradient(135deg, #1e3c72, #2a5298, #3b82f6, #60a5fa)',
+    'primary': '#60a5fa',
+    'secondary': '#3b82f6',
+    'accent': '#93c5fd',
+    'text': '#f8fafc',
+    'input_bg': '#1e40af',
+    'card_bg': 'rgba(255,255,255,0.12)',
 },
-    'sunset': {
-    'bg_gradient': 'linear-gradient(135deg, #ffb347, #ffcc70, #ff8a65, #ff6b9d)',
-    'primary': '#ff8a65',
-    'secondary': '#ffb347',
-    'accent': '#ffffff',
-    'text': '#ffffff',
-    'input_bg': '#fff3e0',
-    'card_bg': 'rgba(255,255,255,0.15)',
+   'sunset': {
+    'bg_gradient': 'linear-gradient(135deg, #7c2d12, #c2410c, #ea580c, #fb923c)',
+    'primary': '#fb923c',
+    'secondary': '#ea580c',
+    'accent': '#fed7aa',
+    'text': '#fff7ed',
+    'input_bg': '#9a3412',
+    'card_bg': 'rgba(255,255,255,0.12)',
 },
     'forest': {
-    'bg_gradient': 'linear-gradient(135deg, #84fab0, #8fd3f4, #52b788, #74c69d)',
-    'primary': '#52b788',
-    'secondary': '#74c69d',
-    'accent': '#ffffff',
-    'text': '#ffffff',
-    'input_bg': '#e8f5e9',
-    'card_bg': 'rgba(255,255,255,0.15)',
+    'bg_gradient': 'linear-gradient(135deg, #14532d, #166534, #16a34a, #4ade80)',
+    'primary': '#4ade80',
+    'secondary': '#16a34a',
+    'accent': '#bbf7d0',
+    'text': '#f0fdf4',
+    'input_bg': '#166534',
+    'card_bg': 'rgba(255,255,255,0.12)',
 },
 }
 
