@@ -175,9 +175,7 @@ st.markdown(f"""
         color: #f44336;
     }}
 
-    /* Toolbar Hide */
-    div[data-testid="stToolbar"] {{
-        display: none !important;
+  
     }}
 
     /* Divider */
