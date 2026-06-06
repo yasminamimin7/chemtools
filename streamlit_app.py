@@ -127,6 +127,7 @@ st.markdown(f"""
         border-right: 2px solid {theme['primary']} !important;
     }}
     /* Sidebar Text Fix */
+    /*
     section[data-testid="stSidebar"] * {{
     color: white !important;
 }}
@@ -138,7 +139,7 @@ st.markdown(f"""
 
     section[data-testid="stSidebar"] .stSelectbox div {{
     color: white !important;
-}}
+}}*/
 
     /* Radio Buttons & Selectbox */
     div[role="radiogroup"] {{
