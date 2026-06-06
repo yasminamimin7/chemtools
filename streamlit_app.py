@@ -374,7 +374,7 @@ if menu == "🏠 Beranda":
     
     with col1:
         st.markdown(f"""
-        ### 🌟 Mengapa Pilih ChemLab?
+        ### 🌟 Mengapa Pilih SPEKTRA?
         
         ✅ **User-Friendly** - Interface yang mudah digunakan untuk semua level
         
