@@ -128,7 +128,7 @@ st.markdown(f"""
     }}
     /* Sidebar Text Fix */
     section[data-testid="stSidebar"] * {
-   
+    color: white !important;
 }
 
 section[data-testid="stSidebar"] label {
