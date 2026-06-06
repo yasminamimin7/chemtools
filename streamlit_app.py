@@ -126,7 +126,7 @@ st.markdown(f"""
         background-color: rgba(10, 25, 47, 0.9) !important;
         border-right: 2px solid {theme['primary']} !important;
     }}
-    /* Sidebar Text Fix */
+   /* /* Sidebar Text Fix */*/
     /*
     section[data-testid="stSidebar"] * {{
     color: white !important;
