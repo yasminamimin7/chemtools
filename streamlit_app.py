@@ -27,14 +27,14 @@ THEME_CONFIG = {
     'input_bg': '#1e40af',
     'card_bg': 'rgba(255,255,255,0.12)',
 },
-   'sunset': {
-    'bg_gradient': 'linear-gradient(135deg, #7c2d12, #c2410c, #ea580c, #fb923c)',
-    'primary': '#fb923c',
-    'secondary': '#ea580c',
-    'accent': '#fed7aa',
+  'sunset': {
+    'bg_gradient': 'linear-gradient(135deg, #4a1d12, #7c2d12, #9a3412, #c2410c)',
+    'primary': '#ea580c',
+    'secondary': '#c2410c',
+    'accent': '#fdba74',
     'text': '#fff7ed',
-    'input_bg': '#9a3412',
-    'card_bg': 'rgba(255,255,255,0.12)',
+    'input_bg': '#7c2d12',
+    'card_bg': 'rgba(255,255,255,0.10)',
 },
     'forest': {
     'bg_gradient': 'linear-gradient(135deg, #14532d, #166534, #16a34a, #4ade80)',
@@ -129,10 +129,11 @@ header {{
     }}
 
     /* Sidebar */
-    section[data-testid="stSidebar"] {{
-        background-color: rgba(10, 25, 47, 0.9) !important;
-        border-right: 2px solid {theme['primary']} !important;
-    }}
+  section[data-testid="stSidebar"] {{
+    background-color: rgba(255,255,255,0.12) !important;
+    backdrop-filter: blur(15px);
+    border-right: 2px solid {theme['primary']} !important;
+}}
    /* /* Sidebar Text Fix */*/
     /*
     section[data-testid="stSidebar"] * {{
