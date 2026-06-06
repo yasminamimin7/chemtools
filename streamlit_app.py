@@ -70,7 +70,7 @@ st.markdown(f"""
     }}
 
     /* Glass Container */
-    .block-container {
+    .block-container {{
         padding-top: 2.5 Rem;
         border-radius: 20px;
         background-color: {theme['card_bg']};
