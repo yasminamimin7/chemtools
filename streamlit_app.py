@@ -131,12 +131,12 @@ st.markdown(f"""
     color: white !important;
 }
 
-section[data-testid="stSidebar"] label {
+    section[data-testid="stSidebar"] label {{
     color: white !important;
     font-weight: bold !important;
-}
+}}
 
-section[data-testid="stSidebar"] .stSelectbox div {
+    section[data-testid="stSidebar"] .stSelectbox div {
     color: white !important;
 }
 
