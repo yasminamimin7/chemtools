@@ -1,452 +1,405 @@
 import streamlit as st
+import pandas as pd
+from datetime import datetime
 
 st.set_page_config(
-    page_title="SPEKTRA - Materi Kuliah",
-    page_icon="📚",
-    layout="wide"
+    page_title="SPEKTRA - Smart Platform for Chemical Analysis",
+    page_icon="🧪",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
+# ==========================
+# CSS STYLING
+# ==========================
 st.markdown("""
 <style>
-    .materi-card {
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        border-left: 5px solid #667eea;
-        margin: 15px 0;
+    * {
+        margin: 0;
+        padding: 0;
     }
     
-    .section-header {
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+    }
+    
+    .main-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 40px 30px;
+        border-radius: 0;
+        color: white;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        text-align: center;
+    }
+    
+    .main-header h1 {
+        font-size: 3em;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    
+    .main-header p {
+        font-size: 1.2em;
+        opacity: 0.95;
+    }
+    
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .feature-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-left: 6px solid #667eea;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        border-left-color: #764ba2;
+    }
+    
+    .feature-card h3 {
+        color: #2d3748;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+    }
+    
+    .feature-card p {
+        color: #4a5568;
+        line-height: 1.6;
+    }
+    
+    .metric-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .metric-box {
+        padding: 25px;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+        border-top: 5px solid #667eea;
+        transition: all 0.3s ease;
+    }
+    
+    .metric-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    
+    .metric-box h3 {
+        color: #667eea;
+        font-size: 2.5em;
+        margin: 10px 0;
+    }
+    
+    .metric-box p {
+        color: #4a5568;
+        font-size: 1.1em;
+    }
+    
+    .info-banner {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 15px;
-        border-radius: 8px;
-        margin: 20px 0 15px 0;
+        padding: 25px;
+        border-radius: 12px;
+        margin: 20px 0;
+        text-align: center;
     }
     
-    .formula-box {
-        background: #f5f5f5;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 4px solid #667eea;
-        margin: 15px 0;
-        font-family: monospace;
+    .divider {
+        margin: 40px 0;
+        border: none;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #667eea, transparent);
     }
     
-    .highlight {
-        background: #fff9e6;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 4px solid #ffc107;
-        margin: 15px 0;
+    .section-title {
+        color: #2d3748;
+        font-size: 2em;
+        margin: 30px 0 20px 0;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
     }
     
-    .example-box {
-        background: #e8f5e9;
-        padding: 15px;
-        border-radius: 8px;
-        margin: 15px 0;
+    .footer {
+        text-align: center;
+        color: #718096;
+        padding: 30px 20px;
+        margin-top: 40px;
+        border-top: 2px solid #e2e8f0;
+    }
+    
+    @media (max-width: 768px) {
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .metric-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 </style>
 """, unsafe_allow_html=True)
 
-st.title("📚 Materi Kuliah - Pembelajaran Kimia Interaktif")
-st.markdown("Akses materi pembelajaran lengkap dengan penjelasan detail, rumus, dan contoh soal")
+# ==========================
+# MAIN HEADER
+# ==========================
+st.markdown("""
+<div class='main-header'>
+    <h1>🧪 SPEKTRA</h1>
+    <p>Smart Platform for Chemical Analysis and Laboratory Tools</p>
+    <p style='font-size: 1em; opacity: 0.85; margin-top: 10px;'>Platform Terintegrasi untuk Analisis Kimia, Manajemen Laboratorium, dan Pembelajaran Interaktif</p>
+</div>
+""", unsafe_allow_html=True)
 
-st.markdown("---")
+# ==========================
+# FEATURE SHOWCASE
+# ==========================
+st.markdown("<h2 class='section-title'>✨ Fitur Unggulan</h2>", unsafe_allow_html=True)
 
-# Pilih topik
-st.subheader("📖 Pilih Topik Pembelajaran")
-
-topics = {
-    "Stoichiometri": "stoichiometri",
-    "Struktur Atom": "atom",
-    "Ikatan Kimia": "ikatan",
-    "Reaksi Kimia": "reaksi",
-    "Asam dan Basa": "asam_basa"
-}
-
-selected_topic = st.selectbox("Pilih Topik:", list(topics.keys()))
-
-st.markdown("---")
-
-# STOICHIOMETRI
-if selected_topic == "Stoichiometri":
-    st.markdown("""
-    <div class='section-header'>
-        <h2>⚗️ Stoichiometri - Hukum Perbandingan Massa</h2>
+st.markdown("""
+<div class='feature-grid'>
+    <div class='feature-card'>
+        <h3>🧪 Kalkulator Pengenceran</h3>
+        <p>Hitung pengenceran larutan dengan mudah menggunakan rumus M1V1 = M2V2. Tersedia 4 metode perhitungan untuk memudahkan Anda menentukan volume dan konsentrasi yang tepat untuk pengenceran larutan kimia.</p>
     </div>
-    """, unsafe_allow_html=True)
     
-    st.subheader("📖 Definisi")
-    st.markdown("""
-    Stoichiometri adalah cabang ilmu kimia yang mempelajari hubungan kuantitatif antara reaktan dan produk dalam suatu reaksi kimia. 
-    Stoichiometri berdasarkan hukum-hukum dasar kimia seperti hukum perbandingan tetap dan hukum perbandingan berganda.
-    """)
-    
-    st.subheader("🔢 Konsep Dasar")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        **1. Mol**
-        - Satuan jumlah zat
-        - 1 mol = 6.022 × 10²³ partikel (Bilangan Avogadro)
-        - n = m/Mr (moles = massa/massa molar)
-        """)
-    
-    with col2:
-        st.markdown("""
-        **2. Massa Molar (Mr)**
-        - Jumlah massa relatif atom-atom penyusun senyawa
-        - Dinyatakan dalam g/mol
-        - Contoh: Mr(H₂O) = 2(1) + 16 = 18 g/mol
-        """)
-    
-    st.markdown("---")
-    
-    st.subheader("📐 Rumus Stoichiometri")
-    
-    st.markdown("""
-    <div class='formula-box'>
-    <strong>Menghitung Jumlah Mol:</strong><br>
-    n = m / Mr<br>
-    <br>
-    Keterangan:<br>
-    n = jumlah mol (mol)<br>
-    m = massa zat (gram)<br>
-    Mr = massa molar (g/mol)<br>
+    <div class='feature-card'>
+        <h3>🔬 ChemScan</h3>
+        <p>Database lengkap bahan kimia dengan informasi detail meliputi: sifat fisik, tingkat bahaya, alat pelindung diri (APD), kondisi penyimpanan yang aman, reaktivitas, dan tindakan darurat untuk keselamatan laboratorium.</p>
     </div>
-    """, unsafe_allow_html=True)
     
-    st.markdown("""
-    <div class='formula-box'>
-    <strong>Dari Persamaan Reaksi:</strong><br>
-    Jika: aA + bB → cC + dD<br>
-    Maka: nA/a = nB/b = nC/c = nD/d<br>
+    <div class='feature-card'>
+        <h3>📝 Quiz Center</h3>
+        <p>Uji pemahaman Anda tentang kimia melalui quiz interaktif dengan bank soal lengkap. Fitur ini dirancang untuk meningkatkan pengetahuan dengan pembahasan detail untuk setiap jawaban.</p>
     </div>
-    """, unsafe_allow_html=True)
     
-    st.markdown("---")
-    
-    st.subheader("📚 Contoh Soal & Pembahasan")
-    
-    with st.expander("Contoh 1: Menghitung Jumlah Mol"):
-        st.markdown("""
-        **Soal:** Berapa mol NaCl yang terdapat dalam 58.5 gram NaCl? (Mr NaCl = 58.5)
-        
-        **Penyelesaian:**
-        
-        n = m / Mr = 58.5 / 58.5 = 1 mol
-        
-        **Jawab:** 1 mol NaCl
-        """)
-    
-    with st.expander("Contoh 2: Stoichiometri Reaksi"):
-        st.markdown("""
-        **Soal:** Persamaan reaksi: 2H₂ + O₂ → 2H₂O
-        
-        Jika tersedia 8 mol H₂, berapa mol O₂ yang diperlukan dan berapa mol H₂O yang dihasilkan?
-        
-        **Penyelesaian:**
-        
-        Dari persamaan: 2H₂ : 1O₂ : 2H₂O
-        
-        Untuk H₂O yang dihasilkan:
-        - nH₂ / 2 = nH₂O / 2
-        - 8 / 2 = nH₂O / 2
-        - nH₂O = 8 mol
-        
-        Untuk O₂ yang diperlukan:
-        - nH₂ / 2 = nO₂ / 1
-        - 8 / 2 = nO₂ / 1
-        - nO₂ = 4 mol
-        
-        **Jawab:** O₂ yang diperlukan = 4 mol, H₂O yang dihasilkan = 8 mol
-        """)
+    <div class='feature-card'>
+        <h3>📚 Materi Kuliah</h3>
+        <p>Akses materi pembelajaran kimia yang komprehensif dengan penjelasan detail, rumus-rumus penting, contoh soal, dan tips belajar untuk berbagai topik kimia dari tingkat dasar hingga lanjutan.</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
-# STRUKTUR ATOM
-elif selected_topic == "Struktur Atom":
-    st.markdown("""
-    <div class='section-header'>
-        <h2>⚛️ Struktur Atom - Model Atom Bohr dan Mekanika Kuantum</h2>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.subheader("📖 Definisi")
-    st.markdown("""
-    Atom terdiri dari inti (proton dan neutron) dan kulit elektron. Struktur atom menjelaskan 
-    bagaimana elektron tersusun dalam tingkat energi dan orbital di sekitar inti.
-    """)
-    
-    st.subheader("🔬 Partikel Penyusun Atom")
-    
-    particles_data = {
-        "Partikel": ["Proton", "Neutron", "Elektron"],
-        "Simbol": ["p⁺", "n⁰", "e⁻"],
-        "Lokasi": ["Inti", "Inti", "Kulit"],
-        "Muatan": ["+1", "0", "-1"],
-        "Massa (amu)": ["1", "1", "0.0005"]
-    }
-    
-    st.table(particles_data)
-    
-    st.markdown("---")
-    
-    st.subheader("📐 Bilangan Kuantum")
-    
-    st.markdown("""
-    <div class='formula-box'>
-    <strong>Ada 4 Bilangan Kuantum yang Menjelaskan Posisi Elektron:</strong><br>
-    <br>
-    1. <strong>n (Bilangan Kuantum Utama):</strong> 1, 2, 3, 4, ... (tingkat energi/kulit)<br>
-    2. <strong>l (Bilangan Kuantum Azimut):</strong> 0, 1, 2, ..., (n-1) (tipe orbital: s, p, d, f)<br>
-    3. <strong>m (Bilangan Kuantum Magnetik):</strong> -l, ..., 0, ..., +l (orientasi orbital)<br>
-    4. <strong>s (Bilangan Kuantum Spin):</strong> +½ atau -½ (arah spin elektron)<br>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    
-    st.subheader("📚 Contoh Soal")
-    
-    with st.expander("Contoh: Menentukan Orbital Elektron"):
-        st.markdown("""
-        **Soal:** Tentukan orbital dari elektron dengan bilangan kuantum n=3, l=2
-        
-        **Penyelesaian:**
-        - n = 3 (kulit ke-3)
-        - l = 2 (orbital d, karena: s=0, p=1, d=2, f=3)
-        - Orbital = 3d
-        
-        **Jawab:** Elektron berada di orbital 3d
-        """)
+# ==========================
+# STATISTICS
+# ==========================
+st.markdown("<h2 class='section-title'>📊 Statistik Platform</h2>", unsafe_allow_html=True)
 
-# IKATAN KIMIA
-elif selected_topic == "Ikatan Kimia":
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
     st.markdown("""
-    <div class='section-header'>
-        <h2>🔗 Ikatan Kimia - Jenis dan Sifat Ikatan</h2>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.subheader("📖 Definisi")
-    st.markdown("""
-    Ikatan kimia adalah gaya tarik-menarik yang mengikat atom-atom satu sama lain membentuk senyawa. 
-    Ikatan terbentuk untuk mencapai konfigurasi elektron yang stabil.
-    """)
-    
-    st.subheader("🔗 Jenis-Jenis Ikatan Kimia")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-        <div class='materi-card'>
-        <h4>Ikatan Ion</h4>
-        <p><strong>Terjadi antara:</strong> Logam + Non-logam</p>
-        <p><strong>Cara terbentuk:</strong> Transfer elektron</p>
-        <p><strong>Contoh:</strong> NaCl, KBr, MgO</p>
-        <p><strong>Sifat:</strong> Larut dalam air, mudah terbakar, konduktor saat cair</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class='materi-card'>
-        <h4>Ikatan Kovalen</h4>
-        <p><strong>Terjadi antara:</strong> Non-logam + Non-logam</p>
-        <p><strong>Cara terbentuk:</strong> Berbagi elektron</p>
-        <p><strong>Contoh:</strong> H₂, CO₂, CH₄</p>
-        <p><strong>Sifat:</strong> Tidak larut dalam air, titik didih rendah</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class='materi-card'>
-        <h4>Ikatan Logam</h4>
-        <p><strong>Terjadi antara:</strong> Logam + Logam</p>
-        <p><strong>Cara terbentuk:</strong> Laut elektron</p>
-        <p><strong>Contoh:</strong> Fe, Cu, Al</p>
-        <p><strong>Sifat:</strong> Konduktor, plastis, lenting</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    
-    st.subheader("💡 Ikatan Kovalen Polar vs Non-Polar")
-    
-    st.markdown("""
-    <div class='highlight'>
-    <strong>Perbedaan Keelektronegatifan menentukan polaritas:</strong><br>
-    <br>
-    • ΔEN = 0 → Kovalen Non-Polar<br>
-    • 0 < ΔEN < 1.7 → Kovalen Polar<br>
-    • ΔEN ≥ 1.7 → Ikatan Ion<br>
+    <div class='metric-box'>
+        <h3>500+</h3>
+        <p>Bahan Kimia</p>
     </div>
     """, unsafe_allow_html=True)
 
-# REAKSI KIMIA
-elif selected_topic == "Reaksi Kimia":
+with col2:
     st.markdown("""
-    <div class='section-header'>
-        <h2>⚗️ Reaksi Kimia - Jenis dan Persamaan Reaksi</h2>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.subheader("📖 Definisi")
-    st.markdown("""
-    Reaksi kimia adalah proses perubahan suatu zat menjadi zat lain yang berbeda melalui pemutusan 
-    dan pembentukan ikatan kimia.
-    """)
-    
-    st.subheader("🔄 Jenis-Jenis Reaksi Kimia")
-    
-    with st.expander("1️⃣ Reaksi Sintesis (Kombinasi)"):
-        st.markdown("""
-        **Persamaan Umum:** A + B → AB
-        
-        **Contoh:**
-        - C + O₂ → CO₂
-        - 2H₂ + O₂ → 2H₂O
-        """)
-    
-    with st.expander("2️⃣ Reaksi Dekomposisi"):
-        st.markdown("""
-        **Persamaan Umum:** AB → A + B
-        
-        **Contoh:**
-        - 2H₂O₂ → 2H₂O + O₂ (pemecahan hidrogen peroksida)
-        - 2KMnO₄ → K₂MnO₄ + MnO₂ + O₂
-        """)
-    
-    with st.expander("3️⃣ Reaksi Pertukaran Tunggal"):
-        st.markdown("""
-        **Persamaan Umum:** A + BC → AC + B
-        
-        **Contoh:**
-        - Zn + CuSO₄ → ZnSO₄ + Cu
-        - Fe + 2HCl → FeCl₂ + H₂
-        """)
-    
-    with st.expander("4️⃣ Reaksi Pertukaran Ganda"):
-        st.markdown("""
-        **Persamaan Umum:** AB + CD → AD + CB
-        
-        **Contoh:**
-        - AgNO₃ + NaCl → AgCl↓ + NaNO₃
-        - HCl + NaOH → NaCl + H₂O
-        """)
-    
-    st.markdown("---")
-    
-    st.subheader("🔍 Menyetarakan Persamaan Reaksi")
-    
-    st.markdown("""
-    <div class='example-box'>
-    <strong>Contoh: Menyetarakan Fe + O₂ → Fe₂O₃</strong><br>
-    <br>
-    1. Hitung atom di setiap sisi<br>
-    2. Tentukan unsur dengan jumlah atom paling banyak<br>
-    3. Mulai dari atom yang paling kompleks<br>
-    4. Verifikasi keseteraan<br>
-    <br>
-    <strong>Hasil Akhir: 4Fe + 3O₂ → 2Fe₂O₃</strong>
+    <div class='metric-box'>
+        <h3>100+</h3>
+        <p>Quiz Soal</p>
     </div>
     """, unsafe_allow_html=True)
 
-# ASAM DAN BASA
-elif selected_topic == "Asam dan Basa":
+with col3:
     st.markdown("""
-    <div class='section-header'>
-        <h2>🧪 Asam dan Basa - pH dan Buffer</h2>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.subheader("📖 Definisi")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        <div class='materi-card'>
-        <h4>Asam</h4>
-        <p><strong>Menurut Arrhenius:</strong> Zat yang melepaskan H⁺ dalam air</p>
-        <p><strong>Sifat:</strong></p>
-        <ul>
-        <li>Rasa asam</li>
-        <li>pH < 7</li>
-        <li>Menggandur kertas lakmus biru</li>
-        <li>Contoh: HCl, H₂SO₄</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class='materi-card'>
-        <h4>Basa</h4>
-        <p><strong>Menurut Arrhenius:</strong> Zat yang melepaskan OH⁻ dalam air</p>
-        <p><strong>Sifat:</strong></p>
-        <ul>
-        <li>Rasa pahit, licin</li>
-        <li>pH > 7</li>
-        <li>Menggandur kertas lakmus merah</li>
-        <li>Contoh: NaOH, KOH</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    
-    st.subheader("📐 Skala pH")
-    
-    st.markdown("""
-    <div class='formula-box'>
-    <strong>pH = -log[H⁺]</strong><br>
-    <strong>pOH = -log[OH⁻]</strong><br>
-    <strong>pH + pOH = 14</strong><br>
-    <br>
-    Skala pH:<br>
-    • pH < 7 → Asam<br>
-    • pH = 7 → Netral<br>
-    • pH > 7 → Basa<br>
+    <div class='metric-box'>
+        <h3>50+</h3>
+        <p>Materi Pembelajaran</p>
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("---")
+with col4:
+    st.markdown("""
+    <div class='metric-box'>
+        <h3>24/7</h3>
+        <p>Akses Penuh</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-# Download materi
-st.subheader("📥 Download Materi")
+# ==========================
+# INTRODUCTION
+# ==========================
+st.markdown("<h2 class='section-title'>🎯 Tentang SPEKTRA</h2>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.download_button(
-        label="📄 Download Ringkasan Materi (PDF)",
-        data=b"Materi PDF",
-        file_name="Materi_Kimia_SPEKTRA.pdf",
-        mime="application/pdf",
-        disabled=True
-    )
+    st.markdown("""
+    **SPEKTRA** adalah platform pendidikan dan manajemen laboratorium yang dirancang khusus untuk mendukung pembelajaran kimia modern. 
+    
+    Dengan antarmuka yang intuitif dan fitur-fitur canggih, SPEKTRA membantu:
+    - 🎓 Mahasiswa dalam memahami konsep kimia
+    - 👨‍🔬 Peneliti dalam manajemen bahan kimia
+    - 🏫 Pengajar dalam menyampaikan materi pembelajaran
+    - 🔬 Teknisi laboratorium dalam keselamatan kerja
+    """)
 
 with col2:
-    st.download_button(
-        label="📋 Download Soal Latihan (DOCX)",
-        data=b"Soal Latihan",
-        file_name="Soal_Latihan_SPEKTRA.docx",
-        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        disabled=True
-    )
+    st.markdown("""
+    **Keunggulan SPEKTRA:**
+    
+    ✅ Interface modern dan user-friendly  
+    ✅ Database bahan kimia paling lengkap  
+    ✅ Quiz interaktif dengan pembahasan  
+    ✅ Materi pembelajaran terlengkap  
+    ✅ Fitur keselamatan laboratorium  
+    ✅ Akses 24/7 dari mana saja  
+    ✅ Gratis dan open source  
+    """)
 
-st.markdown("---")
+# ==========================
+# QUICK START
+# ==========================
+st.markdown("<h2 class='section-title'>🚀 Mulai Sekarang</h2>", unsafe_allow_html=True)
 
-# Footer
 st.markdown("""
-<div style="text-align: center; color: #666; padding: 20px; margin-top: 30px;">
-    <p>📚 Materi Kuliah SPEKTRA | Pembelajaran Kimia Komprehensif | Dibuat dengan ❤️ untuk kemajuan pendidikan</p>
+<div class='info-banner'>
+    <h3>Pilih Fitur dari Menu Samping untuk Memulai</h3>
+    <p style='margin-top: 10px; font-size: 1.1em;'>Gunakan sidebar (☰) untuk menavigasi ke fitur yang Anda inginkan</p>
 </div>
 """, unsafe_allow_html=True)
+
+# ==========================
+# FEATURES DETAIL
+# ==========================
+st.markdown("<h2 class='section-title'>📖 Panduan Penggunaan</h2>", unsafe_allow_html=True)
+
+tab1, tab2, tab3, tab4 = st.tabs([
+    "🧪 Kalkulator", 
+    "🔬 ChemScan", 
+    "📝 Quiz", 
+    "📚 Materi"
+])
+
+with tab1:
+    st.subheader("🧪 Cara Menggunakan Kalkulator Pengenceran")
+    st.markdown("""
+    1. **Pilih Metode** - Tentukan variabel apa yang ingin Anda hitung
+    2. **Masukkan Data** - Isi nilai yang Anda ketahui
+    3. **Klik Hitung** - Dapatkan hasil perhitungan
+    4. **Lihat Penjelasan** - Baca cara kerja dan rekomendasi
+    
+    **Metode yang Tersedia:**
+    - Hitung Volume Akhir (V2)
+    - Hitung Konsentrasi Akhir (M2)
+    - Hitung Konsentrasi Awal (M1)
+    - Hitung Volume Awal (V1)
+    """)
+
+with tab2:
+    st.subheader("🔬 Cara Menggunakan ChemScan")
+    st.markdown("""
+    1. **Cari Bahan Kimia** - Gunakan search bar untuk mencari
+    2. **Baca Informasi** - Lihat sifat fisik dan bahaya
+    3. **Perhatikan APD** - Ketahui alat pelindung yang diperlukan
+    4. **Download Info** - Simpan data dalam format TXT
+    
+    **Informasi yang Tersedia:**
+    - Sifat Fisik (titik didih, densitas, dll)
+    - Tingkat Bahaya
+    - Gejala Paparan
+    - APD yang Diperlukan
+    - Kondisi Penyimpanan
+    - Tindakan Darurat
+    """)
+
+with tab3:
+    st.subheader("📝 Cara Menggunakan Quiz Center")
+    st.markdown("""
+    1. **Pilih Topik** - Pilih topik yang ingin Anda kuasai
+    2. **Tentukan Jumlah Soal** - Sesuaikan tingkat kesulitan
+    3. **Jawab Soal** - Pilih jawaban yang tepat
+    4. **Lihat Pembahasan** - Pelajari penjelasan jawaban
+    5. **Cek Skor** - Lihat hasil dan review jawaban
+    
+    **Topik Tersedia:**
+    - Stoichiometri
+    - Struktur Atom
+    - Ikatan Kimia
+    - Reaksi Kimia
+    - Asam dan Basa
+    """)
+
+with tab4:
+    st.subheader("📚 Cara Menggunakan Materi Kuliah")
+    st.markdown("""
+    1. **Pilih Topik** - Pilih materi yang ingin dipelajari
+    2. **Baca Penjelasan** - Pahami konsep dan teori
+    3. **Pelajari Rumus** - Ketahui formula penting
+    4. **Lihat Contoh** - Pelajari dari contoh soal
+    5. **Download Materi** - Simpan materi untuk referensi
+    
+    **Topik Pembelajaran:**
+    - Stoichiometri
+    - Struktur Atom
+    - Ikatan Kimia
+    - Reaksi Kimia
+    - Asam dan Basa
+    """)
+
+# ==========================
+# FOOTER
+# ==========================
+st.markdown("""
+<div class='footer'>
+    <p style='font-size: 1.2em; margin-bottom: 15px;'>🧪 SPEKTRA | Smart Platform for Chemical Analysis and Laboratory Tools</p>
+    <p>© 2026 | Dikembangkan dengan ❤️ untuk kemajuan pendidikan kimia</p>
+    <p style='margin-top: 15px; font-size: 0.9em;'>Lisensi: Apache 2.0 | Open Source | Gratis untuk semua pengguna</p>
+</div>
+""", unsafe_allow_html=True)
+
+# ==========================
+# SIDEBAR
+# ==========================
+with st.sidebar:
+    st.markdown("### 📚 Menu Navigasi")
+    st.markdown("""
+    Pilih fitur dari menu di atas:
+    
+    - 🧪 **Kalkulator Pengenceran**
+    - 🔬 **ChemScan**
+    - 📝 **Quiz Center**
+    - 📚 **Materi Kuliah**
+    """)
+    
+    st.divider()
+    
+    st.markdown("### ℹ️ Informasi")
+    st.markdown("""
+    **Versi:** 1.0.0  
+    **Platform:** Streamlit  
+    **Lisensi:** Apache 2.0  
+    
+    Hubungi kami untuk saran!
+    """)
+    
+    st.divider()
+    
+    st.markdown("### 🔗 Tautan Cepat")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("[GitHub](#)")
+    with col2:
+        st.markdown("[Dokumentasi](#)")
