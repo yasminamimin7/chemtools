@@ -188,7 +188,16 @@ header {{
         opacity: 0.5 !important;
     }}
     
-    /* Tombol buka/tutup sidebar */
+   [data-testid="collapsedControl"] {{
+        background: #2d9cdb !important;
+        border-radius: 8px !important;
+}}
+
+[data-testid="collapsedControl"] svg {{
+    fill: white !important;
+    color: white !important;
+    opacity: 1 !important;
+}}
    
     </style>
 """, unsafe_allow_html=True)
