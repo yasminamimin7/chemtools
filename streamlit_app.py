@@ -188,15 +188,20 @@ header {{
         opacity: 0.5 !important;
     }}
     
- [data-testid="collapsedControl"] {{
-    background-color: rgba(0,0,0,0.4) !important;
-    border: 2px solid white !important;
+[data-testid="collapsedControl"] {{
+    background: transparent !important;
 }}
 
-[data-testid="collapsedControl"] * {{
-    color: white !important;
-    fill: white !important;
-    stroke: white !important;
+[data-testid="collapsedControl"] svg {{
+    fill: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+    color: #FFFFFF !important;
+    opacity: 1 !important;
+}}
+
+[data-testid="collapsedControl"] path {{
+    fill: #FFFFFF !important;
+    stroke: #FFFFFF !important;
 }}
    
 </style>
