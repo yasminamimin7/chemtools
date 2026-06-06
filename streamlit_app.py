@@ -53,7 +53,7 @@ theme = THEME_CONFIG[st.session_state.theme]
 # DYNAMIC STYLING
 # =========================
 st.markdown(f"""
-button[kind="header"] {
+    button[kind="header"] {
     color: white !important;
     background: #2d9cdb !important;
 }
