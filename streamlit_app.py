@@ -7,7 +7,7 @@ from datetime import datetime
 # PAGE CONFIG
 # =========================
 st.set_page_config(
-    page_title="🧪 ChemLab Mini Tools",
+    page_title="🧪 SPEKTRA 🔬",
     layout="wide",
     initial_sidebar_state="expanded"
 )
