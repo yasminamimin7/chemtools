@@ -1,94 +1,148 @@
-# ChemLab Mini Tools v4.0 (Revisi)
-# Catatan:
-# Ini adalah kerangka revisi untuk menggantikan beberapa bagian yang bermasalah:
-# - number_input tanpa value=None
-# - quiz anti-spam skor
-# - history dibatasi
-# - reset analisis
-# - CSS lebih aman
-
 import streamlit as st
 import pandas as pd
-from datetime import datetime
+from datetime import date
 
 st.set_page_config(
-    page_title="ChemLab Mini Tools v4.0",
+    page_title="SmartLab C",
+    page_icon="🧪",
     layout="wide"
 )
 
-if "history" not in st.session_state:
-    st.session_state.history = []
+# ==========================
+# CSS
+# ==========================
+st.markdown("""
+<style>
+.main {
+    background-color: #f8fafc;
+}
 
-if "skor" not in st.session_state:
-    st.session_state.skor = 0
+.metric-box {
+    padding:15px;
+    border-radius:15px;
+    background:white;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    text-align:center;
+}
 
-if "total" not in st.session_state:
-    st.session_state.total = 0
+h1 {
+    color:#0f172a;
+}
+</style>
+""", unsafe_allow_html=True)
 
-if "jawaban_tercek" not in st.session_state:
-    st.session_state.jawaban_tercek = {}
+# ==========================
+# SESSION STATE
+# ==========================
+if "alat" not in st.session_state:
+    st.session_state.alat = pd.DataFrame({
+        "Nama Alat":[
+            "Neraca Analitik",
+            "pH Meter",
+            "Spektrofotometer UV-Vis"
+        ],
+        "Status":[
+            "Baik",
+            "Baik",
+            "Rusak Ringan"
+        ],
+        "Kalibrasi":[
+            "2026-06-10",
+            "2026-07-15",
+            "2026-06-25"
+        ]
+    })
 
-st.title("ðŸ§ª ChemLab Mini Tools v4.0")
+# ==========================
+# HEADER
+# ==========================
+st.title("🧪 SmartLab C")
+st.subheader("Sistem Monitoring Alat Laboratorium")
 
-menu = st.sidebar.selectbox(
-    "Menu",
-    ["Kalkulator Pengenceran", "Quiz Reaksi"]
-)
+# ==========================
+# METRIC
+# ==========================
+df = st.session_state.alat
 
-if menu == "Kalkulator Pengenceran":
-    st.subheader("Câ‚Vâ‚ = Câ‚‚Vâ‚‚")
+total = len(df)
+baik = len(df[df["Status"]=="Baik"])
+rusak_ringan = len(df[df["Status"]=="Rusak Ringan"])
+rusak_berat = len(df[df["Status"]=="Rusak Berat"])
 
-    c1 = st.number_input("Câ‚", min_value=0.0, step=0.1)
-    v1 = st.number_input("Vâ‚", min_value=0.0, step=0.1)
-    c2 = st.number_input("Câ‚‚", min_value=0.0, step=0.1)
+col1,col2,col3,col4 = st.columns(4)
 
-    if st.button("Hitung Vâ‚‚"):
-        if c2 == 0:
-            st.error("Câ‚‚ tidak boleh nol")
-        else:
-            v2 = (c1 * v1) / c2
-            st.success(f"Vâ‚‚ = {v2:.3f}")
+col1.metric("Total Alat", total)
+col2.metric("Baik", baik)
+col3.metric("Rusak Ringan", rusak_ringan)
+col4.metric("Rusak Berat", rusak_berat)
 
-            st.session_state.history.append({
-                "waktu": datetime.now().strftime("%H:%M:%S"),
-                "hasil": f"Vâ‚‚ = {v2:.3f}"
-            })
+st.divider()
 
-            if len(st.session_state.history) > 50:
-                st.session_state.history.pop(0)
+# ==========================
+# INPUT DATA
+# ==========================
+st.header("➕ Tambah Data Alat")
 
-    if st.session_state.history:
-        st.dataframe(pd.DataFrame(st.session_state.history))
+with st.form("form_alat"):
 
-elif menu == "Quiz Reaksi":
-    soal = {
-        "pertanyaan": "Agâº + Clâ» menghasilkan endapan berwarna?",
-        "pilihan": ["Putih", "Merah", "Biru"],
-        "jawaban": "Putih"
-    }
+    nama = st.text_input("Nama Alat")
 
-    st.write(soal["pertanyaan"])
-
-    jawab = st.radio(
-        "Pilih",
-        soal["pilihan"]
+    status = st.selectbox(
+        "Status",
+        ["Baik","Rusak Ringan","Rusak Berat"]
     )
 
-    if st.button("Cek Jawaban"):
-        idx = 0
+    kalibrasi = st.date_input(
+        "Tanggal Kalibrasi"
+    )
 
-        if idx not in st.session_state.jawaban_tercek:
-            st.session_state.total += 1
+    submit = st.form_submit_button("Simpan")
 
-            if jawab == soal["jawaban"]:
-                st.session_state.skor += 1
-                st.success("Benar")
-            else:
-                st.error("Salah")
+    if submit:
 
-            st.session_state.jawaban_tercek[idx] = True
-        else:
-            st.warning("Soal ini sudah dinilai")
+        data_baru = pd.DataFrame({
+            "Nama Alat":[nama],
+            "Status":[status],
+            "Kalibrasi":[kalibrasi]
+        })
 
-    st.metric("Skor", st.session_state.skor)
-    st.metric("Total", st.session_state.total)
+        st.session_state.alat = pd.concat(
+            [st.session_state.alat,data_baru],
+            ignore_index=True
+        )
+
+        st.success("Data berhasil ditambahkan!")
+
+# ==========================
+# TABEL
+# ==========================
+st.header("📋 Data Alat")
+
+st.dataframe(
+    st.session_state.alat,
+    use_container_width=True
+)
+
+# ==========================
+# DOWNLOAD
+# ==========================
+csv = st.session_state.alat.to_csv(index=False)
+
+st.download_button(
+    "⬇ Download CSV",
+    csv,
+    "data_alat.csv",
+    "text/csv"
+)
+
+# ==========================
+# GRAFIK
+# ==========================
+st.header("📊 Statistik Status Alat")
+
+chart = (
+    st.session_state.alat["Status"]
+    .value_counts()
+)
+
+st.bar_chart(chart)
