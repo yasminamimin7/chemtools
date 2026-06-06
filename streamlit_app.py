@@ -55,13 +55,20 @@ theme = THEME_CONFIG[st.session_state.theme]
 st.markdown(f"""
     <style>
     /* Background Animation */
-    .stApp {{
-        background: {theme['bg_gradient']};
-        background-size: 400% 400%;
-        animation: gradientBG 14s ease infinite;
-        color: {theme['text']};
-    }}
+.stApp {{
+    background: {theme['bg_gradient']};
+    background-size: 400% 400%;
+    animation: gradientBG 14s ease infinite;
+    color: {theme['text']};
+}}
 
+[data-testid="stHeader"] {{
+    background: transparent !important;
+}}
+
+header {{
+    background: transparent !important;
+}}
     @keyframes gradientBG {{
         0% {{background-position: 0% 50%;}}
         50% {{background-position: 100% 50%;}}
@@ -182,13 +189,7 @@ st.markdown(f"""
     }}
     
     /* Tombol buka/tutup sidebar */
-    [data-testid="collapsedControl"] {{
-        color: white !important;
-        background: #2d9cdb !important;
-        border-radius: 8px !important;
-        padding: 5px !important;
-        opacity: 1 !important;
-}}
+   
     </style>
 """, unsafe_allow_html=True)
 
