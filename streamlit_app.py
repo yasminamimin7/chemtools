@@ -261,7 +261,7 @@ with st.sidebar:
 
     st.markdown(f"### 📌 Tentang Aplikasi")
     st.info("""
-    **SPEKTRA v1.0**
+    **SPEKTRA Mini Tools v1.0**
     
     Platform pembelajaran kimia yang interaktif dan inspiratif!
     
@@ -328,7 +328,7 @@ chemical_db = {
 # =========================
 st.markdown(f"""
     <div style='text-align:center;margin-bottom:2rem;'>
-        <h1 style='color:{theme['accent']};font-size:3rem;margin:0;'>🔬 SPEKTRA🧪 </h1>
+        <h1 style='color:{theme['accent']};font-size:3rem;margin:0;'>🔬 SPEKTRA Mini Tools🧪 </h1>
         <p style='color:{theme['primary']};font-size:1.2rem;margin-top:0.5rem;'>
             ✨ Smart Platform for Chemistry Analysis and Laboratory Tools ✨
         </p>
@@ -1116,7 +1116,7 @@ st.divider()
 # =========================
 st.markdown(f"""
 <div style='text-align:center;padding:2rem;opacity:0.8;border-top:1px solid {theme['primary']};margin-top:2rem;'>
-    <p style='font-size:1.1rem;color:{theme['accent']};'>🔬 <strong>SPEKTRA v1.0</strong> 🧪</p>
+    <p style='font-size:1.1rem;color:{theme['accent']};'>🔬 <strong>SPEKTRA Mini Tools v1.0</strong> 🧪</p>
     <p style='margin-top:0.5rem;'>✨ Belajar Kimia Lebih Seru dan Interaktif ✨</p>
     <p style='margin-top:1rem;font-size:0.9rem;opacity:0.7;'>
         Tema Aktif: <strong>{st.session_state.theme.upper()}</strong> | 
