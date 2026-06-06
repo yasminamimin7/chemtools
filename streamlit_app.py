@@ -9,7 +9,7 @@ from datetime import datetime
 st.set_page_config(
     page_title="🧪 ChemLab Mini Tools",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 # =========================
 # THEME MANAGEMENT
