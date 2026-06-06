@@ -223,7 +223,7 @@ menu = st.selectbox(
         "🧠 Analisis Kesalahan",
         "📚 Panduan Lengkap"
     ]
-
+    )    
     st.divider()
 
     st.markdown(f"### 📌 Tentang Aplikasi")
