@@ -208,189 +208,22 @@ with st.sidebar:
             st.rerun()
     
     st.divider()
-    chemical_db = {
-
-    "HCl": {
-        "nama":"Hydrochloric Acid",
-        "rumus":"HCl",
-        "mr":"36.46",
-        "bahaya":"Korosif",
-        "simbol":"☣️",
-        "apd":"Sarung tangan, kacamata",
-        "penyimpanan":"Lemari asam",
-        "reaktivitas":"Bereaksi dengan basa menghasilkan garam dan air"
-    },
-
-    "NaOH":{
-        "nama":"Sodium Hydroxide",
-        "rumus":"NaOH",
-        "mr":"40.00",
-        "bahaya":"Korosif kuat",
-        "simbol":"⚠️",
-        "apd":"Sarung tangan, kacamata",
-        "penyimpanan":"Tempat kering",
-        "reaktivitas":"Bereaksi dengan asam"
-    },
-
-    "KMnO4":{
-        "nama":"Potassium Permanganate",
-        "rumus":"KMnO₄",
-        "mr":"158.03",
-        "bahaya":"Oksidator kuat",
-        "simbol":"🔥",
-        "apd":"Sarung tangan",
-        "penyimpanan":"Botol gelap",
-        "reaktivitas":"Bereaksi dengan reduktor"
-    },
-
-    "AgNO3":{
-        "nama":"Silver Nitrate",
-        "rumus":"AgNO₃",
-        "mr":"169.87",
-        "bahaya":"Oksidator",
-        "simbol":"☠️",
-        "apd":"Sarung tangan",
-        "penyimpanan":"Botol gelap",
-        "reaktivitas":"Bereaksi dengan ion klorida"
-    }
-}
-    elif menu == "🔬 ChemScan":
-
-    st.title("🔬 ChemScan")
-
-    bahan = st.selectbox(
-        "Pilih Bahan Kimia",
-        list(chemical_db.keys())
-    )
-
-    data = chemical_db[bahan]
-
-    st.subheader(data["nama"])
-
-    st.write("🧪 Rumus :", data["rumus"])
-    st.write("⚖️ Mr :", data["mr"])
-    st.write("☣️ Bahaya :", data["bahaya"])
-    st.write("🚨 Simbol :", data["simbol"])
-    st.write("🥽 APD :", data["apd"])
-    st.write("📦 Penyimpanan :", data["penyimpanan"])
-    st.write("⚗️ Reaktivitas :", data["reaktivitas"])
-    elif menu == "⚗️ Reaksi Titrasi":
-
-    st.title("⚗️ Reaksi Titrasi")
-
-    jenis = st.selectbox(
-        "Pilih Jenis Titrasi",
-        [
-            "Asam Basa",
-            "Permanganometri",
-            "Argentometri",
-            "Kompleksometri"
-        ]
-    )
-
-    if jenis == "Asam Basa":
-
-        st.latex(
-            r"HCl + NaOH \rightarrow NaCl + H_2O"
-        )
-
-        st.success(
-            "Indikator PP berubah dari tidak berwarna menjadi merah muda."
-        )
-
-    elif jenis == "Permanganometri":
-
-        st.latex(
-            r"MnO_4^- + Fe^{2+} \rightarrow Fe^{3+}"
-        )
-
-        st.success(
-            "Warna ungu KMnO₄ menghilang."
-        )
-
-    elif jenis == "Argentometri":
-
-        st.latex(
-            r"AgNO_3 + Cl^- \rightarrow AgCl \downarrow"
-        )
-
-        st.success(
-            "Terbentuk endapan putih AgCl."
-        )
-
-    elif jenis == "Kompleksometri":
-
-        st.latex(
-            r"Ca^{2+} + EDTA \rightarrow Ca-EDTA"
-        )
-
-        st.success(
-            "Ion logam membentuk kompleks dengan EDTA."
-        )
-        elif menu == "📝 Quiz Center":
-
-    st.title("📝 Quiz Kimia")
-
-    skor = 0
-
-    q1 = st.radio(
-        "1. Standar primer untuk NaOH?",
-        [
-            "NaCl",
-            "KHP",
-            "NH4OH",
-            "HCl"
-        ]
-    )
-
-    q2 = st.radio(
-        "2. Warna KMnO4?",
-        [
-            "Merah",
-            "Ungu",
-            "Hijau",
-            "Biru"
-        ]
-    )
-
-    q3 = st.radio(
-        "3. AgNO3 bereaksi dengan Cl⁻ menghasilkan?",
-        [
-            "AgCl",
-            "NaCl",
-            "AgOH",
-            "Ag2SO4"
-        ]
-    )
-
-    if st.button("Periksa Jawaban"):
-
-        if q1 == "KHP":
-            skor += 1
-
-        if q2 == "Ungu":
-            skor += 1
-
-        if q3 == "AgCl":
-            skor += 1
-
-        st.success(
-            f"Skor Anda = {skor}/3"
-        )
+    
     # Main Menu
     st.markdown(f"<h3 style='color:{theme['accent']};'>📋 MENU UTAMA</h3>", unsafe_allow_html=True)
-    menu = st.selectbox(
-        "Pilih Fitur:",
+   menu = st.selectbox(
+    "Pilih Fitur:",
     [
-    "🏠 Beranda",
-    "🧪 Kalkulator Pengenceran",
-    "🔬 ChemScan",
-    "⚗️ Reaksi Titrasi",
-    "📝 Quiz Center",
-    "🧠 Analisis Kesalahan",
-    "📚 Panduan Lengkap"
-]
-    )
+        "🏠 Beranda",
+        "📊 Kalkulator Pengenceran",
+        "🔬 ChemScan",
+        "⚗️ Reaksi Titrasi",
+        "📝 Quiz Center",
+        "🎮 Tebak Warna Reaksi",
+        "🧠 Analisis Kesalahan",
+        "📚 Panduan Lengkap"
+    ]
+)
     
     st.divider()
     st.markdown(f"### 📌 Tentang Aplikasi")
@@ -406,6 +239,56 @@ with st.sidebar:
     • 🎨 3 tema warna cantik
     • 📖 Panduan lengkap
     """)
+# =========================
+# DATABASE CHEMSCAN
+# =========================
+
+chemical_db = {
+
+    "HCl": {
+        "nama":"Hydrochloric Acid",
+        "rumus":"HCl",
+        "mr":"36.46",
+        "bahaya":"Korosif",
+        "simbol":"☣️",
+        "apd":"Sarung tangan, kacamata",
+        "penyimpanan":"Lemari asam",
+        "reaktivitas":"Bereaksi dengan basa menghasilkan garam dan air"
+    },
+
+    "NaOH": {
+        "nama":"Sodium Hydroxide",
+        "rumus":"NaOH",
+        "mr":"40.00",
+        "bahaya":"Korosif kuat",
+        "simbol":"⚠️",
+        "apd":"Sarung tangan, kacamata",
+        "penyimpanan":"Tempat kering",
+        "reaktivitas":"Bereaksi dengan asam"
+    },
+
+    "KMnO4": {
+        "nama":"Potassium Permanganate",
+        "rumus":"KMnO₄",
+        "mr":"158.03",
+        "bahaya":"Oksidator kuat",
+        "simbol":"🔥",
+        "apd":"Sarung tangan",
+        "penyimpanan":"Botol gelap",
+        "reaktivitas":"Bereaksi dengan reduktor"
+    },
+
+    "AgNO3": {
+        "nama":"Silver Nitrate",
+        "rumus":"AgNO₃",
+        "mr":"169.87",
+        "bahaya":"Oksidator",
+        "simbol":"☠️",
+        "apd":"Sarung tangan",
+        "penyimpanan":"Botol gelap",
+        "reaktivitas":"Bereaksi dengan ion klorida"
+    }
+}
 
 # =========================
 # TITLE SECTION
@@ -1058,7 +941,141 @@ elif menu == "📚 Panduan Lengkap":
         | End point susah dilihat | Gunakan cahaya lebih baik |
         | Konsentrasi tidak akurat | Kalibrasi ulang larutan standar |
         """)
+# =========================
+# CHEMSCAN
+# =========================
 
+elif menu == "🔬 ChemScan":
+
+    st.title("🔬 ChemScan")
+
+    bahan = st.selectbox(
+        "Pilih Bahan Kimia",
+        list(chemical_db.keys())
+    )
+
+    data = chemical_db[bahan]
+
+    st.subheader(data["nama"])
+
+    st.write("🧪 Rumus :", data["rumus"])
+    st.write("⚖️ Mr :", data["mr"])
+    st.write("☣️ Bahaya :", data["bahaya"])
+    st.write("🚨 Simbol :", data["simbol"])
+    st.write("🥽 APD :", data["apd"])
+    st.write("📦 Penyimpanan :", data["penyimpanan"])
+    st.write("⚗️ Reaktivitas :", data["reaktivitas"])
+# =========================
+# REAKSI TITRASI
+# =========================
+
+elif menu == "⚗️ Reaksi Titrasi":
+
+    st.title("⚗️ Reaksi Titrasi")
+
+    jenis = st.selectbox(
+        "Pilih Jenis Titrasi",
+        [
+            "Asam Basa",
+            "Permanganometri",
+            "Argentometri",
+            "Kompleksometri"
+        ]
+    )
+
+    if jenis == "Asam Basa":
+
+        st.latex(
+            r"HCl + NaOH \rightarrow NaCl + H_2O"
+        )
+
+        st.success(
+            "Perubahan warna indikator PP: tidak berwarna → merah muda"
+        )
+
+    elif jenis == "Permanganometri":
+
+        st.latex(
+            r"MnO_4^- + Fe^{2+} \rightarrow Fe^{3+}"
+        )
+
+        st.success(
+            "Warna ungu KMnO₄ menghilang"
+        )
+
+    elif jenis == "Argentometri":
+
+        st.latex(
+            r"AgNO_3 + Cl^- \rightarrow AgCl \downarrow"
+        )
+
+        st.success(
+            "Terbentuk endapan putih AgCl"
+        )
+
+    elif jenis == "Kompleksometri":
+
+        st.latex(
+            r"Ca^{2+} + EDTA \rightarrow Ca-EDTA"
+        )
+
+        st.success(
+            "Terjadi pembentukan kompleks logam-EDTA"
+        )
+# =========================
+# QUIZ CENTER
+# =========================
+
+elif menu == "📝 Quiz Center":
+
+    st.title("📝 Quiz Kimia")
+
+    skor = 0
+
+    q1 = st.radio(
+        "1. Larutan standar primer untuk standarisasi NaOH?",
+        [
+            "NaCl",
+            "KHP",
+            "NH4OH",
+            "HCl"
+        ]
+    )
+
+    q2 = st.radio(
+        "2. Warna larutan KMnO4 adalah?",
+        [
+            "Merah",
+            "Hijau",
+            "Ungu",
+            "Biru"
+        ]
+    )
+
+    q3 = st.radio(
+        "3. AgNO3 bereaksi dengan Cl⁻ menghasilkan?",
+        [
+            "AgCl",
+            "AgOH",
+            "NaCl",
+            "KCl"
+        ]
+    )
+
+    if st.button("Periksa Jawaban"):
+
+        if q1 == "KHP":
+            skor += 1
+
+        if q2 == "Ungu":
+            skor += 1
+
+        if q3 == "AgCl":
+            skor += 1
+
+        st.success(
+            f"Skor Anda = {skor}/3"
+        )
 st.divider()
 
 # =========================
