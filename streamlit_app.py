@@ -89,8 +89,8 @@ header {{
     /* Text Colors */
     h1, h2, h3, h4, h5, h6, p {{
     color: {theme['text']} !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }}
-
     /* Input Fields */
     div[data-baseweb="input"] input {{
         background-color: {theme['input_bg']} !important;
@@ -130,9 +130,8 @@ header {{
 
     /* Sidebar */
   section[data-testid="stSidebar"] {{
-    background-color: rgba(255,255,255,0.12) !important;
-    backdrop-filter: blur(15px);
-    border-right: 2px solid {theme['primary']} !important;
+    background: rgba(255,255,255,0.15) !important;
+    backdrop-filter: blur(12px);
 }}
    /* /* Sidebar Text Fix */*/
     /*
