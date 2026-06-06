@@ -1,870 +1,284 @@
 import streamlit as st
 import pandas as pd
+
 from datetime import datetime
-# ==================== CONFIG ====================
+
+# =========================
+# PAGE CONFIG
+# =========================
 st.set_page_config(
-    page_title="🧪 ChemLab Mini Tools",
-    page_icon="🧪",
+    page_title="ðŸ§ª ChemLab Mini Tools",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
-st.markdown("""
-    <style>
-    .metric-card {
-        background-color: #f0f2f6;
-        padding: 20px;
-        border-radius: 10px;
-        border-left: 5px solid #FF6B6B;
-    }
-    .success-card {
-        background-color: #d4edda;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 5px solid #28a745;
-    }
-     .error-card {
-        background-color: #f8d7da;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 5px solid #dc3545;
-    }
-    </style>
-""", unsafe_allow_html=True)
+# =========================
+# THEME MANAGEMENT
+# =========================
+if 'theme' not in st.session_state:
+    st.session_state.theme = 'ocean'
 
-# ==================== SIDEBAR ====================
-with st.sidebar:
-    st.markdown("# ⚙️ Menu Utama")
-    menu = st.selectbox(
-        "Pilih Fitur",
-        [
-            "🏠 Beranda",
-            "📊 Kalkulator Pengenceran",
-            "🎮 Tebak Warna Reaksi",
-            "🧠 Analisis Kesalahan Praktikum",
-            "📚 Panduan & Tips"
-        ]
-      )
-    
-    st.divider()
-    st.markdown("### 📌 Tentang Aplikasi")
-    st.info("ChemLab Mini Tools membantu Anda belajar kimia dengan cara yang interaktif dan menyenangkan!")
-
-# ==================== HALAMAN UTAMA ====================
-if menu == "🏠 Beranda":
-    st.title("🧪 ChemLab Mini Tools")
-    st.markdown("### Selamat datang di platform pembelajaran kimia interaktif!")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-        <div class="metric-card">
-            <h3>📊 Kalkulator</h3>
-            <p>Hitung pengenceran larutan dengan mudah</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class="metric-card">
-            <h3>🎮 Game Quiz</h3>
-             <p>Asah pengetahuan dengan tebak warna reaksi</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class="metric-card">
-            <h3>🧠 Troubleshooting</h3>
-            <p>Analisis kesalahan praktikum Anda</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.divider()
-    st.markdown("### 🚀 Mulai Sekarang!")
-    st.markdown("Pilih fitur di menu sebelah kiri untuk memulai pembelajaran!")
-
-# ==================== KALKULATOR PENGENCERAN ====================
-elif menu == "📊 Kalkulator Pengenceran":
-    st.header("📊 Kalkulator Pengenceran")
-    st.markdown("Gunakan rumus: **M₁V₁ = M₂V₂**")
-    
-    tab1, tab2, tab3 = st.tabs(["📐 Kalkulator", "📖 Panduan", "💾 Riwayat"])
-    
-    with tab1:
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.subheader("Input Data")
-            M1 = st.number_input("Konsentrasi Awal (M1) [mol/L]", min_value=0.0, value=1.0, step=0.1)
-            V1 = st.number_input("Volume Awal (V1) [mL]", min_value=0.0, value=100.0, step=10.0)
-            
-            pilihan_hitung = st.radio(
-                "Apa yang ingin dihitung?",
-                ["Volume Akhir (V2)", "Konsentrasi Akhir (M2)"]
-            )
-            
-            if pilihan_hitung == "Volume Akhir (V2)":
-                M2 = st.number_input("Konsentrasi Akhir (M2) [mol/L]", min_value=0.0, value=0.5, step=0.1)
-                hitung_btn = st.button("🔢 Hitung V2", use_container_width=True)
-                
-                if hitung_btn:
-                    if M2 != 0:
-                        V2 = (M1 * V1) / M2
-                        st.markdown(f"""
-                        <div class="success-card">
-                            <h4>✅ Hasil Perhitungan</h4>
-                            <h2>V2 = {V2:.2f} mL</h2>
-                            <p><strong>Arti:</strong> Encerkan {V1:.0f} mL larutan {M1} M dengan air hingga volumenya menjadi {V2:.2f} mL</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                        
-                        # Visualisasi
-                        fig = go.Figure()
-                        fig.add_trace(go.Bar(
-                            x=['Awal', 'Akhir'],
-                            y=[V1, V2],
-                            marker=dict(color=['#FF6B6B', '#4ECDC4']),
-                            text=[f'{V1:.0f} mL', f'{V2:.2f} mL'],
-                            textposition='auto',
-                        ))
-                        fig.update_layout(title="Perubahan Volume", height=300)
-                        st.plotly_chart(fig, use_container_width=True)
-                    else:
-                        st.error("❌ M2 tidak boleh nol!")
-            
-            else:  # Hitung M2
-                V2 = st.number_input("Volume Akhir (V2) [mL]", min_value=0.0, value=200.0, step=10.0)
-                hitung_btn = st.button("🔢 Hitung M2", use_container_width=True)
-                
-                if hitung_btn:
-                    if V2 != 0:
-                        M2 = (M1 * V1) / V2
-                        st.markdown(f"""
-                        <div class="success-card">
-                            <h4>✅ Hasil Perhitungan</h4>
-                            <h2>M2 = {M2:.4f} mol/L</h2>
-                            <p><strong>Arti:</strong> Konsentrasi larutan setelah pengenceran menjadi {M2:.4f} mol/L</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                        
-                        # Visualisasi
-                        fig = go.Figure()
-                        fig.add_trace(go.Bar(
-                            x=['Awal', 'Akhir'],
-                            y=[M1, M2],
-                            marker=dict(color=['#FF6B6B', '#4ECDC4']),
-                            text=[f'{M1:.2f} mol/L', f'{M2:.4f} mol/L'],
-                            textposition='auto',
-                        ))
-                        fig.update_layout(title="Perubahan Konsentrasi", height=300)
-                        st.plotly_chart(fig, use_container_width=True)
-                    else:
-                        st.error("❌ V2 tidak boleh nol!")
-     
-        with col2:
-            st.subheader("📐 Rumus & Formula")
-            st.info("""
-            **Rumus Pengenceran:**
-            
-            M₁V₁ = M₂V₂
-            
-            Dimana:
-            - M₁ = Konsentrasi awal (mol/L)
-            - V₁ = Volume awal (mL)
-            - M₂ = Konsentrasi akhir (mol/L)
-            - V₂ = Volume akhir (mL)
-            """)
-            
-            st.warning("""
-            **💡 Tips Penting:**
-            - Pastikan satuan volume konsisten
-            - Pengenceran = M berkurang, V bertambah
-            - Jumlah mol zat terlarut tetap sama
-            """)
-    
-    with tab2:
-        st.markdown("""
-        ### 📖 Panduan Pengenceran Larutan
-        
-        **Apa itu pengenceran?**
-        Pengenceran adalah proses menambahkan pelarut (biasanya air) ke dalam larutan untuk menurunkan konsentrasinya.
-        
-        **Langkah-langkah praktis:**
-        1. Hitung berapa banyak larutan pekat yang dibutuhkan
-        2. Hitung berapa banyak pelarut (air) yang ditambahkan
-        3. Campurkan perlahan sambil diaduk
-        4. Biarkan sebentar agar merata
-        
-        **Contoh soal:**
-        - Anda punya 100 mL larutan HCl 2 M
-        - Ingin membuat larutan HCl 0.5 M
-        - Berapa volume akhir yang dihasilkan?
-        - **Jawab:** V₂ = (2 × 100) / 0.5 = 400 mL
-        """)
-    
-    with tab3:
-        st.info("💾 Riwayat perhitungan akan ditampilkan di sini")
-
-# ==================== TEBAK WARNA REAKSI ====================
-elif menu == "🎮 Tebak Warna Reaksi":
-    st.header("🎮 Tebak Warna Reaksi - Game Quiz")
-    
-    if 'skor' not in st.session_state:
-        st.session_state.skor = 0
-        st.session_state.total = 0
-    
-    # Soal-soal
-    soal_list = [
-        {
-            "pertanyaan": "KMnO4 + Fe²⁺ → warna apa?",
-            "pilihan": ["Ungu", "Bening", "Coklat", "Hijau"],
-            "jawaban": "Bening",
-            "penjelasan": "KMnO4 (ungu) tereduksi menjadi Mn²⁺ (tidak berwarna). Ungu hilang → Bening"
-        },
-        {
-            "pertanyaan": "Ag⁺ + Cl⁻ → endapan warna?",
-            "pilihan": ["Putih", "Kuning", "Biru", "Merah"],
-            "jawaban": "Putih",
-            "penjelasan": "AgCl membentuk endapan putih yang tidak larut dalam air"
-        },
-        {
-            "pertanyaan": "I₂ dalam larutan → warna?",
-            "pilihan": ["Merah", "Coklat", "Ungu", "Hijau"],
-            "jawaban": "Coklat",
-            "penjelasan": "I₂ (iodium) dalam larutan berubah menjadi warna coklat kemerahan"
-        },
-        {
-            "pertanyaan": "CuSO4 + NaOH → endapan?",
-            "pilihan": ["Putih", "Biru", "Merah", "Kuning"],
-            "jawaban": "Biru",
-            "penjelasan": "Cu(OH)₂ membentuk endapan biru muda"
-        },
-        {
-            "pertanyaan": "Fe³⁺ + SCN⁻ → warna?",
-            "pilihan": ["Biru", "Merah", "Hijau", "Kuning"],
-            "jawaban": "Merah",
-            "penjelasan": "Kompleks [Fe(SCN)]²⁺ memberikan warna merah/merah darah"
-        }
-    ]
-    
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Skor", st.session_state.skor)
-    with col2:
-        st.metric("Total Soal", st.session_state.total)
-    with col3:
-        if st.session_state.total > 0:
-            persentase = (st.session_state.skor / st.session_state.total) * 100
-            st.metric("Akurasi", f"{persentase:.0f}%")
-    
-    st.divider()
-    
-    tabs = st.tabs([f"Soal {i+1}" for i in range(len(soal_list))])
-    
-    for idx, (tab, soal) in enumerate(zip(tabs, soal_list)):
-        with tab:
-            st.subheader(f"❓ {soal['pertanyaan']}")
-            
-            jawaban_user = st.radio(
-                "Pilih jawaban:",
-                soal['pilihan'],
-                key=f"soal_{idx}"
-            )
-            
-            col1, col2 = st.columns(2)
-            with col1:
-                if st.button(f"✅ Cek Jawaban {idx+1}", use_container_width=True):
-                    st.session_state.total += 1
-                    
-                    if jawaban_user == soal['jawaban']:
-                        st.session_state.skor += 1
-                        st.markdown(f"""
-                        <div class="success-card">
-                            <h3>🎉 Benar!</h3>
-                            <p>{soal['penjelasan']}</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    else:
-                        st.markdown(f"""
-                        <div class="error-card">
-                            <h3>❌ Salah!</h3>
-                            <p><strong>Jawaban benar:</strong> {soal['jawaban']}</p>
-                            <p><strong>Penjelasan:</strong> {soal['penjelasan']}</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-            
-            with col2:
-                if st.button("💡 Lihat Penjelasan", use_container_width=True):
-                    st.info(soal['penjelasan'])
-
-# ==================== ANALISIS KESALAHAN ====================
-elif menu == "🧠 Analisis Kesalahan Praktikum":
-    st.header("🧠 Analisis Kesalahan Praktikum")
-    
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        masalah = st.selectbox(
-            "Masalah yang terjadi:",
-            [
-                "Pilih masalah...",
-                "❌ Larutan tidak berubah warna",
-                "❌ Hasil titrasi berbeda jauh",
-                "⏱️ End point terlalu cepat",
-                "🧂 Kristal tidak terbentuk",
-                "🫧 Gas tidak keluar"
-            ]
-        )
-    
-    with col2:
-        if st.button("🔍 Analisis", use_container_width=True):
-            st.session_state.analisis = True
-    
-    st.divider()
-    
-    if 'analisis' in st.session_state and st.session_state.analisis:
-        if masalah == "Pilih masalah...":
-            st.warning("Silakan pilih masalah terlebih dahulu")
-        
-        elif masalah == "❌ Larutan tidak berubah warna":
-            st.markdown("""
-            <div class="error-card">
-                <h3>📋 Kemungkinan Penyebab:</h3>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            col1, col2, col3 = st.columns(3)
-            
-            with col1:
-                st.markdown("""
-                **🔴 Masalah Utama:**
-                1. Indikator salah
-                2. Reagen tidak bereaksi
-                3. pH tidak sesuai
-                """)
-            
-            with col2:
-                st.markdown("""
-                **🟡 Solusi:**
-                1. Periksa jenis indikator
-                2. Pastikan reagen segar
-                3. Ukur pH larutan
-                """)
-            
-            with col3:
-                st.markdown("""
-                **🟢 Pencegahan:**
-                1. Catat tanggal kadaluarsa
-                2. Simpan di tempat gelap
-                3. Gunakan wadah tertutup
-                """)
-        
-        elif masalah == "❌ Hasil titrasi berbeda jauh":
-            st.markdown("""
-            <div class="error-card">
-                <h3>📋 Kemungkinan Penyebab:</h3>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            col1, col2, col3 = st.columns(3)
-            
-            with col1:
-                st.markdown("""
-                **🔴 Masalah Utama:**
-                1. Kesalahan pembacaan buret
-                2. Larutan tidak homogen
-                3. Teknik pipet salah
-                """)
-            
-            with col2:
-                st.markdown("""
-                **🟡 Solusi:**
-                1. Baca meniskus di mata sejajar
-                2. Aduk larutan dengan baik
-                3. Pegang pipet vertikal
-                """)
-            
-            with col3:
-                st.markdown("""
-                **🟢 Pencegahan:**
-                1. Kalibrasikan alat ukur
-                2. Lakukan minimal 3x titrasi
-                3. Ambil rata-rata yang konsisten
-                """)
-        
-        elif masalah == "⏱️ End point terlalu cepat":
-            st.markdown("""
-            <div class="error-card">
-                <h3>📋 Kemungkinan Penyebab:</h3>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            col1, col2, col3 = st.columns(3)
-            
-            with col1:
-                st.markdown("""
-                **🔴 Masalah Utama:**
-                1. Konsentrasi terlalu tinggi
-                2. Salah perhitungan awal
-                3. Alat tidak bersih
-                """)
-            
-            with col2:
-                st.markdown("""
-                **🟡 Solusi:**
-                1. Encerkan larutan
-                2. Hitung ulang volume
-                3. Cuci alat dengan baik
-                """)
-            
-            with col3:
-                st.markdown("""
-                **🟢 Pencegahan:**
-                1. Lakukan uji pendahuluan
-                2. Gunakan pipet lebih kecil
-                3. Tambahkan indikator hati-hati
-                """)
-
-# ==================== PANDUAN & TIPS ====================
-elif menu == "📚 Panduan & Tips":
-    st.header("📚 Panduan & Tips Belajar Kimia")
-    
-    tab1, tab2, tab3 = st.tabs(["📖 Teori", "🎯 Tips Praktikum", "⚗️ Reaksi Umum"])
-    
-    with tab1:
-        st.subheader("Teori Dasar Pengenceran & Titrasi")
-        st.markdown("""
-        ### 1. Pengenceran Larutan
-        **Pengenceran** adalah proses menambahkan pelarut untuk mengurangi konsentrasi larutan.
-        
-        - Mol zat terlarut tetap sama
-        - Volume bertambah
-        - Konsentrasi berkurang
-        
-        ### 2. Titrasi
-        **Titrasi** adalah teknik untuk menentukan konsentrasi larutan dengan cara mereaksikannya dengan larutan standar.
-        
-        - Digunakan untuk analisis kuantitatif
-        - Memerlukan indikator untuk menentukan end point
-        - Harus dilakukan minimal 3 kali untuk hasil akurat
-        """)
-    
-    with tab2:
-        st.subheader("🎯 Tips Sukses Praktikum")
-        st.markdown("""
-        #### Persiapan Sebelum Praktikum
-        - ✅ Baca SOP dengan teliti
-        - ✅ Siapkan semua alat dan bahan
-        - ✅ Periksa kondisi alat (bersih, tidak bocor)
-        - ✅ Gunakan APD lengkap (jas lab, sarung tangan, kacamata)
-        
-        #### Selama Praktikum
-        - 🔍 Amati perubahan dengan cermat
-        - 📝 Catat data secara real-time
-        - 🧼 Cuci alat setelah digunakan
-        - 🚨 Minta bantuan jika ada yang tidak jelas
-        
-        #### Setelah Praktikum
-        - 📊 Analisis data dengan statistik
-        - 🤔 Bandingkan dengan literatur
-        - 📋 Tulis laporan yang jelas dan terstruktur
-        """)
-    
-    with tab3:
-        st.subheader("⚗️ Reaksi Kimia Umum & Warnanya")
-        
-        data_reaksi = {
-            "Reaksi": [
-                "KMnO₄ (ungu) + Fe²⁺",
-                "Ag⁺ + Cl⁻",
-                "I₂ dalam larutan",
-                "CuSO₄ + NaOH",
-                "Fe³⁺ + SCN⁻",
-                "K₄[Fe(CN)₆] + Fe³⁺",
-                "Cu²⁺ + NH₃"
-            ],
-            "Warna Hasil": [
-                "Bening (ungu hilang)",
-                "Endapan putih",
-                "Coklat kemerahan",
-                "Endapan biru",
-                "Merah darah",
-                "Biru Prusia",
-                "Biru terang"
-            ],
-            "Catatan": [
-                "Permanganat tereduksi",
-                "AgCl tidak larut",
-                "Halogens berwarna",
-                "Cu(OH)₂ membentuk endapan",
-                "Kompleks Fe-SCN",
-                "Kompleks besi sianida",
-                "Kompleks ammin"
-            ]
-        }
-        
-        df_reaksi = pd.DataFrame(data_reaksi)
-        st.dataframe(df_reaksi, use_container_width=True)
-
-st.divider()
-st.markdown("""
-<div style="text-align: center; color: #888;">
-    <p>🧪 <strong>ChemLab Mini Tools</strong> | Dibuat untuk membantu pembelajaran kimia yang lebih interaktif</p>
-    <p>© 2026 | Versio 2.0</p>
-</div>
-""", unsafe_allow_html=True)
-
-# ==================== CONFIG ====================
-st.set_page_config(
-    page_title="🧪 ChemLab Mini Tools",
-    page_icon="🧪",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# ==================== TEMA MANAGEMENT ====================
-if 'tema' not in st.session_state:
-    st.session_state.tema = 'light'
-
-# Dictionary Tema
-TEMA_CONFIG = {
-    'light': {
-        'bg_color': '#ffffff',
-        'text_color': '#000000',
-        'primary': '#FF6B6B',
-        'secondary': '#4ECDC4',
-        'accent': '#FFE66D',
-        'card_bg': '#f0f2f6',
-        'success_bg': '#d4edda',
-        'error_bg': '#f8d7da',
-    },
-    'dark': {
-        'bg_color': '#1e1e1e',
-        'text_color': '#ffffff',
-        'primary': '#FF6B9D',
-        'secondary': '#00D9FF',
-        'accent': '#FFD700',
-        'card_bg': '#2d2d2d',
-        'success_bg': '#1e4620',
-        'error_bg': '#4d1f1f',
-    },
+THEME_CONFIG = {
     'ocean': {
-        'bg_color': '#e8f4f8',
-        'text_color': '#003d5c',
-        'primary': '#006BA6',
-        'secondary': '#0496FF',
-        'accent': '#00D4FF',
-        'card_bg': '#cfe9f3',
-        'success_bg': '#c8e6c9',
-        'error_bg': '#ffcccc',
-    },
-    'forest': {
-        'bg_color': '#f1f5f1',
-        'text_color': '#1b4332',
-        'primary': '#2d6a4f',
-        'secondary': '#52b788',
-        'accent': '#74c69d',
-        'card_bg': '#d8f3dc',
-        'success_bg': '#b7e4c7',
-        'error_bg': '#ffcccc',
+        'bg_gradient': 'linear-gradient(135deg, #0b1320, #102a43, #1f6f8b, #2d9cdb)',
+        'primary': '#2d9cdb',
+        'secondary': '#1f6f8b',
+        'accent': '#00d9ff',
+        'text': '#e6f1ff',
+        'input_bg': '#0f2740',
+        'card_bg': 'rgba(10, 25, 47, 0.75)',
     },
     'sunset': {
-        'bg_color': '#fff5f0',
-        'text_color': '#5a2c1e',
-        'primary': '#ff6b35',
-        'secondary': '#f7931e',
-        'accent': '#fdb833',
-        'card_bg': '#ffe8d6',
-        'success_bg': '#d4edda',
-        'error_bg': '#f8d7da',
+        'bg_gradient': 'linear-gradient(135deg, #1a0f2e, #372d5a, #8b4789, #ff6b9d)',
+        'primary': '#ff6b9d',
+        'secondary': '#8b4789',
+        'accent': '#ffd700',
+        'text': '#ffe6f0',
+        'input_bg': '#2d1b4e',
+        'card_bg': 'rgba(26, 15, 46, 0.75)',
+    },
+    'forest': {
+        'bg_gradient': 'linear-gradient(135deg, #0b1f15, #1a3d2a, #2d5a47, #52b788)',
+        'primary': '#52b788',
+        'secondary': '#2d5a47',
+        'accent': '#74c69d',
+        'text': '#e6f5f0',
+        'input_bg': '#0f2d1f',
+        'card_bg': 'rgba(11, 31, 21, 0.75)',
     }
 }
 
-tema_aktif = TEMA_CONFIG[st.session_state.tema]
+theme = THEME_CONFIG[st.session_state.theme]
 
-# Custom CSS dinamis
+# =========================
+# DYNAMIC STYLING
+# =========================
 st.markdown(f"""
     <style>
-    :root {{
-        --bg-color: {tema_aktif['bg_color']};
-        --text-color: {tema_aktif['text_color']};
-        --primary: {tema_aktif['primary']};
-        --secondary: {tema_aktif['secondary']};
-        --accent: {tema_aktif['accent']};
+    /* Background Animation */
+    .stApp {{
+        background: {theme['bg_gradient']};
+        background-size: 400% 400%;
+        animation: gradientBG 14s ease infinite;
+        color: {theme['text']};
     }}
-    
-    * {{
-        background-color: {tema_aktif['bg_color']};
-        color: {tema_aktif['text_color']};
+
+    @keyframes gradientBG {{
+        0% {{background-position: 0% 50%;}}
+        50% {{background-position: 100% 50%;}}
+        100% {{background-position: 0% 50%;}}
     }}
-    
+
+    /* Glass Container */
+    .block-container {{
+        padding: 2.5rem;
+        border-radius: 20px;
+        background-color: {theme['card_bg']};
+        box-shadow: 0px 8px 32px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(45, 156, 219, 0.2);
+    }}
+
+    /* Text Colors */
+    h1, h2, h3, h4, h5, h6, p, label, span, div {{
+        color: {theme['text']} !important;
+    }}
+
+    /* Input Fields */
+    div[data-baseweb="input"] input {{
+        background-color: {theme['input_bg']} !important;
+        color: {theme['text']} !important;
+        border: 2px solid {theme['primary']} !important;
+        border-radius: 10px !important;
+        padding: 12px !important;
+    }}
+
+    input::placeholder {{
+        color: rgba(230, 241, 255, 0.5) !important;
+    }}
+
+    textarea {{
+        background-color: {theme['input_bg']} !important;
+        color: {theme['text']} !important;
+        border: 2px solid {theme['primary']} !important;
+        border-radius: 10px !important;
+    }}
+
+    /* Buttons */
+    div.stButton > button {{
+        background-color: {theme['primary']} !important;
+        color: #0b1320 !important;
+        font-weight: bold !important;
+        border-radius: 12px !important;
+        border: none !important;
+        padding: 12px 24px !important;
+        transition: all 0.3s ease !important;
+    }}
+
+    div.stButton > button:hover {{
+        background-color: {theme['accent']} !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0px 8px 16px rgba(45, 156, 219, 0.3) !important;
+    }}
+
+    /* Sidebar */
+    section[data-testid="stSidebar"] {{
+        background-color: rgba(10, 25, 47, 0.9) !important;
+        border-right: 2px solid {theme['primary']} !important;
+    }}
+
+    /* Radio Buttons & Selectbox */
+    div[role="radiogroup"] {{
+        background-color: {theme['card_bg']} !important;
+        padding: 15px !important;
+        border-radius: 12px !important;
+        border: 1px solid {theme['primary']} !important;
+    }}
+
+    /* Cards */
     .metric-card {{
-        background-color: {tema_aktif['card_bg']};
-        padding: 20px;
-        border-radius: 10px;
-        border-left: 5px solid {tema_aktif['primary']};
-        color: {tema_aktif['text_color']};
-    }}
-    
-    .success-card {{
-        background-color: {tema_aktif['success_bg']};
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 5px solid {tema_aktif['secondary']};
-        color: {tema_aktif['text_color']};
-    }}
-    
-    .error-card {{
-        background-color: {tema_aktif['error_bg']};
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 5px solid {tema_aktif['primary']};
-        color: {tema_aktif['text_color']};
-    }}
-    
-    .dashboard-box {{
-        background-color: {tema_aktif['card_bg']};
+        background: linear-gradient(135deg, {theme['secondary']}, {theme['primary']});
         padding: 25px;
-        border-radius: 12px;
-        border: 2px solid {tema_aktif['primary']};
-        margin: 10px 0;
+        border-radius: 15px;
+        color: {theme['text']};
+        box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+        border: 1px solid {theme['accent']};
     }}
-     
-    .theme-btn {{
-        background-color: {tema_aktif['secondary']};
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        margin: 5px;
-    }}
-    
-    .stButton > button {{
-        background-color: {tema_aktif['primary']};
-        color: white;
+
+    .success-box {{
+        background-color: rgba(76, 175, 80, 0.1);
+        border-left: 5px solid #4CAF50;
+        padding: 15px;
         border-radius: 8px;
-        border: none;
-        padding: 10px 20px;
-        font-weight: bold;
+        color: #4CAF50;
     }}
-    
+
+    .error-box {{
+        background-color: rgba(244, 67, 54, 0.1);
+        border-left: 5px solid #f44336;
+        padding: 15px;
+        border-radius: 8px;
+        color: #f44336;
+    }}
+
+    /* Toolbar Hide */
+    div[data-testid="stToolbar"] {{
+        display: none !important;
+    }}
+
+    /* Divider */
+    hr {{
+        border: 1px solid {theme['primary']} !important;
+        opacity: 0.5 !important;
+    }}
     </style>
 """, unsafe_allow_html=True)
 
-# ==================== SIDEBAR - MENU & TEMA ====================
+# =========================
+# SIDEBAR - THEME & NAVIGATION
+# =========================
 with st.sidebar:
-    st.markdown("# ⚙️ CONTROL PANEL")
+    st.markdown(f"<h2 style='color:{theme['accent']};'>âš™ï¸ KONTROL PANEL</h2>", unsafe_allow_html=True)
     
-    # Selector Tema
-    st.subheader("🎨 Pilih Tema")
-    tema_pilihan = st.selectbox(
-        "Pilih tema latar:",
-        ["light", "dark", "ocean", "forest", "sunset"],
-        index=["light", "dark", "ocean", "forest", "sunset"].index(st.session_state.tema),
-        key="tema_select"
+    # Theme Selector
+    st.subheader("ðŸŽ¨ Pilih Tema")
+    theme_choice = st.selectbox(
+        "Tema Warna:",
+        ["ocean", "sunset", "forest"],
+        index=["ocean", "sunset", "forest"].index(st.session_state.theme)
     )
     
-    if tema_pilihan != st.session_state.tema:
-        st.session_state.tema = tema_pilihan
+    if theme_choice != st.session_state.theme:
+        st.session_state.theme = theme_choice
         st.rerun()
     
-    # Tampilkan preview tema
+    # Theme Preview
     col1, col2, col3 = st.columns(3)
     with col1:
-        if st.button("💡", help="Light Theme"):
-            st.session_state.tema = 'light'
+        if st.button("ðŸŒŠ Ocean", use_container_width=True):
+            st.session_state.theme = 'ocean'
             st.rerun()
     with col2:
-        if st.button("🌙", help="Dark Theme"):
-            st.session_state.tema = 'dark'
+        if st.button("ðŸŒ… Sunset", use_container_width=True):
+            st.session_state.theme = 'sunset'
             st.rerun()
     with col3:
-        if st.button("🌊", help="Ocean Theme"):
-            st.session_state.tema = 'ocean'
-            st.rerun()
-    
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        if st.button("🌲", help="Forest Theme"):
-            st.session_state.tema = 'forest'
-            st.rerun()
-    with col2:
-        if st.button("🌅", help="Sunset Theme"):
-            st.session_state.tema = 'sunset'
+        if st.button("ðŸŒ² Forest", use_container_width=True):
+            st.session_state.theme = 'forest'
             st.rerun()
     
     st.divider()
     
-    # Menu Utama
-    st.markdown("# 📋 MENU UTAMA")
+    # Main Menu
+    st.markdown(f"<h3 style='color:{theme['accent']};'>ðŸ“‹ MENU UTAMA</h3>", unsafe_allow_html=True)
     menu = st.selectbox(
-        "Pilih Fitur",
+        "Pilih Fitur:",
         [
-            "📊 Dashboard",
-            "🏠 Beranda",
-            "📐 Kalkulator Pengenceran",
-            "🎮 Tebak Warna Reaksi",
-            "🧠 Analisis Kesalahan Praktikum",
-            "📚 Panduan & Tips"
+            "ðŸ  Beranda",
+            "ðŸ“Š Kalkulator Pengenceran",
+            "ðŸŽ® Tebak Warna Reaksi",
+            "ðŸ§  Analisis Kesalahan",
+            "ðŸ“š Panduan Lengkap"
         ]
     )
     
     st.divider()
-    st.markdown("### 📌 Info Aplikasi")
+    st.markdown(f"### ðŸ“Œ Tentang Aplikasi")
     st.info("""
-    **ChemLab Mini Tools v2.0**
+    *ChemLab Mini Tools v3.0*
     
-    Platform pembelajaran kimia interaktif dengan:
-    • 🧮 Kalkulator pengenceran
-    • 🎯 Game quiz warna reaksi
-    • 🔧 Troubleshooting praktikum
-    • 🎨 5 tema warna berbeda
+    Platform pembelajaran kimia yang interaktif dan inspiratif!
+    
+    âœ¨ Fitur:
+    â€¢ ðŸ§® Kalkulator pengenceran dinamis
+    â€¢ ðŸŽ¯ Game quiz warna reaksi
+    â€¢ ðŸ”§ Troubleshooting praktikum
+    â€¢ ðŸŽ¨ 3 tema warna cantik
+    â€¢ ðŸ“– Panduan lengkap
     """)
 
-# ==================== DASHBOARD ====================
-if menu == "📊 Dashboard":
-    st.title("📊 Dashboard ChemLab")
-    
-    # Statistik
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        st.markdown(f"""
-        <div class="dashboard-box">
-            <h3>🎮 Quiz Dimainkan</h3>
-            <h1>{st.session_state.get('total', 0)}</h1>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown(f"""
-        <div class="dashboard-box">
-            <h3>✅ Jawaban Benar</h3>
-            <h1>{st.session_state.get('skor', 0)}</h1>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        total = st.session_state.get('total', 0)
-        akurasi = (st.session_state.get('skor', 0) / total * 100) if total > 0 else 0
-        st.markdown(f"""
-        <div class="dashboard-box">
-            <h3>📈 Akurasi</h3>
-            <h1>{akurasi:.0f}%</h1>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col4:
-        st.markdown(f"""
-        <div class="dashboard-box">
-            <h3>🎨 Tema Aktif</h3>
-            <h1>{st.session_state.tema.upper()}</h1>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.divider()
-    
-    # Chart statistik
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.subheader("📊 Distribusi Jawaban")
-        total = st.session_state.get('total', 0)
-        skor = st.session_state.get('skor', 0)
-        
-        if total > 0:
-            fig = go.Figure(data=[
-                go.Pie(
-                    labels=['Benar', 'Salah'],
-                    values=[skor, total - skor],
-                    marker=dict(colors=[tema_aktif['secondary'], tema_aktif['primary']])
-                )
-            ])
-            fig.update_layout(height=400, paper_bgcolor=tema_aktif['bg_color'], font=dict(color=tema_aktif['text_color']))
-            st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.info("📭 Belum ada data quiz. Mulai main quiz untuk melihat statistik!")
-    
-    with col2:
-        st.subheader("🎯 Progress Pembelajaran")
-        
-        aktivitas = {
-            "Kalkulator": 5,
-            "Quiz": st.session_state.get('total', 0),
-            "Troubleshooting": 3,
-            "Tips Belajar": 10
-        }
-        
-        fig2 = go.Figure(data=[
-            go.Bar(
-                x=list(aktivitas.keys()),
-                y=list(aktivitas.values()),
-                marker=dict(color=tema_aktif['secondary'])
-            )
-        ])
-        fig2.update_layout(height=400, paper_bgcolor=tema_aktif['bg_color'], plot_bgcolor=tema_aktif['card_bg'], font=dict(color=tema_aktif['text_color']))
-        st.plotly_chart(fig2, use_container_width=True)
-    
-    st.divider()
-    
-    # Info Dashboard
-    st.subheader("📈 Ringkasan Aktivitas")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        ### 📋 Fitur yang Tersedia
-        - **Kalkulator Pengenceran**: Hitung M₁V₁ = M₂V₂ dengan mudah
-        - **Quiz Warna Reaksi**: Asah pengetahuan kimia Anda
-        - **Troubleshooting**: Analisis kesalahan praktikum
-        - **Panduan Lengkap**: Tips dan trik sukses praktikum
-        """)
-    
-    with col2:
-        st.markdown(f"""
-        ### 🎨 Tema yang Tersedia
-        1. **Light** - Tema terang klasik
-        2. **Dark** - Tema gelap modern
-        3. **Ocean** - Tema biru seperti laut
-        4. **Forest** - Tema hijau alam
-        5. **Sunset** - Tema hangat matahari terbenam
-        
-        **Tema Aktif**: {st.session_state.tema.upper()}
-        """)
+# =========================
+# TITLE SECTION
+# =========================
+st.markdown(f"""
+    <div style='text-align:center;margin-bottom:2rem;'>
+        <h1 style='color:{theme['accent']};font-size:3rem;margin:0;'>ðŸ§ª ChemLab Mini Tools</h1>
+        <p style='color:{theme['primary']};font-size:1.2rem;margin-top:0.5rem;'>
+            âœ¨ Belajar Kimia Lebih Seru dan Interaktif âœ¨
+        </p>
+    </div>
+""", unsafe_allow_html=True)
 
-# ==================== HALAMAN BERANDA ====================
-elif menu == "🏠 Beranda":
-    st.title("🧪 ChemLab Mini Tools v2.0")
-    st.markdown("### Selamat datang di platform pembelajaran kimia interaktif!")
-    
+# =========================
+# HOME PAGE
+# =========================
+if menu == "ðŸ  Beranda":
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.markdown(f"""
-        <div class="metric-card">
-            <h3>📊 Kalkulator</h3>
-            <p>Hitung pengenceran larutan dengan mudah menggunakan rumus M₁V₁ = M₂V₂</p>
+        <div class='metric-card'>
+            <h3>ðŸ“Š Kalkulator</h3>
+            <p>Hitung pengenceran larutan dengan rumus Mâ‚Vâ‚ = Mâ‚‚Vâ‚‚ secara akurat dan cepat</p>
+            <p style='font-size:0.9rem;opacity:0.8;'>ðŸ’¡ Hemat waktu perhitungan!</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown(f"""
-        <div class="metric-card">
-            <h3>🎮 Game Quiz</h3>
-            <p>Asah pengetahuan dengan tebak warna reaksi dan dapatkan skor</p>
+        <div class='metric-card'>
+            <h3>ðŸŽ® Game Quiz</h3>
+            <p>Asah pengetahuan dengan game interaktif tebak warna reaksi kimia</p>
+            <p style='font-size:0.9rem;opacity:0.8;'>ðŸ† Raih skor tertinggi!</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown(f"""
-        <div class="metric-card">
-            <h3>🧠 Troubleshooting</h3>
-            <p>Analisis kesalahan praktikum dan temukan solusinya</p>
+        <div class='metric-card'>
+            <h3>ðŸ”§ Troubleshooting</h3>
+            <p>Analisis kesalahan praktikum dan temukan solusi terbaik</p>
+            <p style='font-size:0.9rem;opacity:0.8;'>âœ… Praktikum sukses!</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -873,330 +287,623 @@ elif menu == "🏠 Beranda":
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("📚 Fitur Utama")
-        st.markdown("""
-        ✅ **Interaktif**: Belajar sambil bermain dengan interface yang user-friendly
+        st.markdown(f"""
+        ### ðŸŒŸ Mengapa Pilih ChemLab?
         
-        ✅ **Visualisasi**: Grafik dan chart untuk memahami konsep dengan lebih baik
+        âœ… *User-Friendly* - Interface yang mudah digunakan untuk semua level
         
-        ✅ **Panduan Lengkap**: Panduan step-by-step untuk setiap fitur
+        âœ… *Interaktif* - Belajar sambil bermain dengan cara yang menyenangkan
         
-        ✅ **Tema Dinamis**: Pilih 5 tema warna berbeda sesuai preferensi Anda
+        âœ… *Akurat* - Perhitungan presisi dengan validasi data lengkap
+        
+        âœ… *Visualisasi* - Grafik dan animasi untuk memahami konsep
+        
+        âœ… *Responsif* - Bekerja sempurna di desktop dan mobile
         """)
     
     with col2:
-        st.subheader("🎨 Kustomisasi Pengalaman")
         st.markdown(f"""
-        ### Tema Warna Tersedia:
-        - 💡 **Light** - Terang dan minimalis
-        - 🌙 **Dark** - Gelap untuk mata yang nyaman
-        - 🌊 **Ocean** - Biru seperti laut
-        - 🌲 **Forest** - Hijau alam yang menenangkan
-        - 🌅 **Sunset** - Warna hangat matahari terbenam
+        ### ðŸŽ¨ Fitur Tema Dinamis
         
-        **Pilih tema favorit Anda di sidebar!**
+        Pilih tema favorit Anda di sidebar!
+        
+        ðŸŒŠ *Ocean* - Tema biru menenangkan
+        
+        ðŸŒ… *Sunset* - Tema ungu hangat
+        
+        ðŸŒ² *Forest* - Tema hijau segar
+        
+        ### ðŸ’¡ Tips Memulai
+        
+        1. Pilih fitur di menu samping
+        2. Ikuti panduan step-by-step
+        3. Gunakan riwayat untuk review
+        4. Bagikan hasil dengan teman!
         """)
-# ==================== KALKULATOR PENGENCERAN ====================
-elif menu == "📐 Kalkulator Pengenceran":
-    st.header("📐 Kalkulator Pengenceran")
-    st.markdown("Gunakan rumus: **M₁V₁ = M₂V₂**")
+
+# =========================
+# 1. KALKULATOR PENGENCERAN
+# =========================
+elif menu == "ðŸ“Š Kalkulator Pengenceran":
+    st.markdown(f"<h1 style='color:{theme['accent']};'>ðŸ“Š Kalkulator Pengenceran</h1>", unsafe_allow_html=True)
     
-    tab1, tab2, tab3 = st.tabs(["📐 Kalkulator", "📖 Panduan", "💾 Riwayat"])
+    # Formula Display
+    st.markdown(f"""
+    <div style='background-color:{theme['secondary']};padding:20px;border-radius:12px;text-align:center;'>
+        <h2 style='color:{theme['accent']};margin:0;'>Câ‚ Ã— Vâ‚ = Câ‚‚ Ã— Vâ‚‚</h2>
+        <p style='margin-top:10px;opacity:0.9;'>Rumus dasar pengenceran larutan</p>
+    </div>
+    """, unsafe_allow_html=True)
     
-    with tab1:
-        col1, col2 = st.columns(2)
+    st.divider()
+    
+    if "history" not in st.session_state:
+        st.session_state.history = []
+    
+    # Input Section
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        satuan = st.selectbox("ðŸ“ Satuan Volume", ["mL", "L", "Î¼L"])
+        satuan_konsentrasi = st.selectbox("âš—ï¸ Satuan Konsentrasi", ["M (Molar)", "N (Normal)", "g/L"])
+    
+    with col2:
+        cari = st.selectbox("ðŸ” Variabel yang Dicari", ["Vâ‚‚ (Volume Akhir)", "Câ‚ (Konsentrasi Awal)", "Câ‚‚ (Konsentrasi Akhir)", "Vâ‚ (Volume Awal)"])
+    
+    st.divider()
+    
+    # Calculations
+    if cari == "Vâ‚‚ (Volume Akhir)":
+        st.subheader("ðŸ“ Masukkan Data Anda")
+        col1, col2, col3 = st.columns(3)
         
         with col1:
-            st.subheader("Input Data")
-            M1 = st.number_input("Konsentrasi Awal (M1) [mol/L]", min_value=0.0, value=1.0, step=0.1)
-            V1 = st.number_input("Volume Awal (V1) [mL]", min_value=0.0, value=100.0, step=10.0)
-            
-            pilihan_hitung = st.radio(
-                "Apa yang ingin dihitung?",
-                ["Volume Akhir (V2)", "Konsentrasi Akhir (M2)"]
-            )
-               
-                M2 = st.number_input("Konsentrasi Akhir (M2) [mol/L]", min_value=0.0, value=0.5, step=0.1)
-                hitung_btn = st.button("🔢 Hitung V2", use_container_width=True)
-                
-                if hitung_btn:
-                    if M2 != 0:
-                        V2 = (M1 * V1) / M2
-                        st.markdown(f"""
-                        <div class="success-card">
-                            <h4>✅ Hasil Perhitungan</h4>
-                            <h2>V2 = {V2:.2f} mL</h2>
-                            <p><strong>Arti:</strong> Encerkan {V1:.0f} mL larutan {M1} M dengan air hingga volumenya menjadi {V2:.2f} mL</p>
-                            <p><strong>Air yang ditambahkan:</strong> {V2 - V1:.2f} mL</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                        
-                        # Visualisasi
-                        fig = go.Figure()
-                        fig.add_trace(go.Bar(
-                            x=['Awal', 'Akhir'],
-                            y=[V1, V2],
-                            marker=dict(color=[tema_aktif['primary'], tema_aktif['secondary']]),
-                            text=[f'{V1:.0f} mL', f'{V2:.2f} mL'],
-                            textposition='auto',
-                        ))
-                        fig.update_layout(
-                            title="Perubahan Volume",
-                            height=300,
-                            paper_bgcolor=tema_aktif['bg_color'],
-                            plot_bgcolor=tema_aktif['card_bg'],
-                            font=dict(color=tema_aktif['text_color'])
-                        )
-                        st.plotly_chart(fig, use_container_width=True)
-                    else:
-                        st.error("❌ M2 tidak boleh nol!")
-            
-            else:  # Hitung M2
-                V2 = st.number_input("Volume Akhir (V2) [mL]", min_value=0.0, value=200.0, step=10.0)
-                hitung_btn = st.button("🔢 Hitung M2", use_container_width=True)
-                
-                if hitung_btn:
-                             if V2 != 0:
-                        M2 = (M1 * V1) / V2
-                        st.markdown(f"""
-                        <div class="success-card">
-                            <h4>✅ Hasil Perhitungan</h4>
-                            <h2>M2 = {M2:.4f} mol/L</h2>
-                            <p><strong>Arti:</strong> Konsentrasi larutan setelah pengenceran menjadi {M2:.4f} mol/L</p>
-                            <p><strong>Tingkat pengenceran:</strong> {M1/M2:.2f} kali</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                        
-                        # Visualisasi
-                        fig = go.Figure()
-                        fig.add_trace(go.Bar(
-                            x=['Awal', 'Akhir'],
-                            y=[M1, M2],
-                            marker=dict(color=[tema_aktif['primary'], tema_aktif['secondary']]),
-                            text=[f'{M1:.2f} mol/L', f'{M2:.4f} mol/L'],
-                            textposition='auto',
-                        ))
-                        fig.update_layout(
-                            title="Perubahan Konsentrasi",
-                            height=300,
-                            paper_bgcolor=tema_aktif['bg_color'],
-                            plot_bgcolor=tema_aktif['card_bg'],
-                            font=dict(color=tema_aktif['text_color'])
-                        )
-                        st.plotly_chart(fig, use_container_width=True)
-                    else:
-                        st.error("❌ V2 tidak boleh nol!")
-        
+            C1 = st.number_input(f"Câ‚ ({satuan_konsentrasi})", value=None, placeholder="Misal: 2.5")
         with col2:
-            st.subheader("📐 Rumus & Formula")
-            st.info("""
-            **Rumus Pengenceran:**
-            
-            M₁V₁ = M₂V₂
-            
-            Dimana:
-            - M₁ = Konsentrasi awal (mol/L)
-            - V₁ = Volume awal (mL)
-            - M₂ = Konsentrasi akhir (mol/L)
-            - V₂ = Volume akhir (mL)
-            """)
-            
-            st.warning("""
-            **💡 Tips Penting:**
-            - Pastikan satuan volume konsisten
-            - Pengenceran = M berkurang, V bertambah
-            - Jumlah mol zat terlarut tetap sama
-            """)
+            V1 = st.number_input(f"Vâ‚ ({satuan})", value=None, placeholder="Misal: 100")
+        with col3:
+            C2 = st.number_input(f"Câ‚‚ ({satuan_konsentrasi})", value=None, placeholder="Misal: 0.5")
+        
+        if st.button("ðŸ§® Hitung Vâ‚‚", use_container_width=True):
+            if None in (C1, V1, C2):
+                st.markdown("""
+                <div class='error-box'>
+                    âš ï¸ Semua kolom harus diisi! Lengkapi data terlebih dahulu.
+                </div>
+                """, unsafe_allow_html=True)
+            elif C2 == 0:
+                st.markdown("""
+                <div class='error-box'>
+                    âš ï¸ Câ‚‚ tidak boleh nol! Periksa kembali data Anda.
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                V2 = (C1 * V1) / C2
+                hasil = f"Vâ‚‚ = {V2:.3f} {satuan}"
+                st.session_state.history.append({
+                    'waktu': datetime.now().strftime("%H:%M:%S"),
+                    'hasil': hasil,
+                    'rumus': f"({C1} Ã— {V1}) Ã· {C2}"
+                })
+                
+                st.markdown(f"""
+                <div class='success-box'>
+                    âœ… <strong>{hasil}</strong><br>
+                    <span style='font-size:0.9rem;'>Rumus: ({C1} Ã— {V1}) Ã· {C2}</span>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                st.info(f"ðŸ’¡ Artinya: Encerkan {V1} {satuan} larutan {C1} {satuan_konsentrasi} dengan menambahkan air hingga totalnya {V2:.3f} {satuan}")
     
-    with tab2:
+    elif cari == "Câ‚ (Konsentrasi Awal)":
+        st.subheader("ðŸ“ Masukkan Data Anda")
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            V1 = st.number_input(f"Vâ‚ ({satuan})", value=None, placeholder="Misal: 100")
+        with col2:
+            C2 = st.number_input(f"Câ‚‚ ({satuan_konsentrasi})", value=None, placeholder="Misal: 0.5")
+        with col3:
+            V2 = st.number_input(f"Vâ‚‚ ({satuan})", value=None, placeholder="Misal: 500")
+        
+        if st.button("ðŸ§® Hitung Câ‚", use_container_width=True):
+            if None in (V1, C2, V2):
+                st.markdown("""
+                <div class='error-box'>
+                    âš ï¸ Semua kolom harus diisi! Lengkapi data terlebih dahulu.
+                </div>
+                """, unsafe_allow_html=True)
+            elif V1 == 0:
+                st.markdown("""
+                <div class='error-box'>
+                    âš ï¸ Vâ‚ tidak boleh nol!
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                C1 = (C2 * V2) / V1
+                hasil = f"Câ‚ = {C1:.4f} {satuan_konsentrasi}"
+                st.session_state.history.append({
+                    'waktu': datetime.now().strftime("%H:%M:%S"),
+                    'hasil': hasil,
+                    'rumus': f"({C2} Ã— {V2}) Ã· {V1}"
+                })
+                
+                st.markdown(f"""
+                <div class='success-box'>
+                    âœ… <strong>{hasil}</strong><br>
+                    <span style='font-size:0.9rem;'>Rumus: ({C2} Ã— {V2}) Ã· {V1}</span>
+                </div>
+                """, unsafe_allow_html=True)
+    
+    elif cari == "Câ‚‚ (Konsentrasi Akhir)":
+        st.subheader("ðŸ“ Masukkan Data Anda")
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            C1 = st.number_input(f"Câ‚ ({satuan_konsentrasi})", value=None, placeholder="Misal: 2.5")
+        with col2:
+            V1 = st.number_input(f"Vâ‚ ({satuan})", value=None, placeholder="Misal: 100")
+        with col3:
+            V2 = st.number_input(f"Vâ‚‚ ({satuan})", value=None, placeholder="Misal: 500")
+        
+        if st.button("ðŸ§® Hitung Câ‚‚", use_container_width=True):
+            if None in (C1, V1, V2):
+                st.markdown("""
+                <div class='error-box'>
+                    âš ï¸ Semua kolom harus diisi! Lengkapi data terlebih dahulu.
+                </div>
+                """, unsafe_allow_html=True)
+            elif V2 == 0:
+                st.markdown("""
+                <div class='error-box'>
+                    âš ï¸ Vâ‚‚ tidak boleh nol!
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                C2 = (C1 * V1) / V2
+                hasil = f"Câ‚‚ = {C2:.4f} {satuan_konsentrasi}"
+                st.session_state.history.append({
+                    'waktu': datetime.now().strftime("%H:%M:%S"),
+                    'hasil': hasil,
+                    'rumus': f"({C1} Ã— {V1}) Ã· {V2}"
+                })
+                
+                st.markdown(f"""
+                <div class='success-box'>
+                    âœ… <strong>{hasil}</strong><br>
+                    <span style='font-size:0.9rem;'>Rumus: ({C1} Ã— {V1}) Ã· {V2}</span>
+                </div>
+                """, unsafe_allow_html=True)
+    
+    elif cari == "Vâ‚ (Volume Awal)":
+        st.subheader("ðŸ“ Masukkan Data Anda")
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            C1 = st.number_input(f"Câ‚ ({satuan_konsentrasi})", value=None, placeholder="Misal: 2.5")
+        with col2:
+            C2 = st.number_input(f"Câ‚‚ ({satuan_konsentrasi})", value=None, placeholder="Misal: 0.5")
+        with col3:
+            V2 = st.number_input(f"Vâ‚‚ ({satuan})", value=None, placeholder="Misal: 500")
+        
+        if st.button("ðŸ§® Hitung Vâ‚", use_container_width=True):
+            if None in (C1, C2, V2):
+                st.markdown("""
+                <div class='error-box'>
+                    âš ï¸ Semua kolom harus diisi! Lengkapi data terlebih dahulu.
+                </div>
+                """, unsafe_allow_html=True)
+            elif C1 == 0:
+                st.markdown("""
+                <div class='error-box'>
+                    âš ï¸ Câ‚ tidak boleh nol!
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                V1 = (C2 * V2) / C1
+                hasil = f"Vâ‚ = {V1:.3f} {satuan}"
+                st.session_state.history.append({
+                    'waktu': datetime.now().strftime("%H:%M:%S"),
+                    'hasil': hasil,
+                    'rumus': f"({C2} Ã— {V2}) Ã· {C1}"
+                })
+                
+                st.markdown(f"""
+                <div class='success-box'>
+                    âœ… <strong>{hasil}</strong><br>
+                    <span style='font-size:0.9rem;'>Rumus: ({C2} Ã— {V2}) Ã· {C1}</span>
+                </div>
+                """, unsafe_allow_html=True)
+    
+    # History Section
+    st.divider()
+    st.subheader("ðŸ“œ Riwayat Perhitungan")
+    
+    if st.session_state.history:
+        history_df = pd.DataFrame(reversed(st.session_state.history))
+        st.dataframe(history_df, use_container_width=True, hide_index=True)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("ðŸ—‘ï¸ Hapus Semua Riwayat", use_container_width=True):
+                st.session_state.history = []
+                st.rerun()
+        with col2:
+            st.info(f"ðŸ“Š Total perhitungan: {len(st.session_state.history)}")
+    else:
         st.markdown("""
-        ### 📖 Panduan Pengenceran Larutan
-        
-        **Apa itu pengenceran?**
-        Pengenceran adalah proses menambahkan pelarut (biasanya air) ke dalam larutan untuk menurunkan konsentrasinya.
-        
-        **Langkah-langkah praktis:**
-        1. Hitung berapa banyak larutan pekat yang dibutuhkan
-        2. Hitung berapa banyak pelarut (air) yang ditambahkan
-        3. Campurkan perlahan sambil diaduk
-        4. Biarkan sebentar agar merata
-        
-        **Contoh soal:**
-        - Anda punya 100 mL larutan HCl 2 M
-        - Ingin membuat larutan HCl 0.5 M
-        - Berapa volume akhir yang dihasilkan?
-        - **Jawab:** V₂ = (2 × 100) / 0.5 = 400 mL
-        """)
-    
-    with tab3:
-        st.info("💾 Riwayat perhitungan akan ditampilkan di sini")
-# ==================== TEBAK WARNA REAKSI ====================
-elif menu == "🎮 Tebak Warna Reaksi":
-    st.header("🎮 Tebak Warna Reaksi - Game Quiz")
+        <div style='text-align:center;padding:2rem;opacity:0.7;'>
+            <p>Belum ada perhitungan ðŸ“­</p>
+            <p style='font-size:0.9rem;'>Mulai hitung di atas untuk melihat riwayat</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+# =========================
+# 2. TEBAK WARNA REAKSI
+# =========================
+elif menu == "ðŸŽ® Tebak Warna Reaksi":
+    st.markdown(f"<h1 style='color:{theme['accent']};'>ðŸŽ® Game Tebak Warna Reaksi</h1>", unsafe_allow_html=True)
+    st.write("ðŸ† Asah pengetahuan kimia Anda dengan menjawab pertanyaan tentang warna produk reaksi!")
     
     if 'skor' not in st.session_state:
         st.session_state.skor = 0
         st.session_state.total = 0
     
-    # Soal-soal
     soal_list = [
         {
-            "pertanyaan": "KMnO4 + Fe²⁺ → warna apa?",
-            "pilihan": ["Ungu", "Bening", "Coklat", "Hijau"],
-            "jawaban": "Bening",
-            "penjelasan": "KMnO4 (ungu) tereduksi menjadi Mn²⁺ (tidak berwarna). Ungu hilang → Bening"
+            "pertanyaan": "KMnOâ‚„ (ungu pekat) + FeÂ²âº â†’ produk berwarna?",
+            "pilihan": ["Ungu pekat", "Tak berwarna", "Coklat tua", "Hijau"],
+            "jawaban": "Tak berwarna",
+            "penjelasan": "KMnOâ‚„ yang ungu tereduksi menjadi MnÂ²âº yang tidak berwarna. Warna ungu hilang total! ðŸŽ¨"
         },
         {
-            "pertanyaan": "Ag⁺ + Cl⁻ → endapan warna?",
+            "pertanyaan": "Agâº + Clâ» â†’ endapan berwarna?",
             "pilihan": ["Putih", "Kuning", "Biru", "Merah"],
             "jawaban": "Putih",
-            "penjelasan": "AgCl membentuk endapan putih yang tidak larut dalam air"
+            "penjelasan": "AgCl membentuk endapan putih yang sangat tidak larut dalam air. Produk klasik titrasi argentometri! âšª"
         },
         {
-            "pertanyaan": "I₂ dalam larutan → warna?",
-            "pilihan": ["Merah", "Coklat", "Ungu", "Hijau"],
-            "jawaban": "Coklat",
-            "penjelasan": "I₂ (iodium) dalam larutan berubah menjadi warna coklat kemerahan"
+            "pertanyaan": "Iâ‚‚ dalam larutan air â†’ warna?",
+            "pilihan": ["Bening", "Coklat gelap", "Merah cerah", "Kuning pucat"],
+            "jawaban": "Coklat gelap",
+            "penjelasan": "Iodium dalam air membentuk larutan coklat kemerahan yang intens. Warna khas dan mudah dikenali! ðŸŸ¤"
         },
         {
-            "pertanyaan": "CuSO4 + NaOH → endapan?",
-            "pilihan": ["Putih", "Biru", "Merah", "Kuning"],
-            "jawaban": "Biru",
-            "penjelasan": "Cu(OH)₂ membentuk endapan biru muda"
+            "pertanyaan": "CuSOâ‚„ + NaOH berlebih â†’ endapan?",
+            "pilihan": ["Putih murni", "Biru muda", "Biru gelap", "Tidak ada endapan"],
+            "jawaban": "Biru gelap",
+            "penjelasan": "Cu(OH)â‚‚ membentuk endapan biru yang indah. Warna kompleks tembaga yang ikonik! ðŸ”µ"
         },
         {
-            "pertanyaan": "Fe³⁺ + SCN⁻ → warna?",
-            "pilihan": ["Biru", "Merah", "Hijau", "Kuning"],
-            "jawaban": "Merah",
-            "penjelasan": "Kompleks [Fe(SCN)]²⁺ memberikan warna merah/merah darah"
+            "pertanyaan": "FeÂ³âº + SCNâ» â†’ larutan berwarna?",
+            "pilihan": ["Kuning", "Merah darah", "Ungu", "Hijau"],
+            "jawaban": "Merah darah",
+            "penjelasan": "Kompleks [Fe(SCN)]Â²âº memberikan warna merah darah yang kuat. Sangat sensitif untuk deteksi FeÂ³âº! ðŸ”´"
         }
     ]
     
+    # Score Display
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("Skor", st.session_state.skor)
+        st.metric("ðŸ† Skor", st.session_state.skor)
     with col2:
-        st.metric("Total Soal", st.session_state.total)
+        st.metric("â“ Total", st.session_state.total)
     with col3:
         if st.session_state.total > 0:
-            persentase = (st.session_state.skor / st.session_state.total) * 100
-            st.metric("Akurasi", f"{persentase:.0f}%")
+            akurasi = (st.session_state.skor / st.session_state.total) * 100
+            st.metric("ðŸ“Š Akurasi", f"{akurasi:.0f}%")
     
     st.divider()
     
+    # Questions in Tabs
     tabs = st.tabs([f"Soal {i+1}" for i in range(len(soal_list))])
     
     for idx, (tab, soal) in enumerate(zip(tabs, soal_list)):
         with tab:
-            st.subheader(f"❓ {soal['pertanyaan']}")
+            st.markdown(f"<h3 style='color:{theme['accent']};'>â“ {soal['pertanyaan']}</h3>", unsafe_allow_html=True)
             
             jawaban_user = st.radio(
-                "Pilih jawaban:",
+                "Pilih jawaban Anda:",
                 soal['pilihan'],
-                key=f"soal_{idx}"
+                key=f"soal_{idx}",
+                label_visibility="collapsed"
             )
             
             col1, col2 = st.columns(2)
+            
             with col1:
-                if st.button(f"✅ Cek Jawaban {idx+1}", use_container_width=True):
+                if st.button(f"âœ… Cek Jawaban", key=f"check_{idx}", use_container_width=True):
                     st.session_state.total += 1
                     
                     if jawaban_user == soal['jawaban']:
                         st.session_state.skor += 1
                         st.markdown(f"""
-                        <div class="success-card">
-                            <h3>🎉 Benar!</h3>
-                            <p>{soal['penjelasan']}</p>
+                        <div class='success-box'>
+                            ðŸŽ‰ <strong>BENAR!</strong><br>
+                            {soal['penjelasan']}
                         </div>
                         """, unsafe_allow_html=True)
                     else:
                         st.markdown(f"""
-                        <div class="error-card">
-                            <h3>❌ Salah!</h3>
-                            <p><strong>Jawaban benar:</strong> {soal['jawaban']}</p>
-                            <p><strong>Penjelasan:</strong> {soal['penjelasan']}</p>
+                        <div class='error-box'>
+                            âŒ Jawaban Salah<br>
+                            <strong>Jawaban Benar:</strong> {soal['jawaban']}<br>
+                            {soal['penjelasan']}
                         </div>
                         """, unsafe_allow_html=True)
             
             with col2:
-                if st.button("💡 Lihat Penjelasan", use_container_width=True):
+                if st.button("ðŸ’¡ Lihat Penjelasan", key=f"hint_{idx}", use_container_width=True):
                     st.info(soal['penjelasan'])
 
-# ==================== ANALISIS KESALAHAN ====================
-elif menu == "🧠 Analisis Kesalahan Praktikum":
-    st.header("🧠 Analisis Kesalahan Praktikum")
+# =========================
+# 3. ANALISIS KESALAHAN
+# =========================
+elif menu == "ðŸ§  Analisis Kesalahan":
+    st.markdown(f"<h1 style='color:{theme['accent']};'>ðŸ§  Analisis Kesalahan Praktikum</h1>", unsafe_allow_html=True)
+    st.write("ðŸ” Hadapi masalah saat praktikum? Dapatkan analisis dan solusi terbaik di sini!")
     
-    col1, col2 = st.columns([2, 1])
+    col1, col2 = st.columns([3, 1])
     
     with col1:
         masalah = st.selectbox(
-            "Masalah yang terjadi:",
+            "ðŸŽ¯ Pilih masalah yang Anda alami:",
             [
-                "Pilih masalah...",
-                "❌ Larutan tidak berubah warna",
-                "❌ Hasil titrasi berbeda jauh",
-                "⏱️ End point terlalu cepat",
-                "🧂 Kristal tidak terbentuk",
-                "🫧 Gas tidak keluar"
+                "Pilih salah satu...",
+                "âŒ Larutan tidak berubah warna",
+                "âŒ Hasil titrasi sangat berbeda",
+                "â±ï¸ End point terlalu cepat",
+                "ðŸ§‚ Kristal tidak terbentuk",
+                "ðŸ«§ Gas tidak keluar"
             ]
         )
     
     with col2:
-        if st.button("🔍 Analisis", use_container_width=True):
+        if st.button("ðŸ” Analisis", use_container_width=True):
             st.session_state.analisis = True
     
     st.divider()
     
     if 'analisis' in st.session_state and st.session_state.analisis:
-        if masalah == "Pilih masalah...":
-            st.warning("Silakan pilih masalah terlebih dahulu")
-        
-        elif masalah == "❌ Larutan tidak berubah warna":
+        if masalah == "Pilih salah satu...":
             st.markdown("""
-            <div class="error-card">
-                <h3>📋 Kemungkinan Penyebab:</h3>
+            <div class='error-box'>
+                âš ï¸ Silakan pilih masalah terlebih dahulu untuk mendapat analisis
             </div>
             """, unsafe_allow_html=True)
+        
+        elif masalah == "âŒ Larutan tidak berubah warna":
+            st.markdown(f"<h3 style='color:{theme['accent']};'>ðŸ“‹ Analisis Masalah</h3>", unsafe_allow_html=True)
             
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                st.markdown("""
-                **🔴 Masalah Utama:**
-                1. Indikator salah
-                2. Reagen tidak bereaksi
-                3. pH tidak sesuai
+                st.markdown(f"""
+                ### ðŸ”´ Kemungkinan Penyebab
+                1. *Indikator salah* - Pilih indikator yang tepat
+                2. *Reagen sudah kedaluarsa* - Cek tanggal kadaluarsa
+                3. *pH tidak sesuai* - Larutan terlalu asam/basa
+                4. *Konsentrasi terlalu rendah* - Tambah konsentrasi
                 """)
             
             with col2:
-                st.markdown("""
-                **🟡 Solusi:**
-                1. Periksa jenis indikator
-                2. Pastikan reagen segar
-                3. Ukur pH larutan
+                st.markdown(f"""
+                ### ðŸŸ¡ Solusi Praktis
+                1. *Verifikasi indikator* - Gunakan indikator yang benar
+                2. *Ganti reagen* - Ambil dari botol baru
+                3. *Atur pH* - Gunakan buffer atau buffer solution
+                4. *Periksa reagen* - Pastikan kualitas bahan baik
+                5. *Uji pendahuluan* - Lakukan uji sebelum titrasi
                 """)
             
             with col3:
-                st.markdown("""
-                **🟢 Pencegahan:**
-                1. Catat tanggal kadaluarsa
-                2. Simpan di tempat gelap
-                3. Gunakan wadah tertutup
+                st.markdown(f"""
+                ### ðŸŸ¢ Pencegahan Ke Depan
+                âœ… Catat tanggal kadaluarsa reagen
+                
+                âœ… Simpan di tempat gelap & sejuk
+                
+                âœ… Gunakan wadah tertutup rapat
+                
+                âœ… Baca SOP dengan teliti
+                
+                âœ… Lakukan titrasi minimal 3x
                 """)
         
-        elif masalah == "❌ Hasil titrasi berbeda jauh":
-            st.markdown("""
-            <div class="error-card">
-                <h3>📋 Kemungkinan Penyebab:</h3>
-            </div>
-            """, unsafe_allow_html=True)
+        elif masalah == "âŒ Hasil titrasi sangat berbeda":
+            st.markdown(f"<h3 style='color:{theme['accent']};'>ðŸ“‹ Analisis Masalah</h3>", unsafe_allow_html=True)
             
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                st.markdown("""
-                **🔴 Masalah Utama:**
-                1. Kesalahan pembacaan buret
-                2. Larutan tidak homogen
-                3. Teknik pipet salah
+                st.markdown(f"""
+                ### ðŸ”´ Kemungkinan Penyebab
+                1. *Kesalahan pembacaan* - Baca meniskus salah
+                2. *Larutan tidak homogen* - Belum tercampur rata
+                3. *Teknik pipet salah* - Pegang pipet tidak vertikal
+                4. *Buret tidak dikalibrasi* - Presisi alat kurang
+                5. *Pengocokan berlebihan* - Terlalu cepat
                 """)
+            
+            with col2:
+                st.markdown(f"""
+                ### ðŸŸ¡ Solusi Praktis
+                1. *Baca dengan hati-hati* - Mata sejajar dengan meniskus
+                2. *Aduk perlahan* - Gunakan pengaduk sampai homogen
+                3. *Pegang pipet vertikal* - Jangan miring
+                4. *Kalibrasikan alat* - Periksa keakuratan buret
+                5. *Ambil rata-rata* - Gunakan 3 hasil yang dekat
+                """)
+            
+            with col3:
+                st.markdown(f"""
+                ### ðŸŸ¢ Pencegahan Ke Depan
+                âœ… Latih pembacaan meniskus
+                
+                âœ… Gunakan lampu untuk pembacaan
+                
+                âœ… Cuci alat hingga bersih
+                
+                âœ… Kalibrasi alat berkala
+                
+                âœ… Lakukan warming up practice
+                """)
+
+# =========================
+# 4. PANDUAN LENGKAP
+# =========================
+elif menu == "ðŸ“š Panduan Lengkap":
+    st.markdown(f"<h1 style='color:{theme['accent']};'>ðŸ“š Panduan & Referensi Lengkap</h1>", unsafe_allow_html=True)
+    
+    tab1, tab2, tab3, tab4 = st.tabs(["ðŸ“– Teori", "ðŸ§ª Teknik Praktikum", "âš—ï¸ Tabel Reaksi", "ðŸ’¡ Tips & Trik"])
+    
+    with tab1:
+        st.subheader("ðŸ“– Teori Dasar Pengenceran & Titrasi")
+        st.markdown("""
+        ### 1ï¸âƒ£ Pengenceran Larutan (Dilution)
+        *Definisi*: Proses menambahkan pelarut untuk menurunkan konsentrasi larutan
+        
+        *Prinsip Penting*:
+        - âœ… Mol zat terlarut tetap sama
+        - âœ… Volume larutan bertambah
+        - âœ… Konsentrasi berkurang
+        - âœ… Energi diberikan saat pencampuran
+        
+        *Rumus*: Câ‚Vâ‚ = Câ‚‚Vâ‚‚
+        
+        ### 2ï¸âƒ£ Titrasi (Titration)
+        *Definisi*: Teknik analisis untuk menentukan konsentrasi larutan
+        
+        *Jenis Titrasi*:
+        - Titrasi Asam-Basa
+        - Titrasi Redoks
+        - Titrasi Kompleksometri
+        - Titrasi Presipitasi
+        
+        *Syarat End Point*:
+        - âœ… Perubahan warna indikator yang jelas
+        - âœ… Perubahan warna tidak kembali saat diaduk
+        - âœ… Dilakukan minimal 3 kali
+        """)
+    
+    with tab2:
+        st.subheader("ðŸ§ª Teknik Praktikum yang Benar")
+        st.markdown("""
+        ### âœï¸ Sebelum Praktikum
+        - ðŸ“‹ Baca SOP dengan teliti dan lengkap
+        - ðŸ” Pahami teori reaksi yang akan dilakukan
+        - ðŸ“ Siapkan format pengisian data
+        - ðŸ§¤ Siapkan APD lengkap (jas lab, sarung tangan, kacamata, sepatu tertutup)
+        
+        ### âš—ï¸ Saat Praktikum
+        - ðŸ‘€ Amati setiap perubahan dengan cermat
+        - ðŸ“ Catat data secara real-time (jangan mengandalkan ingatan)
+        - ðŸ§¼ Cuci alat setelah digunakan
+        - â±ï¸ Catat waktu jika diperlukan
+        - ðŸš¨ Minta bantuan jika ada yang tidak jelas
+        
+        ### ðŸ“Š Setelah Praktikum
+        - ðŸ”¢ Analisis data dengan statistik yang tepat
+        - ðŸ“š Bandingkan hasil dengan literatur
+        - ðŸ“‹ Tulis laporan yang jelas dan terstruktur
+        - ðŸ¤” Diskusikan kesalahan dan perbaikan
+        """)
+    
+    with tab3:
+        st.subheader("âš—ï¸ Tabel Reaksi Kimia & Warnanya")
+        
+        data_reaksi = {
+            "Reaksi": [
+                "KMnOâ‚„ (aq) + FeÂ²âº",
+                "Agâº + Clâ»",
+                "Iâ‚‚ dalam Hâ‚‚O",
+                "CuSOâ‚„ + NaOH (berlebih)",
+                "FeÂ³âº + SCNâ»",
+                "Kâ‚„[Fe(CN)â‚†] + FeÂ³âº",
+                "CuÂ²âº + NHâ‚ƒ",
+                "BaÂ²âº + SOâ‚„Â²â»"
+            ],
+            "Warna Produk": [
+                "Tak berwarna (ungu â†’ hilang)",
+                "Putih (endapan)",
+                "Coklat gelap",
+                "Biru tua (endapan)",
+                "Merah darah",
+                "Biru Prusia",
+                "Biru terang",
+                "Putih (endapan)"
+            ],
+            "Tipe Reaksi": [
+                "Redoks",
+                "Presipitasi",
+                "Fisika",
+                "Presipitasi",
+                "Kompleksasi",
+                "Kompleksasi",
+                "Kompleksasi",
+                "Presipitasi"
+            ],
+            "Keterangan": [
+                "Reduksi permanganat",
+                "AgCl tidak larut",
+                "Iâ‚‚ berwarna",
+                "Cu(OH)â‚‚ biru",
+                "Kompleks Fe-tiosenat",
+                "Kompleks besi sianida",
+                "Kompleks ammin Cu",
+                "BaSOâ‚„ tidak larut"
+            ]
+        }
+        
+        df = pd.DataFrame(data_reaksi)
+        st.dataframe(df, use_container_width=True, hide_index=True)
+    
+    with tab4:
+        st.subheader("ðŸ’¡ Tips & Trik Sukses Praktikum")
+        st.markdown(f"""
+        ### ðŸ† Tips Umum
+        âœ… *Persiapan matang* = 80% kesuksesan praktikum
+        
+        âœ… *Teliti saat pembacaan* = Hasil akurat terjamin
+        
+        âœ… *Catat semua data* = Bahan analisis yang lengkap
+        
+        ### ðŸŽ¯ Tips Spesifik Titrasi
+        1. *Warming Up*: Lakukan 1-2 titrasi pendahuluan
+        2. *Blank Correction*: Catat volume awal buret dengan teliti
+        3. *Konsistensi*: Gunakan teknik yang sama untuk semua titrasi
+        4. *Penghitungan*: Gunakan data yang konsisten (RSD < 5%)
+        
+        ### ðŸ”¬ Tips Pembacaan Alat
+        - *Meniskus*: Baca bagian bawah untuk cairan bening
+        - *Mata Sejajar*: Posisi mata harus sejajar dengan garis skala
+        - *Pencahayaan*: Gunakan lampu yang cukup
+        - *Stabilitas*: Tunggu hingga meniskus stabil sebelum membaca
+        
+        ### âš¡ Troubleshooting Cepat
+        | Masalah | Solusi |
+        |---------|--------|
+        | Warna tidak muncul | Ubah indikator atau pH |
+        | Hasil sangat berbeda | Ulangi dengan teknik lebih hati-hati |
+        | End point susah dilihat | Gunakan cahaya lebih baik |
+        | Konsentrasi tidak akurat | Kalibrasi ulang larutan standar |
+        """)
+
+st.divider()
+
+# =========================
+# FOOTER
+# =========================
+st.markdown(f"""
+<div style='text-align:center;padding:2rem;opacity:0.8;border-top:1px solid {theme['primary']};margin-top:2rem;'>
+    <p style='font-size:1.1rem;color:{theme['accent']};'>ðŸ§ª <strong>ChemLab Mini Tools v3.0</strong> ðŸ§ª</p>
+    <p style='margin-top:0.5rem;'>âœ¨ Belajar Kimia Lebih Seru dan Interaktif âœ¨</p>
+    <p style='margin-top:1rem;font-size:0.9rem;opacity:0.7;'>
+        Tema Aktif: <strong>{st.session_state.theme.upper()}</strong> | 
+        Â© 2026 | Platform Pembelajaran Kimia Interaktif
+    </p>
+    <p style='font-size:0.85rem;opacity:0.6;margin-top:0.5rem;'>
+        ðŸ’¡ Tips: Gunakan aplikasi ini sebagai pendamping belajar, bukan pengganti guru!
+    </p>
+</div>
+""", unsafe_allow_html=True)
