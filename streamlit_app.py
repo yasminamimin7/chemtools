@@ -175,9 +175,6 @@ st.markdown(f"""
         color: #f44336;
     }}
 
-  
-    }}
-
     /* Divider */
     hr {{
         border: 1px solid {theme['primary']} !important;
