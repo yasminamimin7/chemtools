@@ -752,25 +752,24 @@ elif menu == "🧠 Analisis Kesalahan":
     col1, col2 = st.columns([3, 1])
     
     with col1:
-        masalah = st.selectbox(
-            "🎯 Pilih masalah yang Anda alami:",
-            [
-                [
-                "Pilih salah satu...",
-                "❌ Larutan tidak berubah warna",
-                "❌ Hasil titrasi sangat berbeda",
-                "⏱️ End point terlalu cepat",
-                "🧂 Kristal tidak terbentuk",
-                "🫧 Gas tidak keluar",
-                "⚗️ Endapan tidak muncul",
-                "🌡️ Hasil terlalu rendah",
-                "📏 Volume titrasi terlalu besar",
-                "💧 Larutan keruh",
-                "🔬 pH tidak sesuai",
-                "⚠️ Indikator tidak bekerja"
-]
-     ]
-        )  
+       masalah = st.selectbox(
+           st.write("Pilihan yang dipilih:", masalah)
+    "🎯 Pilih masalah yang Anda alami:",
+    [
+        "Pilih salah satu...",
+        "❌ Larutan tidak berubah warna",
+        "❌ Hasil titrasi sangat berbeda",
+        "⏱️ End point terlalu cepat",
+        "🧂 Kristal tidak terbentuk",
+        "🫧 Gas tidak keluar",
+        "⚗️ Endapan tidak muncul",
+        "🌡️ Hasil terlalu rendah",
+        "📏 Volume titrasi terlalu besar",
+        "💧 Larutan keruh",
+        "🔬 pH tidak sesuai",
+        "⚠️ Indikator tidak bekerja"
+    ]
+)
     
     with col2:
         if st.button("🔍 Analisis", use_container_width=True):
