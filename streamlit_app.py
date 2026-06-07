@@ -364,15 +364,7 @@ if menu == "🏠 Beranda":
     kalkulator kimia, analisis kesalahan praktikum, serta berbagai
     fitur pembelajaran interaktif yang mudah digunakan.
     """)
-    st.markdown("## 📚 Menu SPEKTRA")
-
-    st.info("""
-        🧪 Kalkulator Kimia
-        🧠 Analisis Praktikum
-        🎮 Quiz Center
-        🎨 Tebak Warna Reaksi
-        📖 Materi Dasar Kimia
-        """)
+    
 
     st.markdown("## ⭐ Beri Penilaian untuk SPEKTRA")
 
@@ -427,7 +419,7 @@ if st.session_state.reviews:
     )
    
     
-     st.divider()
+st.divider()
 
 colA, colB = st.columns(2)
 
