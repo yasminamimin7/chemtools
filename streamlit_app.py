@@ -339,86 +339,74 @@ st.markdown(f"""
 # HOME PAGE
 # =========================
 if menu == "🏠 Beranda":
-
-    st.markdown("""
-    <div style="
-        background: linear-gradient(135deg,#1e3a8a,#2563eb);
-        padding:35px;
-        border-radius:20px;
-        text-align:center;
-        color:white;
-        margin-bottom:20px;
-    ">
-        <h1>👋 Selamat Datang di SPEKTRA</h1>
-        <h3>Sistem Pendukung Eksperimen Kimia Terapan</h3>
-        <p>
-        Teman belajar dan praktikum bagi mahasiswa Analis Kimia.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.success("""
-    🧪 Selamat datang!
-
-    SPEKTRA hadir untuk membantu kegiatan praktikum kimia melalui
-    kalkulator kimia, analisis kesalahan praktikum, serta berbagai
-    fitur pembelajaran interaktif yang mudah digunakan.
-    """)
+    col1, col2, col3 = st.columns(3)
     
-
-    st.markdown("## ⭐ Beri Penilaian untuk SPEKTRA")
-
-if "reviews" not in st.session_state:
-    st.session_state.reviews = []
-
-import streamlit as st
-
-sentiment_mapping = ["one", "two", "three", "four", "five"]
-selected = st.feedback("stars")
-if selected is not None:
-    st.markdown(f"You selected {sentiment_mapping[selected]} star(s).")
-
-ulasan = st.text_area(
-    "💬 Kesan dan Saran",
-    placeholder="Bagikan pengalaman Anda menggunakan SPEKTRA...",
-    height=120
-)
-st.markdown("""
-<style>
-.stTextArea textarea {
-    background-color: white !important;
-    color: black !important;
-    border: 2px solid #2563eb !important;
-    border-radius: 12px !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-if st.button("📨 Kirim Review"):
-    st.session_state.reviews.append({
-        "rating": rating,
-        "ulasan": ulasan
-    })
-
-    st.success("Terima kasih atas review Anda! ⭐")
-    st.balloons()
-
-if st.session_state.reviews:
-    st.markdown("### 📋 Review Pengguna")
-
-    for review in reversed(st.session_state.reviews):
-        st.info(
-            f"{'⭐' * review['rating']}\n\n{review['ulasan']}"
-        )
-
-
+    with col1:
+        st.markdown(f"""
+        <div class='metric-card'>
+            <h3>📊 Kalkulator</h3>
+            <p>Hitung pengenceran larutan dengan rumus M₁V₁ = M₂V₂ secara akurat dan cepat</p>
+            <p style='font-size:0.9rem;opacity:0.8;'>💡 Hemat waktu perhitungan!</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown(f"""
+        <div class='metric-card'>
+            <h3>🎮 Game Quiz</h3>
+            <p>Asah pengetahuan dengan game interaktif tebak warna reaksi kimia</p>
+            <p style='font-size:0.9rem;opacity:0.8;'>🏆 Raih skor tertinggi!</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown(f"""
+        <div class='metric-card'>
+            <h3>🔧 Troubleshooting</h3>
+            <p>Analisis kesalahan praktikum dan temukan solusi terbaik</p>
+            <p style='font-size:0.9rem;opacity:0.8;'>✅ Praktikum sukses!</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
     st.divider()
-
-    st.caption(
-        "🔬 SPEKTRA dikembangkan sebagai media pembelajaran dan pendukung praktikum mahasiswa Analis Kimia."
-    )
-   
     
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown(f"""
+        ### 🌟 Mengapa Pilih SPEKTRA?
+        
+        ✅ **User-Friendly** - Interface yang mudah digunakan untuk semua level
+        
+        ✅ **Interaktif** - Belajar sambil bermain dengan cara yang menyenangkan
+        
+        ✅ **Akurat** - Perhitungan presisi dengan validasi data lengkap
+        
+        ✅ **Visualisasi** - Grafik dan animasi untuk memahami konsep
+        
+        ✅ **Responsif** - Bekerja sempurna di desktop dan mobile
+        """)
+    
+    with col2:
+        st.markdown(f"""
+        ### 🎨 Fitur Tema Dinamis
+        
+        Pilih tema favorit Anda di sidebar!
+        
+        🌊 **Ocean** - Tema biru menenangkan
+        
+        🌅 **Sunset** - Tema ungu hangat
+        
+        🌲 **Forest** - Tema hijau segar
+        
+        ### 💡 Tips Memulai
+        
+        1. Pilih fitur di menu samping
+        2. Ikuti panduan step-by-step
+        3. Gunakan riwayat untuk review
+        4. Bagikan hasil dengan teman!
+        """)
+
 # =========================
 # 1. KALKULATOR PENGENCERAN
 # =========================
@@ -734,6 +722,118 @@ elif menu == "🎮 Tebak Warna Reaksi":
                 if st.button("💡 Lihat Penjelasan", key=f"hint_{idx}", use_container_width=True):
                     st.info(soal['penjelasan'])
 
+# =========================
+# 3. ANALISIS KESALAHAN
+# =========================
+elif menu == "🧠 Analisis Kesalahan":
+    st.markdown(f"<h1 style='color:{theme['accent']};'>🧠 Analisis Kesalahan Praktikum</h1>", unsafe_allow_html=True)
+    st.write("🔍 Hadapi masalah saat praktikum? Dapatkan analisis dan solusi terbaik di sini!")
+    
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        masalah = st.selectbox(
+            "🎯 Pilih masalah yang Anda alami:",
+            [
+                "Pilih salah satu...",
+                "❌ Larutan tidak berubah warna",
+                "❌ Hasil titrasi sangat berbeda",
+                "⏱️ End point terlalu cepat",
+                "🧂 Kristal tidak terbentuk",
+                "🫧 Gas tidak keluar"
+            ]
+        )
+    
+    with col2:
+        if st.button("🔍 Analisis", use_container_width=True):
+            st.session_state.analisis = True
+    
+    st.divider()
+    
+    if 'analisis' in st.session_state and st.session_state.analisis:
+        if masalah == "Pilih salah satu...":
+            st.markdown("""
+            <div class='error-box'>
+                ⚠️ Silakan pilih masalah terlebih dahulu untuk mendapat analisis
+            </div>
+            """, unsafe_allow_html=True)
+        
+        elif masalah == "❌ Larutan tidak berubah warna":
+            st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.markdown(f"""
+                ### 🔴 Kemungkinan Penyebab
+                1. **Indikator salah** - Pilih indikator yang tepat
+                2. **Reagen sudah kedaluarsa** - Cek tanggal kadaluarsa
+                3. **pH tidak sesuai** - Larutan terlalu asam/basa
+                4. **Konsentrasi terlalu rendah** - Tambah konsentrasi
+                """)
+            
+            with col2:
+                st.markdown(f"""
+                ### 🟡 Solusi Praktis
+                1. **Verifikasi indikator** - Gunakan indikator yang benar
+                2. **Ganti reagen** - Ambil dari botol baru
+                3. **Atur pH** - Gunakan buffer atau buffer solution
+                4. **Periksa reagen** - Pastikan kualitas bahan baik
+                5. **Uji pendahuluan** - Lakukan uji sebelum titrasi
+                """)
+            
+            with col3:
+                st.markdown(f"""
+                ### 🟢 Pencegahan Ke Depan
+                ✅ Catat tanggal kadaluarsa reagen
+                
+                ✅ Simpan di tempat gelap & sejuk
+                
+                ✅ Gunakan wadah tertutup rapat
+                
+                ✅ Baca SOP dengan teliti
+                
+                ✅ Lakukan titrasi minimal 3x
+                """)
+        
+        elif masalah == "❌ Hasil titrasi sangat berbeda":
+            st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.markdown(f"""
+                ### 🔴 Kemungkinan Penyebab
+                1. **Kesalahan pembacaan** - Baca meniskus salah
+                2. **Larutan tidak homogen** - Belum tercampur rata
+                3. **Teknik pipet salah** - Pegang pipet tidak vertikal
+                4. **Buret tidak dikalibrasi** - Presisi alat kurang
+                5. **Pengocokan berlebihan** - Terlalu cepat
+                """)
+            
+            with col2:
+                st.markdown(f"""
+                ### 🟡 Solusi Praktis
+                1. **Baca dengan hati-hati** - Mata sejajar dengan meniskus
+                2. **Aduk perlahan** - Gunakan pengaduk sampai homogen
+                3. **Pegang pipet vertikal** - Jangan miring
+                4. **Kalibrasikan alat** - Periksa keakuratan buret
+                5. **Ambil rata-rata** - Gunakan 3 hasil yang dekat
+                """)
+            
+            with col3:
+                st.markdown(f"""
+                ### 🟢 Pencegahan Ke Depan
+                ✅ Latih pembacaan meniskus
+                
+                ✅ Gunakan lampu untuk pembacaan
+                
+                ✅ Cuci alat hingga bersih
+                
+                ✅ Kalibrasi alat berkala
+                
+                ✅ Lakukan warming up practice
+                """)
 
 # =========================
 # 4. PANDUAN LENGKAP
