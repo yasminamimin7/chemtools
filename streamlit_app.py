@@ -379,8 +379,19 @@ rating = st.slider(
 
 ulasan = st.text_area(
     "💬 Kesan dan Saran",
-    placeholder="Bagikan pengalaman Anda menggunakan SPEKTRA..."
+    placeholder="Bagikan pengalaman Anda menggunakan SPEKTRA...",
+    height=120
 )
+st.markdown("""
+<style>
+.stTextArea textarea {
+    background-color: white !important;
+    color: black !important;
+    border: 2px solid #2563eb !important;
+    border-radius: 12px !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 if st.button("📨 Kirim Review"):
     st.session_state.reviews.append({
