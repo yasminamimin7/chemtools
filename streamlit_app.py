@@ -370,12 +370,12 @@ if menu == "🏠 Beranda":
 if "reviews" not in st.session_state:
     st.session_state.reviews = []
 
-rating = st.slider(
-    "Berikan Rating",
-    min_value=1,
-    max_value=5,
-    value=5
-)
+import streamlit as st
+
+sentiment_mapping = ["one", "two", "three", "four", "five"]
+selected = st.feedback("stars")
+if selected is not None:
+    st.markdown(f"You selected {sentiment_mapping[selected]} star(s).")
 
 ulasan = st.text_area(
     "💬 Kesan dan Saran",
