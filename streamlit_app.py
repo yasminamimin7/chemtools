@@ -768,7 +768,7 @@ elif menu == "🧠 Analisis Kesalahan":
                 "🔬 pH tidak sesuai",
                 "⚠️ Indikator tidak bekerja"
 ]
-            ]
+     ]
         )  
     
     with col2:
@@ -882,14 +882,70 @@ elif menu == "🧠 Analisis Kesalahan":
     - Cek reagen sebelum praktikum
     - Lakukan uji pendahuluan
     """)
-        elif masalah == "🧂 Kristal tidak terbentuk":
-        elif masalah == "⚗️ Endapan tidak muncul":
-        elif masalah == "🌡️ Hasil terlalu rendah":
-        elif masalah == "📏 Volume titrasi terlalu besar":
-        elif masalah == "💧 Larutan keruh":
-        elif masalah == "🔬 pH tidak sesuai":
-        elif masalah == "⚠️ Indikator tidak bekerja":
+      elif masalah == "⚗️ Endapan tidak muncul":
 
+    st.error("Kemungkinan Penyebab")
+    st.markdown("""
+    - Konsentrasi terlalu rendah
+    - Reagen salah
+    - pH tidak sesuai
+    """)
+
+    st.success("Solusi")
+    st.markdown("""
+    - Tingkatkan konsentrasi
+    - Periksa reagen
+    - Atur pH
+    """)
+
+elif masalah == "🌡️ Hasil terlalu rendah":
+
+    st.error("Kemungkinan Penyebab")
+    st.markdown("""
+    - Sampel kurang homogen
+    - Kesalahan pembacaan
+    - Reaksi belum sempurna
+    """)
+
+    st.success("Solusi")
+    st.markdown("""
+    - Homogenkan sampel
+    - Ulangi pengukuran
+    - Perpanjang waktu reaksi
+    """)
+
+elif masalah == "📏 Volume titrasi terlalu besar":
+
+    st.error("Kemungkinan Penyebab")
+    st.markdown("""
+    - Larutan terlalu encer
+    - Konsentrasi titran rendah
+    """)
+
+elif masalah == "💧 Larutan keruh":
+
+    st.error("Kemungkinan Penyebab")
+    st.markdown("""
+    - Kontaminasi
+    - Endapan halus terbentuk
+    - Reagen tidak murni
+    """)
+
+elif masalah == "🔬 pH tidak sesuai":
+
+    st.error("Kemungkinan Penyebab")
+    st.markdown("""
+    - Buffer tidak bekerja
+    - Penambahan asam/basa berlebih
+    """)
+
+elif masalah == "⚠️ Indikator tidak bekerja":
+
+    st.error("Kemungkinan Penyebab")
+    st.markdown("""
+    - Indikator kedaluwarsa
+    - pH di luar rentang indikator
+    """)
 # =========================
 # 4. PANDUAN LENGKAP
 # =========================
