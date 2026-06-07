@@ -365,29 +365,40 @@ if menu == "🏠 Beranda":
     fitur pembelajaran interaktif yang mudah digunakan.
     """)
 
-    st.markdown("## ⭐ Kesan Pengguna")
+    st.markdown("## ⭐ Beri Penilaian untuk SPEKTRA")
 
-    col1, col2 = st.columns(2)
+if "reviews" not in st.session_state:
+    st.session_state.reviews = []
 
-    with col1:
-        st.info("""
-⭐⭐⭐⭐⭐
+rating = st.slider(
+    "Berikan Rating",
+    min_value=1,
+    max_value=5,
+    value=5
+)
 
-"Membantu saya saat menghitung pengenceran dan
-menyelesaikan laporan praktikum."
+ulasan = st.text_area(
+    "💬 Kesan dan Saran",
+    placeholder="Bagikan pengalaman Anda menggunakan SPEKTRA..."
+)
 
-— Mahasiswa Analis Kimia
-""")
+if st.button("📨 Kirim Review"):
+    st.session_state.reviews.append({
+        "rating": rating,
+        "ulasan": ulasan
+    })
 
-    with col2:
-        st.info("""
-⭐⭐⭐⭐⭐
+    st.success("Terima kasih atas review Anda! ⭐")
+    st.balloons()
 
-"Tampilannya sederhana, mudah dipahami,
-dan cocok untuk pembelajaran."
+if st.session_state.reviews:
+    st.markdown("### 📋 Review Pengguna")
 
-— Pengguna SPEKTRA
-""")
+    for review in reversed(st.session_state.reviews):
+        st.info(
+            f"{'⭐' * review['rating']}\n\n{review['ulasan']}"
+        )
+
 
     st.markdown("## 🚀 Fitur Utama")
 
