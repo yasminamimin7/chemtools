@@ -419,48 +419,6 @@ if st.session_state.reviews:
     )
    
     
-st.divider()
-
-colA, colB = st.columns(2)
-
-with colA:
-    st.markdown("""
-    ### 🌟 Mengapa Pilih SPEKTRA?
-
-    ✅ User-Friendly - Mudah digunakan
-
-    ✅ Interaktif - Belajar sambil bermain
-
-    ✅ Akurat - Perhitungan lebih cepat
-
-    ✅ Visualisasi menarik
-
-    ✅ Responsif di berbagai perangkat
-    """)
-
-with colB:
-    st.markdown("""
-    ### 🎨 Fitur Tema Dinamis
-
-    🌊 Ocean - Biru menenangkan
-
-    🌅 Sunset - Ungu hangat
-
-    🌲 Forest - Hijau segar
-
-    ### 💡 Tips Memulai
-
-    1. Pilih menu di sidebar
-
-    2. Coba fitur kalkulator
-
-    3. Gunakan analisis praktikum
-
-    4. Ikuti Quiz Center
-
-    5. Berikan review untuk SPEKTRA
-    """)
-    
 # =========================
 # 1. KALKULATOR PENGENCERAN
 # =========================
