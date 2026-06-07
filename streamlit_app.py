@@ -426,36 +426,9 @@ dan cocok untuk pembelajaran."
     st.caption(
         "🔬 SPEKTRA dikembangkan sebagai media pembelajaran dan pendukung praktikum mahasiswa Analis Kimia."
     )
-    with col1:
-        st.markdown(f"""
-        <div class='metric-card'>
-            <h3>📊 Kalkulator</h3>
-            <p>Hitung pengenceran larutan dengan rumus M₁V₁ = M₂V₂ secara akurat dan cepat</p>
-            <p style='font-size:0.9rem;opacity:0.8;'>💡 Hemat waktu perhitungan!</p>
-        </div>
-        """, unsafe_allow_html=True)
+   
     
-    with col2:
-        st.markdown(f"""
-        <div class='metric-card'>
-            <h3>🎮 Game Quiz</h3>
-            <p>Asah pengetahuan dengan game interaktif tebak warna reaksi kimia</p>
-            <p style='font-size:0.9rem;opacity:0.8;'>🏆 Raih skor tertinggi!</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown(f"""
-        <div class='metric-card'>
-            <h3>🔧 Troubleshooting</h3>
-            <p>Analisis kesalahan praktikum dan temukan solusi terbaik</p>
-            <p style='font-size:0.9rem;opacity:0.8;'>✅ Praktikum sukses!</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.divider()
-    
-    col1, col2 = st.columns(2)
+ 
     
     with col1:
         st.markdown(f"""
