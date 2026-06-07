@@ -757,6 +757,7 @@ elif menu == "🧠 Analisis Kesalahan":
     st.divider()
     
     if 'analisis' in st.session_state and st.session_state.analisis:
+        st.write("DEBUG:", masalah)
         if masalah == "Pilih salah satu...":
             st.markdown("""
             <div class='error-box'>
