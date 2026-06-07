@@ -766,7 +766,8 @@ elif menu == "🧠 Analisis Kesalahan":
             "💧 Larutan keruh",
             "🔬 pH tidak sesuai",
             "⚠️ Indikator tidak bekerja"
-    ])
+            ]
+        )
  
  
     
