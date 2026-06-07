@@ -411,7 +411,7 @@ if st.session_state.reviews:
         )
 
 
-    st.markdown("## 🚀 Fitur Utama")
+st.markdown("## 🚀 Fitur Utama")
 
     col1, col2, col3 = st.columns(3)
 
@@ -450,43 +450,47 @@ if st.session_state.reviews:
     )
    
     
- 
-    
-    with col1:
-        st.markdown(f"""
-        ### 🌟 Mengapa Pilih SPEKTRA?
-        
-        ✅ **User-Friendly** - Interface yang mudah digunakan untuk semua level
-        
-        ✅ **Interaktif** - Belajar sambil bermain dengan cara yang menyenangkan
-        
-        ✅ **Akurat** - Perhitungan presisi dengan validasi data lengkap
-        
-        ✅ **Visualisasi** - Grafik dan animasi untuk memahami konsep
-        
-        ✅ **Responsif** - Bekerja sempurna di desktop dan mobile
-        """)
-    
-    with col2:
-        st.markdown(f"""
-        ### 🎨 Fitur Tema Dinamis
-        
-        Pilih tema favorit Anda di sidebar!
-        
-        🌊 **Ocean** - Tema biru menenangkan
-        
-        🌅 **Sunset** - Tema ungu hangat
-        
-        🌲 **Forest** - Tema hijau segar
-        
-        ### 💡 Tips Memulai
-        
-        1. Pilih fitur di menu samping
-        2. Ikuti panduan step-by-step
-        3. Gunakan riwayat untuk review
-        4. Bagikan hasil dengan teman!
-        """)
+ st.divider()
 
+colA, colB = st.columns(2)
+
+with colA:
+    st.markdown("""
+    ### 🌟 Mengapa Pilih SPEKTRA?
+
+    ✅ User-Friendly - Mudah digunakan
+
+    ✅ Interaktif - Belajar sambil bermain
+
+    ✅ Akurat - Perhitungan lebih cepat
+
+    ✅ Visualisasi menarik
+
+    ✅ Responsif di berbagai perangkat
+    """)
+
+with colB:
+    st.markdown("""
+    ### 🎨 Fitur Tema Dinamis
+
+    🌊 Ocean - Biru menenangkan
+
+    🌅 Sunset - Ungu hangat
+
+    🌲 Forest - Hijau segar
+
+    ### 💡 Tips Memulai
+
+    1. Pilih menu di sidebar
+
+    2. Coba fitur kalkulator
+
+    3. Gunakan analisis praktikum
+
+    4. Ikuti Quiz Center
+
+    5. Berikan review untuk SPEKTRA
+    """)
 # =========================
 # 1. KALKULATOR PENGENCERAN
 # =========================
