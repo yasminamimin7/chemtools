@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
-
 from datetime import datetime
-
 # =========================
 # PAGE CONFIG
 # =========================
@@ -48,7 +46,6 @@ THEME_CONFIG = {
 }
 
 theme = THEME_CONFIG[st.session_state.theme]
-
 # =========================
 # DYNAMIC STYLING
 # =========================
@@ -148,32 +145,13 @@ header {{
     color: white !important;
 }}*/
 
-    /* MENU UTAMA */
-div[role="radiogroup"] {{
-    background-color: {theme['card_bg']} !important;
-    padding: 25px !important;
-    border-radius: 15px !important;
-    border: 2px solid {theme['primary']} !important;
-}}
-
-/* Tulisan Menu */
-div[role="radiogroup"] label {{
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    padding: 8px 0px !important;
-}}
-div[role="radiogroup"] > label {{
-    background: rgba(255,255,255,0.08);
-    padding: 12px !important;
-    border-radius: 10px;
-    margin-bottom: 6px;
-    transition: 0.3s;
-}}
-
-div[role="radiogroup"] > label:hover {{
-    background: rgba(255,255,255,0.15);
-    transform: scale(1.02);
-}}
+    /* Radio Buttons & Selectbox */
+    div[role="radiogroup"] {{
+        background-color: {theme['card_bg']} !important;
+        padding: 15px !important;
+        border-radius: 12px !important;
+        border: 1px solid {theme['primary']} !important;
+    }}
 
     /* Cards */
     .metric-card {{
@@ -210,7 +188,6 @@ div[role="radiogroup"] > label:hover {{
 [data-testid="collapsedControl"] {{
     background: transparent !important;
 }}
-
 [data-testid="collapsedControl"] svg {{
     fill: #FFFFFF !important;
     stroke: #FFFFFF !important;
@@ -549,7 +526,7 @@ elif menu == "📊 Kalkulator Pengenceran":
         with col2:
             V1 = st.number_input(f"V₁ ({satuan})", value=None, placeholder="Misal: 100")
         with col3:
-            V2 = st.number_input(f"V₂ ({satuan})", value=None, placeholder="Misal: 500")
+V2 = st.number_input(f"V₂ ({satuan})", value=None, placeholder="Misal: 500")
         
         if st.button("🧮 Hitung C₂", use_container_width=True):
             if None in (C1, V1, V2):
@@ -612,14 +589,13 @@ elif menu == "📊 Kalkulator Pengenceran":
                     'hasil': hasil,
                     'rumus': f"({C2} × {V2}) ÷ {C1}"
                 })
-                
+
                 st.markdown(f"""
                 <div class='success-box'>
                     ✅ <strong>{hasil}</strong><br>
                     <span style='font-size:0.9rem;'>Rumus: ({C2} × {V2}) ÷ {C1}</span>
                 </div>
                 """, unsafe_allow_html=True)
-    
     # History Section
     st.divider()
     st.subheader("📜 Riwayat Perhitungan")
@@ -647,7 +623,7 @@ elif menu == "📊 Kalkulator Pengenceran":
 # 2. TEBAK WARNA REAKSI
 # =========================
 elif menu == "🎮 Tebak Warna Reaksi":
-    st.markdown(f"<h1 style='color:{theme['accent']};'>🎮 Game Tebak Warna Reaksi</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='color:{theme['accent']};'>🎮 Game Tebak Warna Reaksi</h1>", unsafe_allow_html=True)
     st.write("🏆 Asah pengetahuan kimia Anda dengan menjawab pertanyaan tentang warna produk reaksi!")
     
     if 'skor' not in st.session_state:
@@ -707,7 +683,7 @@ elif menu == "🎮 Tebak Warna Reaksi":
         with tab:
             st.markdown(f"<h3 style='color:{theme['accent']};'>❓ {soal['pertanyaan']}</h3>", unsafe_allow_html=True)
             
-            jawaban_user = st.radio(
+            jawaban_user = st.radio(8
                 "Pilih jawaban Anda:",
                 soal['pilihan'],
                 key=f"soal_{idx}",
@@ -751,25 +727,17 @@ elif menu == "🧠 Analisis Kesalahan":
     col1, col2 = st.columns([3, 1])
     
     with col1:
-       masalah = st.selectbox(
-            "🔎 Pilih masalah praktikum:",
+        masalah = st.selectbox(
+            "🎯 Pilih masalah yang Anda alami:",
             [
-            "Pilih salah satu...",
-            "❌ Larutan tidak berubah warna",
-            "❌ Hasil titrasi sangat berbeda",
-            "⏱️ End point terlalu cepat",
-            "🧂 Kristal tidak terbentuk",
-            "🫧 Gas tidak keluar",
-            "⚗️ Endapan tidak muncul",
-            "🌡️ Hasil terlalu rendah",
-            "📏 Volume titrasi terlalu besar",
-            "💧 Larutan keruh",
-            "🔬 pH tidak sesuai",
-            "⚠️ Indikator tidak bekerja"
+                "Pilih salah satu...",
+                "❌ Larutan tidak berubah warna",
+                "❌ Hasil titrasi sangat berbeda",
+                "⏱️ End point terlalu cepat",
+                "🧂 Kristal tidak terbentuk",
+                "🫧 Gas tidak keluar"
             ]
         )
- 
- 
     
     with col2:
         if st.button("🔍 Analisis", use_container_width=True):
@@ -861,83 +829,7 @@ elif menu == "🧠 Analisis Kesalahan":
                 
                 ✅ Lakukan warming up practice
                 """)
-        
-        elif masalah == "🫧 Gas tidak keluar":
-            st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
-            st.markdown("""
-            ### 🔴 Kemungkinan Penyebab
-            - Reagen sudah rusak
-            - Konsentrasi terlalu rendah
-            - Suhu reaksi kurang
-            - Sistem bocor
- 
-            ### 🟡 Solusi
-            - Ganti reagen
-            - Tingkatkan konsentrasi
-            - Naikkan suhu sesuai SOP
-            - Periksa sambungan alat
- 
-            ### 🟢 Pencegahan
-            - Cek reagen sebelum praktikum
-            - Lakukan uji pendahuluan
-            """)
- 
-        elif masalah == "⚗️ Endapan tidak muncul":
-            st.error("Kemungkinan Penyebab")
-            st.markdown("""
-            - Konsentrasi terlalu rendah
-            - Reagen salah
-            - pH tidak sesuai
-            """)
-            st.success("Solusi")
-            st.markdown("""
-            - Tingkatkan konsentrasi
-            - Periksa reagen
-            - Atur pH
-            """)
- 
-        elif masalah == "🌡️ Hasil terlalu rendah":
-            st.error("Kemungkinan Penyebab")
-            st.markdown("""
-            - Sampel kurang homogen
-            - Kesalahan pembacaan
-            - Reaksi belum sempurna
-            """)
-            st.success("Solusi")
-            st.markdown("""
-            - Homogenkan sampel
-            - Ulangi pengukuran
-            - Perpanjang waktu reaksi
-            """)
- 
-        elif masalah == "📏 Volume titrasi terlalu besar":
-            st.error("Kemungkinan Penyebab")
-            st.markdown("""
-            - Larutan terlalu encer
-            - Konsentrasi titran rendah
-            """)
- 
-        elif masalah == "💧 Larutan keruh":
-            st.error("Kemungkinan Penyebab")
-            st.markdown("""
-            - Kontaminasi
-            - Endapan halus terbentuk
-            - Reagen tidak murni
-            """)
- 
-        elif masalah == "🔬 pH tidak sesuai":
-            st.error("Kemungkinan Penyebab")
-            st.markdown("""
-            - Buffer tidak bekerja
-            - Penambahan asam/basa berlebih
-            """)
- 
-        elif masalah == "⚠️ Indikator tidak bekerja":
-            st.error("Kemungkinan Penyebab")
-            st.markdown("""
-            - Indikator kedaluwarsa
-            - pH di luar rentang indikator
-            """)
+
 # =========================
 # 4. PANDUAN LENGKAP
 # =========================
@@ -1205,15 +1097,12 @@ elif menu == "📝 Quiz Center":
 
         if q2 == "Ungu":
             skor += 1
-
         if q3 == "AgCl":
             skor += 1
-
         st.success(
             f"Skor Anda = {skor}/3"
         )
 st.divider()
-
 # =========================
 # FOOTER
 # =========================
@@ -1230,3 +1119,4 @@ st.markdown(f"""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
