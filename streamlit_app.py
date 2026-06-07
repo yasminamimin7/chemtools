@@ -354,6 +354,14 @@ if menu == "🏠 Beranda":
         <p>Teman belajar dan praktikum bagi mahasiswa Analis Kimia.</p>
     </div>
     """, unsafe_allow_html=True)
+    
+st.markdown("### ⭐ Beri Rating WEBSITE ini")
+
+    rating = st.radio(
+        "Seberapa puas kamu dengan SPEKTRA?",
+        ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"],
+        horizontal=True
+    )
 
 
     st.markdown("## 💬 Kritik dan Saran")
