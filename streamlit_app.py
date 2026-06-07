@@ -148,13 +148,32 @@ header {{
     color: white !important;
 }}*/
 
-    /* Radio Buttons & Selectbox */
-    div[role="radiogroup"] {{
-        background-color: {theme['card_bg']} !important;
-        padding: 15px !important;
-        border-radius: 12px !important;
-        border: 1px solid {theme['primary']} !important;
-    }}
+    /* MENU UTAMA */
+div[role="radiogroup"] {{
+    background-color: {theme['card_bg']} !important;
+    padding: 25px !important;
+    border-radius: 15px !important;
+    border: 2px solid {theme['primary']} !important;
+}}
+
+/* Tulisan Menu */
+div[role="radiogroup"] label {{
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    padding: 8px 0px !important;
+}}
+div[role="radiogroup"] > label {{
+    background: rgba(255,255,255,0.08);
+    padding: 12px !important;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    transition: 0.3s;
+}}
+
+div[role="radiogroup"] > label:hover {{
+    background: rgba(255,255,255,0.15);
+    transform: scale(1.02);
+}}
 
     /* Cards */
     .metric-card {{
