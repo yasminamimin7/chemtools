@@ -351,13 +351,24 @@ if menu == "🏠 Beranda":
     ">
         <h1>👋 Selamat Datang di SPEKTRA</h1>
         <h3>Sistem Pendukung Eksperimen Kimia Terapan</h3>
-        <p>
-        Teman belajar dan praktikum bagi mahasiswa Analis Kimia.
-        </p>
+        <p>Teman belajar dan praktikum bagi mahasiswa Analis Kimia.</p>
     </div>
     """, unsafe_allow_html=True)
 
+
     st.markdown("## 💬 Kritik dan Saran")
+
+    # KOTAK PUTIH MULAI
+    st.markdown("""
+    <div style="
+        background-color:white;
+        padding:20px;
+        border-radius:15px;
+        box-shadow:0px 2px 10px rgba(0,0,0,0.1);
+        margin-top:10px;
+        margin-bottom:15px;
+    ">
+    """, unsafe_allow_html=True)
 
     ulasan = st.text_area(
         "Tulis komentar Anda:",
@@ -366,12 +377,13 @@ if menu == "🏠 Beranda":
     )
 
     if st.button("📨 Kirim Ulasan", use_container_width=True):
-
         if ulasan.strip() == "":
             st.warning("Silakan isi komentar terlebih dahulu.")
         else:
             st.success("✅ Terima kasih! Ulasan Anda berhasil dikirim.")
             st.balloons()
+
+    st.markdown("</div>", unsafe_allow_html=True)
     
     st.divider()
     
