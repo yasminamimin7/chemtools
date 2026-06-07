@@ -753,20 +753,20 @@ elif menu == "🧠 Analisis Kesalahan":
     
     with col1:
        masalah = st.selectbox(
-    "🎯 Pilih masalah yang Anda alami:",
-    [
-        "Pilih salah satu...",
-        "❌ Larutan tidak berubah warna",
-        "❌ Hasil titrasi sangat berbeda",
-        "⏱️ End point terlalu cepat",
-        "🧂 Kristal tidak terbentuk",
-        "🫧 Gas tidak keluar",
-        "⚗️ Endapan tidak muncul",
-        "🌡️ Hasil terlalu rendah",
-        "📏 Volume titrasi terlalu besar",
-        "💧 Larutan keruh",
-        "🔬 pH tidak sesuai",
-        "⚠️ Indikator tidak bekerja"
+            "🎯 Pilih masalah yang Anda alami:",
+            [
+            "Pilih salah satu...",
+            "❌ Larutan tidak berubah warna",
+            "❌ Hasil titrasi sangat berbeda",
+            "⏱️ End point terlalu cepat",
+            "🧂 Kristal tidak terbentuk",
+            "🫧 Gas tidak keluar",
+            "⚗️ Endapan tidak muncul",
+            "🌡️ Hasil terlalu rendah",
+            "📏 Volume titrasi terlalu besar",
+            "💧 Larutan keruh",
+            "🔬 pH tidak sesuai",
+            "⚠️ Indikator tidak bekerja"
     ]
 )
 
