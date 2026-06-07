@@ -731,18 +731,24 @@ elif menu == "🧠 Analisis Kesalahan":
     
     col1, col2 = st.columns([3, 1])
     
-    with col1:
-        masalah = st.selectbox(
-            "🎯 Pilih masalah yang Anda alami:",
-            [
-                "Pilih salah satu...",
-                "❌ Larutan tidak berubah warna",
-                "❌ Hasil titrasi sangat berbeda",
-                "⏱️ End point terlalu cepat",
-                "🧂 Kristal tidak terbentuk",
-                "🫧 Gas tidak keluar"
-            ]
-        )
+ with col1:
+    masalah = st.selectbox(
+        "🎯 Pilih masalah yang Anda alami:",
+        [
+            "Pilih salah satu...",
+            "❌ Larutan tidak berubah warna",
+            "❌ Hasil titrasi sangat berbeda",
+            "⏱️ End point terlalu cepat",
+            "🧂 Kristal tidak terbentuk",
+            "🫧 Gas tidak keluar",
+            "⚗️ Endapan tidak muncul",
+            "🌡️ Hasil terlalu rendah",
+            "📏 Volume titrasi terlalu besar",
+            "💧 Larutan keruh",
+            "🔬 pH tidak sesuai",
+            "⚠️ Indikator tidak bekerja"
+        ]
+    )
     
     with col2:
         if st.button("🔍 Analisis", use_container_width=True):
@@ -834,6 +840,32 @@ elif menu == "🧠 Analisis Kesalahan":
                 
                 ✅ Lakukan warming up practice
                 """)
+        elif masalah == "⏱️ End point terlalu cepat":
+            st.info("Kemungkinan titran terlalu pekat atau pengadukan kurang merata.")
+
+        elif masalah == "🧂 Kristal tidak terbentuk":
+            st.info("Larutan mungkin belum jenuh atau pendinginan kurang optimal.")
+
+        elif masalah == "🫧 Gas tidak keluar":
+            st.info("Reaksi belum berlangsung sempurna atau sistem mengalami kebocoran.")
+
+        elif masalah == "⚗️ Endapan tidak muncul":
+            st.info("Konsentrasi terlalu rendah, reagen tidak sesuai, atau pH tidak tepat.")
+
+        elif masalah == "🌡️ Hasil terlalu rendah":
+            st.info("Kemungkinan terjadi kehilangan sampel atau reaksi belum sempurna.")
+
+        elif masalah == "📏 Volume titrasi terlalu besar":
+            st.info("Titran terlalu encer atau konsentrasi sampel terlalu tinggi.")
+
+        elif masalah == "💧 Larutan keruh":
+            st.info("Bisa disebabkan oleh kontaminasi, reagen tidak murni, atau terbentuk endapan halus.")
+
+        elif masalah == "🔬 pH tidak sesuai":
+            st.info("Buffer tidak bekerja optimal atau terjadi penambahan asam/basa berlebih.")
+
+        elif masalah == "⚠️ Indikator tidak bekerja":
+            st.info("Indikator mungkin kedaluwarsa atau tidak cocok dengan rentang pH larutan.")
 
 # =========================
 # 4. PANDUAN LENGKAP
