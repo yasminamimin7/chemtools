@@ -339,8 +339,93 @@ st.markdown(f"""
 # HOME PAGE
 # =========================
 if menu == "🏠 Beranda":
+
+    st.markdown("""
+    <div style="
+        background: linear-gradient(135deg,#1e3a8a,#2563eb);
+        padding:35px;
+        border-radius:20px;
+        text-align:center;
+        color:white;
+        margin-bottom:20px;
+    ">
+        <h1>👋 Selamat Datang di SPEKTRA</h1>
+        <h3>Sistem Pendukung Eksperimen Kimia Terapan</h3>
+        <p>
+        Teman belajar dan praktikum bagi mahasiswa Analis Kimia.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.success("""
+    🧪 Selamat datang!
+
+    SPEKTRA hadir untuk membantu kegiatan praktikum kimia melalui
+    kalkulator kimia, analisis kesalahan praktikum, serta berbagai
+    fitur pembelajaran interaktif yang mudah digunakan.
+    """)
+
+    st.markdown("## ⭐ Kesan Pengguna")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.info("""
+⭐⭐⭐⭐⭐
+
+"Membantu saya saat menghitung pengenceran dan
+menyelesaikan laporan praktikum."
+
+— Mahasiswa Analis Kimia
+""")
+
+    with col2:
+        st.info("""
+⭐⭐⭐⭐⭐
+
+"Tampilannya sederhana, mudah dipahami,
+dan cocok untuk pembelajaran."
+
+— Pengguna SPEKTRA
+""")
+
+    st.markdown("## 🚀 Fitur Utama")
+
     col1, col2, col3 = st.columns(3)
-    
+
+    with col1:
+        st.success("""
+🧪 Kalkulator Kimia
+
+• Pengenceran
+• Molaritas
+• Normalitas
+• pH
+""")
+
+    with col2:
+        st.warning("""
+🧠 Analisis Praktikum
+
+• Identifikasi masalah
+• Solusi praktis
+• Pencegahan kesalahan
+""")
+
+    with col3:
+        st.info("""
+🎮 Edukasi Interaktif
+
+• Quiz Kimia
+• Tebak Warna Reaksi
+• Mini Game
+""")
+
+    st.divider()
+
+    st.caption(
+        "🔬 SPEKTRA dikembangkan sebagai media pembelajaran dan pendukung praktikum mahasiswa Analis Kimia."
+    )
     with col1:
         st.markdown(f"""
         <div class='metric-card'>
