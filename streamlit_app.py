@@ -753,7 +753,6 @@ elif menu == "🧠 Analisis Kesalahan":
     
     with col1:
        masalah = st.selectbox(
-           st.write("Pilihan yang dipilih:", masalah)
     "🎯 Pilih masalah yang Anda alami:",
     [
         "Pilih salah satu...",
