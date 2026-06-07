@@ -816,39 +816,39 @@ elif menu == "🧠 Analisis Kesalahan":
     
     col1, col2 = st.columns([3, 1])
     
- with col1:
-    masalah = st.selectbox(
-        "🎯 Pilih masalah yang Anda alami:",
-        [
-            "Pilih salah satu...",
-            "❌ Larutan tidak berubah warna",
-            "❌ Hasil titrasi sangat berbeda",
-            "⏱️ End point terlalu cepat",
-            "🧂 Kristal tidak terbentuk",
-            "🫧 Gas tidak keluar",
-            "⚗️ Endapan tidak muncul",
-            "🌡️ Hasil terlalu rendah",
-            "📏 Volume titrasi terlalu besar",
-            "💧 Larutan keruh",
-            "🔬 pH tidak sesuai",
-            "⚠️ Indikator tidak bekerja"
-        ]
-    )
+     with col1:
+        masalah = st.selectbox(
+            "🎯 Pilih masalah yang Anda alami:",
+            [
+                "Pilih salah satu...",
+                "❌ Larutan tidak berubah warna",
+                "❌ Hasil titrasi sangat berbeda",
+                "⏱️ End point terlalu cepat",
+                "🧂 Kristal tidak terbentuk",
+                "🫧 Gas tidak keluar",
+                "⚗️ Endapan tidak muncul",
+                "🌡️ Hasil terlalu rendah",
+                "📏 Volume titrasi terlalu besar",
+                "💧 Larutan keruh",
+                "🔬 pH tidak sesuai",
+                "⚠️ Indikator tidak bekerja"
+            ]
+        )
     
-    with col2:
-        if st.button("🔍 Analisis", use_container_width=True):
-            st.session_state.analisis = True
+        with col2:
+            if st.button("🔍 Analisis", use_container_width=True):
+                st.session_state.analisis = True
     
-    st.divider()
+        st.divider()
     
-    if 'analisis' in st.session_state and st.session_state.analisis:
-        st.write("DEBUG:", masalah)
-        if masalah == "Pilih salah satu...":
-            st.markdown("""
-            <div class='error-box'>
-                ⚠️ Silakan pilih masalah terlebih dahulu untuk mendapat analisis
-            </div>
-            """, unsafe_allow_html=True)
+        if 'analisis' in st.session_state and st.session_state.analisis:
+            st.write("DEBUG:", masalah)
+            if masalah == "Pilih salah satu...":
+                st.markdown("""
+                <div class='error-box'>
+                    ⚠️ Silakan pilih masalah terlebih dahulu untuk mendapat analisis
+                </div>
+                """, unsafe_allow_html=True)
         
         elif masalah == "❌ Larutan tidak berubah warna":
             st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
