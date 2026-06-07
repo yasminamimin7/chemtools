@@ -427,7 +427,7 @@ if st.session_state.reviews:
     )
    
     
- st.divider()
+     st.divider()
 
 colA, colB = st.columns(2)
 
