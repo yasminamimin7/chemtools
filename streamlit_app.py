@@ -882,13 +882,13 @@ elif menu == "🧠 Analisis Kesalahan":
     - Cek reagen sebelum praktikum
     - Lakukan uji pendahuluan
     """)
-    elif masalah == "🧂 Kristal tidak terbentuk":
-    elif masalah == "⚗️ Endapan tidak muncul":
-    elif masalah == "🌡️ Hasil terlalu rendah":
-    elif masalah == "📏 Volume titrasi terlalu besar":
-    elif masalah == "💧 Larutan keruh":
-    elif masalah == "🔬 pH tidak sesuai":
-    elif masalah == "⚠️ Indikator tidak bekerja":
+        elif masalah == "🧂 Kristal tidak terbentuk":
+        elif masalah == "⚗️ Endapan tidak muncul":
+        elif masalah == "🌡️ Hasil terlalu rendah":
+        elif masalah == "📏 Volume titrasi terlalu besar":
+        elif masalah == "💧 Larutan keruh":
+        elif masalah == "🔬 pH tidak sesuai":
+        elif masalah == "⚠️ Indikator tidak bekerja":
 
 # =========================
 # 4. PANDUAN LENGKAP
