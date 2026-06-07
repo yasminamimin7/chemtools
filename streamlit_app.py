@@ -505,11 +505,17 @@ elif menu == "📊 Kalkulator Pengenceran":
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            V1 = st.number_input(f"V₁ ({satuan})", value=None, placeholder="Misal: 100")
+            V1 = st.number_input(f"V₁ ({satuan})", 
+            value=None, 
+            placeholder="Misal: 100")
         with col2:
-            C2 = st.number_input(f"C₂ ({satuan_konsentrasi})", value=None, placeholder="Misal: 0.5")
+            C2 = st.number_input(f"C₂ ({satuan_konsentrasi})", 
+            value=None,
+            placeholder="Misal: 0.5")
         with col3:
-            V2 = st.number_input(f"V₂ ({satuan})", value=None, placeholder="Misal: 500")
+            V2 = st.number_input(f"V₂ ({satuan})", 
+            value=None, 
+            placeholder="Misal: 500")
         
         if st.button("🧮 Hitung C₁", use_container_width=True):
             if None in (V1, C2, V2):
