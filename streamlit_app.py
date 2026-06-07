@@ -840,33 +840,145 @@ elif menu == "🧠 Analisis Kesalahan":
                 
                 ✅ Lakukan warming up practice
                 """)
-        elif masalah == "⏱️ End point terlalu cepat":
-            st.info("Kemungkinan titran terlalu pekat atau pengadukan kurang merata.")
+elif masalah == "⏱️ End point terlalu cepat":
+    st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
 
-        elif masalah == "🧂 Kristal tidak terbentuk":
-            st.info("Larutan mungkin belum jenuh atau pendinginan kurang optimal.")
+    col1, col2, col3 = st.columns(3)
 
-        elif masalah == "🫧 Gas tidak keluar":
-            st.info("Reaksi belum berlangsung sempurna atau sistem mengalami kebocoran.")
+    with col1:
+        st.markdown("""
+        ### 🔴 Kemungkinan Penyebab
+        1. **Titran terlalu pekat** - Reaksi berlangsung sangat cepat
+        2. **Sampel terlalu sedikit** - Mudah mencapai titik akhir
+        3. **Penambahan titran terlalu cepat** - Tidak sempat diamati
+        4. **Indikator terlalu banyak** - Perubahan warna terlalu jelas
+        """)
 
-        elif masalah == "⚗️ Endapan tidak muncul":
-            st.info("Konsentrasi terlalu rendah, reagen tidak sesuai, atau pH tidak tepat.")
+    with col2:
+        st.markdown("""
+        ### 🟡 Solusi Praktis
+        1. Encerkan titran jika diperlukan
+        2. Tambah volume sampel
+        3. Teteskan titran perlahan
+        4. Gunakan indikator secukupnya
+        """)
 
-        elif masalah == "🌡️ Hasil terlalu rendah":
-            st.info("Kemungkinan terjadi kehilangan sampel atau reaksi belum sempurna.")
+    with col3:
+        st.markdown("""
+        ### 🟢 Pencegahan Ke Depan
+        ✅ Lakukan standarisasi titran
 
-        elif masalah == "📏 Volume titrasi terlalu besar":
-            st.info("Titran terlalu encer atau konsentrasi sampel terlalu tinggi.")
+        ✅ Gunakan buret yang baik
 
-        elif masalah == "💧 Larutan keruh":
-            st.info("Bisa disebabkan oleh kontaminasi, reagen tidak murni, atau terbentuk endapan halus.")
+        ✅ Teteskan perlahan mendekati end point
 
-        elif masalah == "🔬 pH tidak sesuai":
-            st.info("Buffer tidak bekerja optimal atau terjadi penambahan asam/basa berlebih.")
+        ✅ Latihan teknik titrasi
+        """)
+elif masalah == "🧂 Kristal tidak terbentuk":
+    st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
 
-        elif masalah == "⚠️ Indikator tidak bekerja":
-            st.info("Indikator mungkin kedaluwarsa atau tidak cocok dengan rentang pH larutan.")
+    col1, col2, col3 = st.columns(3)
 
+    with col1:
+        st.markdown("""
+        ### 🔴 Kemungkinan Penyebab
+        1. **Larutan belum jenuh**
+        2. **Pendinginan terlalu cepat**
+        3. **Terlalu banyak pengotor**
+        4. **Pelarut masih berlebih**
+        """)
+
+    with col2:
+        st.markdown("""
+        ### 🟡 Solusi Praktis
+        1. Pekatkan larutan
+        2. Dinginkan perlahan
+        3. Lakukan penyaringan
+        4. Kurangi volume pelarut
+        """)
+
+    with col3:
+        st.markdown("""
+        ### 🟢 Pencegahan Ke Depan
+        ✅ Gunakan bahan murni
+
+        ✅ Hindari kontaminasi
+
+        ✅ Ikuti prosedur kristalisasi
+
+        ✅ Kontrol suhu pendinginan
+        """)
+        
+elif masalah == "🫧 Gas tidak keluar":
+    st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        ### 🔴 Kemungkinan Penyebab
+        1. **Reaksi belum terjadi**
+        2. **Reagen tidak aktif**
+        3. **Konsentrasi terlalu rendah**
+        4. **Sistem bocor**
+        """)
+
+    with col2:
+        st.markdown("""
+        ### 🟡 Solusi Praktis
+        1. Tambahkan reagen sesuai SOP
+        2. Gunakan reagen baru
+        3. Tingkatkan konsentrasi
+        4. Periksa sambungan alat
+        """)
+
+    with col3:
+        st.markdown("""
+        ### 🟢 Pencegahan Ke Depan
+        ✅ Periksa kondisi reagen
+
+        ✅ Uji alat sebelum digunakan
+
+        ✅ Pastikan sambungan rapat
+
+        ✅ Lakukan uji pendahuluan
+        """)
+        
+elif masalah == "💧 Larutan keruh":
+    st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        ### 🔴 Kemungkinan Penyebab
+        1. **Kontaminasi sampel** - Ada zat asing masuk
+        2. **Reagen tidak murni** - Kualitas reagen menurun
+        3. **Endapan halus terbentuk** - Reaksi samping terjadi
+        4. **Alat kurang bersih** - Masih ada sisa percobaan sebelumnya
+        """)
+
+    with col2:
+        st.markdown("""
+        ### 🟡 Solusi Praktis
+        1. **Saring larutan** sebelum digunakan
+        2. **Gunakan reagen baru**
+        3. **Bersihkan alat** secara menyeluruh
+        4. **Ulangi preparasi sampel**
+        """)
+
+    with col3:
+        st.markdown("""
+        ### 🟢 Pencegahan Ke Depan
+        ✅ Gunakan air bebas ion
+
+        ✅ Simpan reagen dengan benar
+
+        ✅ Cuci alat sebelum praktikum
+
+        ✅ Hindari kontaminasi silang
+        """)
+        
 # =========================
 # 4. PANDUAN LENGKAP
 # =========================
