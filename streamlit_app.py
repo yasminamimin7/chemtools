@@ -753,7 +753,7 @@ elif menu == "🧠 Analisis Kesalahan":
     
     with col1:
        masalah = st.selectbox(
-            
+            "🔎 Pilih masalah praktikum:",
             [
             "Pilih salah satu...",
             "❌ Larutan tidak berubah warna",
@@ -769,8 +769,8 @@ elif menu == "🧠 Analisis Kesalahan":
             "⚠️ Indikator tidak bekerja"
     ]
 )
-
-
+ 
+ 
     
     with col2:
         if st.button("🔍 Analisis", use_container_width=True):
@@ -862,91 +862,83 @@ elif menu == "🧠 Analisis Kesalahan":
                 
                 ✅ Lakukan warming up practice
                 """)
-                elif masalah == "🫧 Gas tidak keluar":
-
-    st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
-
-    st.markdown("""
-    ### 🔴 Kemungkinan Penyebab
-    - Reagen sudah rusak
-    - Konsentrasi terlalu rendah
-    - Suhu reaksi kurang
-    - Sistem bocor
-
-    ### 🟡 Solusi
-    - Ganti reagen
-    - Tingkatkan konsentrasi
-    - Naikkan suhu sesuai SOP
-    - Periksa sambungan alat
-
-    ### 🟢 Pencegahan
-    - Cek reagen sebelum praktikum
-    - Lakukan uji pendahuluan
-    """)
-      elif masalah == "⚗️ Endapan tidak muncul":
-
-    st.error("Kemungkinan Penyebab")
-    st.markdown("""
-    - Konsentrasi terlalu rendah
-    - Reagen salah
-    - pH tidak sesuai
-    """)
-
-    st.success("Solusi")
-    st.markdown("""
-    - Tingkatkan konsentrasi
-    - Periksa reagen
-    - Atur pH
-    """)
-
-elif masalah == "🌡️ Hasil terlalu rendah":
-
-    st.error("Kemungkinan Penyebab")
-    st.markdown("""
-    - Sampel kurang homogen
-    - Kesalahan pembacaan
-    - Reaksi belum sempurna
-    """)
-
-    st.success("Solusi")
-    st.markdown("""
-    - Homogenkan sampel
-    - Ulangi pengukuran
-    - Perpanjang waktu reaksi
-    """)
-
-elif masalah == "📏 Volume titrasi terlalu besar":
-
-    st.error("Kemungkinan Penyebab")
-    st.markdown("""
-    - Larutan terlalu encer
-    - Konsentrasi titran rendah
-    """)
-
-elif masalah == "💧 Larutan keruh":
-
-    st.error("Kemungkinan Penyebab")
-    st.markdown("""
-    - Kontaminasi
-    - Endapan halus terbentuk
-    - Reagen tidak murni
-    """)
-
-elif masalah == "🔬 pH tidak sesuai":
-
-    st.error("Kemungkinan Penyebab")
-    st.markdown("""
-    - Buffer tidak bekerja
-    - Penambahan asam/basa berlebih
-    """)
-
-elif masalah == "⚠️ Indikator tidak bekerja":
-
-    st.error("Kemungkinan Penyebab")
-    st.markdown("""
-    - Indikator kedaluwarsa
-    - pH di luar rentang indikator
-    """)
+        
+        elif masalah == "🫧 Gas tidak keluar":
+            st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
+            st.markdown("""
+            ### 🔴 Kemungkinan Penyebab
+            - Reagen sudah rusak
+            - Konsentrasi terlalu rendah
+            - Suhu reaksi kurang
+            - Sistem bocor
+ 
+            ### 🟡 Solusi
+            - Ganti reagen
+            - Tingkatkan konsentrasi
+            - Naikkan suhu sesuai SOP
+            - Periksa sambungan alat
+ 
+            ### 🟢 Pencegahan
+            - Cek reagen sebelum praktikum
+            - Lakukan uji pendahuluan
+            """)
+ 
+        elif masalah == "⚗️ Endapan tidak muncul":
+            st.error("Kemungkinan Penyebab")
+            st.markdown("""
+            - Konsentrasi terlalu rendah
+            - Reagen salah
+            - pH tidak sesuai
+            """)
+            st.success("Solusi")
+            st.markdown("""
+            - Tingkatkan konsentrasi
+            - Periksa reagen
+            - Atur pH
+            """)
+ 
+        elif masalah == "🌡️ Hasil terlalu rendah":
+            st.error("Kemungkinan Penyebab")
+            st.markdown("""
+            - Sampel kurang homogen
+            - Kesalahan pembacaan
+            - Reaksi belum sempurna
+            """)
+            st.success("Solusi")
+            st.markdown("""
+            - Homogenkan sampel
+            - Ulangi pengukuran
+            - Perpanjang waktu reaksi
+            """)
+ 
+        elif masalah == "📏 Volume titrasi terlalu besar":
+            st.error("Kemungkinan Penyebab")
+            st.markdown("""
+            - Larutan terlalu encer
+            - Konsentrasi titran rendah
+            """)
+ 
+        elif masalah == "💧 Larutan keruh":
+            st.error("Kemungkinan Penyebab")
+            st.markdown("""
+            - Kontaminasi
+            - Endapan halus terbentuk
+            - Reagen tidak murni
+            """)
+ 
+        elif masalah == "🔬 pH tidak sesuai":
+            st.error("Kemungkinan Penyebab")
+            st.markdown("""
+            - Buffer tidak bekerja
+            - Penambahan asam/basa berlebih
+            """)
+ 
+        elif masalah == "⚠️ Indikator tidak bekerja":
+            st.error("Kemungkinan Penyebab")
+            st.markdown("""
+            - Indikator kedaluwarsa
+            - pH di luar rentang indikator
+            """)
 # =========================
 # 4. PANDUAN LENGKAP
 # =========================
