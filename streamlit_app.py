@@ -770,7 +770,7 @@ elif menu == "🧠 Analisis Kesalahan":
     ]
 )
 
-st.write("Pilihan yang dipilih:", masalah)
+
     
     with col2:
         if st.button("🔍 Analisis", use_container_width=True):
