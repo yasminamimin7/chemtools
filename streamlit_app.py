@@ -388,6 +388,8 @@ if prompt:
     ">
     """, unsafe_allow_html=True)
 
+    st.markdown("## 💬 Kritik dan Saran")
+
     ulasan = st.text_area(
         "Tulis komentar Anda:",
         placeholder="Berikan kritik, saran, atau pengalaman Anda menggunakan SPEKTRA...",
@@ -395,12 +397,12 @@ if prompt:
     )
 
     if st.button("📨 Kirim Ulasan", use_container_width=True):
+
         if ulasan.strip() == "":
             st.warning("Silakan isi komentar terlebih dahulu.")
         else:
             st.success("✅ Terima kasih! Ulasan Anda berhasil dikirim.")
             st.balloons()
-
     st.markdown("</div>", unsafe_allow_html=True)
     
     st.divider()
