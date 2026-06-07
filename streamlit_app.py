@@ -347,6 +347,7 @@ if menu == "🏠 Beranda":
         border-radius:20px;
         text-align:center;
         color:white;
+        margin-bottom:20px;
     ">
         <h1>👋 Selamat Datang di SPEKTRA</h1>
         <h3>Sistem Pendukung Eksperimen Kimia Terapan</h3>
@@ -356,50 +357,21 @@ if menu == "🏠 Beranda":
     </div>
     """, unsafe_allow_html=True)
 
-    st.success("""
-    🧪 Selamat datang!
+    st.markdown("## 💬 Kritik dan Saran")
 
-    SPEKTRA hadir untuk membantu kegiatan praktikum kimia melalui
-    kalkulator kimia, analisis kesalahan praktikum, serta fitur
-    pembelajaran interaktif yang mudah digunakan.
-    """)
-
-    st.markdown("## ⭐ Beri Ulasan untuk SPEKTRA")
-
-   
-st.markdown("""
-<div style="
-padding:10px;
-border-radius:10px;
-background-color:#f8fafc;
-margin-bottom:10px;">
-<h4>💬 Kesan dan Saran</h4>
-</div>
-""", unsafe_allow_html=True)
-
-ulasan = st.text_area(
-    "",
-    placeholder="Tuliskan pengalaman Anda menggunakan SPEKTRA...",
-    height=150
-)
-
-
-        st.success("Terima kasih atas ulasan Anda! ⭐")
-
-    if st.session_state.reviews:
-
-        st.markdown("### 📋 Ulasan Pengguna")
-
-        for review in reversed(st.session_state.reviews):
-            st.info(
-                f"{'⭐' * review['rating']}\n\n{review['ulasan']}"
-            )
-
-    st.divider()
-
-    st.caption(
-        "🔬 SPEKTRA dikembangkan sebagai media pembelajaran dan pendukung praktikum mahasiswa Analis Kimia."
+    ulasan = st.text_area(
+        "Tulis komentar Anda:",
+        placeholder="Berikan kritik, saran, atau pengalaman Anda menggunakan SPEKTRA...",
+        height=150
     )
+
+    if st.button("📨 Kirim Ulasan", use_container_width=True):
+
+        if ulasan.strip() == "":
+            st.warning("Silakan isi komentar terlebih dahulu.")
+        else:
+            st.success("✅ Terima kasih! Ulasan Anda berhasil dikirim.")
+            st.balloons()
     
     st.divider()
     
