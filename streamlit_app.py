@@ -364,6 +364,19 @@ if menu == "🏠 Beranda":
     kalkulator kimia, analisis kesalahan praktikum, serta berbagai
     fitur pembelajaran interaktif yang mudah digunakan.
     """)
+    st.markdown("## 📚 Menu SPEKTRA")
+
+st.info("""
+🧪 Kalkulator Kimia
+
+🧠 Analisis Praktikum
+
+🎮 Quiz Center
+
+🎨 Tebak Warna Reaksi
+
+📖 Materi Dasar Kimia
+""")
 
     st.markdown("## ⭐ Beri Penilaian untuk SPEKTRA")
 
@@ -410,38 +423,6 @@ if st.session_state.reviews:
             f"{'⭐' * review['rating']}\n\n{review['ulasan']}"
         )
 
-
-st.markdown("## 🚀 Fitur Utama")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.success("""
-🧪 Kalkulator Kimia
-
-• Pengenceran
-• Molaritas
-• Normalitas
-• pH
-""")
-
-    with col2:
-        st.warning("""
-🧠 Analisis Praktikum
-
-• Identifikasi masalah
-• Solusi praktis
-• Pencegahan kesalahan
-""")
-
-    with col3:
-        st.info("""
-🎮 Edukasi Interaktif
-
-• Quiz Kimia
-• Tebak Warna Reaksi
-• Mini Game
-""")
 
     st.divider()
 
