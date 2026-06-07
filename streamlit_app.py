@@ -754,12 +754,20 @@ elif menu == "🧠 Analisis Kesalahan":
         masalah = st.selectbox(
             "🎯 Pilih masalah yang Anda alami:",
             [
-                "Pilih salah satu...",
-                "❌ Larutan tidak berubah warna",
-                "❌ Hasil titrasi sangat berbeda",
-                "⏱️ End point terlalu cepat",
-                "🧂 Kristal tidak terbentuk",
-                "🫧 Gas tidak keluar"
+                [
+    "Pilih salah satu...",
+    "❌ Larutan tidak berubah warna",
+    "❌ Hasil titrasi sangat berbeda",
+    "⏱️ End point terlalu cepat",
+    "🧂 Kristal tidak terbentuk",
+    "🫧 Gas tidak keluar",
+    "⚗️ Endapan tidak muncul",
+    "🌡️ Hasil terlalu rendah",
+    "📏 Volume titrasi terlalu besar",
+    "💧 Larutan keruh",
+    "🔬 pH tidak sesuai",
+    "⚠️ Indikator tidak bekerja"
+]
             ]
         )
     
@@ -853,6 +861,34 @@ elif menu == "🧠 Analisis Kesalahan":
                 
                 ✅ Lakukan warming up practice
                 """)
+                elif masalah == "🫧 Gas tidak keluar":
+
+    st.markdown(f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>", unsafe_allow_html=True)
+
+    st.markdown("""
+    ### 🔴 Kemungkinan Penyebab
+    - Reagen sudah rusak
+    - Konsentrasi terlalu rendah
+    - Suhu reaksi kurang
+    - Sistem bocor
+
+    ### 🟡 Solusi
+    - Ganti reagen
+    - Tingkatkan konsentrasi
+    - Naikkan suhu sesuai SOP
+    - Periksa sambungan alat
+
+    ### 🟢 Pencegahan
+    - Cek reagen sebelum praktikum
+    - Lakukan uji pendahuluan
+    """)
+    elif masalah == "🧂 Kristal tidak terbentuk":
+    elif masalah == "⚗️ Endapan tidak muncul":
+    elif masalah == "🌡️ Hasil terlalu rendah":
+    elif masalah == "📏 Volume titrasi terlalu besar":
+    elif masalah == "💧 Larutan keruh":
+    elif masalah == "🔬 pH tidak sesuai":
+    elif masalah == "⚠️ Indikator tidak bekerja":
 
 # =========================
 # 4. PANDUAN LENGKAP
