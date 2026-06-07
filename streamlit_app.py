@@ -383,11 +383,6 @@ ulasan = st.text_area(
     height=150
 )
 
-    if st.button("📨 Kirim Ulasan"):
-        st.session_state.reviews.append({
-            "rating": rating,
-            "ulasan": ulasan
-        })
 
         st.success("Terima kasih atas ulasan Anda! ⭐")
 
