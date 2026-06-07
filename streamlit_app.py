@@ -339,34 +339,72 @@ st.markdown(f"""
 # HOME PAGE
 # =========================
 if menu == "🏠 Beranda":
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown(f"""
-        <div class='metric-card'>
-            <h3>📊 Kalkulator</h3>
-            <p>Hitung pengenceran larutan dengan rumus M₁V₁ = M₂V₂ secara akurat dan cepat</p>
-            <p style='font-size:0.9rem;opacity:0.8;'>💡 Hemat waktu perhitungan!</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown(f"""
-        <div class='metric-card'>
-            <h3>🎮 Game Quiz</h3>
-            <p>Asah pengetahuan dengan game interaktif tebak warna reaksi kimia</p>
-            <p style='font-size:0.9rem;opacity:0.8;'>🏆 Raih skor tertinggi!</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown(f"""
-        <div class='metric-card'>
-            <h3>🔧 Troubleshooting</h3>
-            <p>Analisis kesalahan praktikum dan temukan solusi terbaik</p>
-            <p style='font-size:0.9rem;opacity:0.8;'>✅ Praktikum sukses!</p>
-        </div>
-        """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div style="
+        background: linear-gradient(135deg,#1e3a8a,#2563eb);
+        padding:35px;
+        border-radius:20px;
+        text-align:center;
+        color:white;
+    ">
+        <h1>👋 Selamat Datang di SPEKTRA</h1>
+        <h3>Sistem Pendukung Eksperimen Kimia Terapan</h3>
+        <p>
+        Teman belajar dan praktikum bagi mahasiswa Analis Kimia.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.success("""
+    🧪 Selamat datang!
+
+    SPEKTRA hadir untuk membantu kegiatan praktikum kimia melalui
+    kalkulator kimia, analisis kesalahan praktikum, serta fitur
+    pembelajaran interaktif yang mudah digunakan.
+    """)
+
+    st.markdown("## ⭐ Beri Ulasan untuk SPEKTRA")
+
+   
+st.markdown("""
+<div style="
+padding:10px;
+border-radius:10px;
+background-color:#f8fafc;
+margin-bottom:10px;">
+<h4>💬 Kesan dan Saran</h4>
+</div>
+""", unsafe_allow_html=True)
+
+ulasan = st.text_area(
+    "",
+    placeholder="Tuliskan pengalaman Anda menggunakan SPEKTRA...",
+    height=150
+)
+
+    if st.button("📨 Kirim Ulasan"):
+        st.session_state.reviews.append({
+            "rating": rating,
+            "ulasan": ulasan
+        })
+
+        st.success("Terima kasih atas ulasan Anda! ⭐")
+
+    if st.session_state.reviews:
+
+        st.markdown("### 📋 Ulasan Pengguna")
+
+        for review in reversed(st.session_state.reviews):
+            st.info(
+                f"{'⭐' * review['rating']}\n\n{review['ulasan']}"
+            )
+
+    st.divider()
+
+    st.caption(
+        "🔬 SPEKTRA dikembangkan sebagai media pembelajaran dan pendukung praktikum mahasiswa Analis Kimia."
+    )
     
     st.divider()
     
