@@ -366,17 +366,13 @@ if menu == "🏠 Beranda":
     """)
     st.markdown("## 📚 Menu SPEKTRA")
 
-st.info("""
-🧪 Kalkulator Kimia
-
-🧠 Analisis Praktikum
-
-🎮 Quiz Center
-
-🎨 Tebak Warna Reaksi
-
-📖 Materi Dasar Kimia
-""")
+    st.info("""
+        🧪 Kalkulator Kimia
+        🧠 Analisis Praktikum
+        🎮 Quiz Center
+        🎨 Tebak Warna Reaksi
+        📖 Materi Dasar Kimia
+        """)
 
     st.markdown("## ⭐ Beri Penilaian untuk SPEKTRA")
 
