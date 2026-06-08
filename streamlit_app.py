@@ -1257,6 +1257,76 @@ elif menu == "📝 Quiz Center":
             "KCl"
         ]
     )
+    
+    q4 = st.radio(
+        "4. Rumus pengenceran yang benar adalah?",
+        [
+            "C₁ + V₁ = C₂ + V₂",
+            "C₁V₁ = C₂V₂",
+            "C₁/C₂ = V₁/V₂",
+            "C₁V₂ = C₂V₁"
+        ]
+    )
+
+    q5 = st.radio(
+        "5. Indikator fenolftalein dalam suasana basa berwarna?",
+        [
+            "Tidak berwarna",
+            "Kuning",
+            "Merah muda",
+            "Hijau"
+        ]
+    )
+
+    q6 = st.radio(
+        "6. Ion penyebab kesadahan air adalah?",
+        [
+            "Na⁺ dan K⁺",
+            "Ca²⁺ dan Mg²⁺",
+            "Cl⁻ dan SO₄²⁻",
+            "H⁺ dan OH⁻"
+        ]
+    )
+    
+    q7 = st.radio(
+        "7. AgNO₃ digunakan pada titrasi jenis?",
+        [
+            "Asam-basa",
+            "Kompleksometri",
+            "Argentometri",
+            "Permanganometri"
+        ]
+    )
+    
+    q8 = st.radio(
+        "8. Warna endapan AgCl adalah?",
+        [
+            "Merah",
+            "Putih",
+            "Biru",
+            "Hijau"
+        ]
+    )
+    
+    q9 = st.radio(
+        "9. KMnO₄ merupakan zat?",
+        [
+            "Reduktor kuat",
+            "Oksidator kuat",
+            "Indikator",
+            "Buffer"
+        ]
+    )
+    
+    q10 = st.radio(
+        "10. Alat yang digunakan untuk titrasi adalah?",
+        [
+            "Pipet tetes",
+            "Gelas ukur",
+            "Buret",
+            "Labu ukur"
+        ]
+    )
 
     if st.button("Periksa Jawaban"):
 
@@ -1268,9 +1338,29 @@ elif menu == "📝 Quiz Center":
 
         if q3 == "AgCl":
             skor += 1
-
+            
+        if q4 == "C₁V₁ = C₂V₂":
+            skor += 1
+        
+        if q5 == "Merah muda":
+            skor += 1
+        
+        if q6 == "Ca²⁺ dan Mg²⁺":
+            skor += 1
+        
+        if q7 == "Argentometri":
+            skor += 1
+        
+        if q8 == "Putih":
+            skor += 1
+        
+        if q9 == "Oksidator kuat":
+            skor += 1
+        
+        if q10 == "Buret":
+            skor += 1
         st.success(
-            f"Skor Anda = {skor}/3"
+           f"🎉 Skor Anda = {skor}/10"
         )
 st.divider()
 
