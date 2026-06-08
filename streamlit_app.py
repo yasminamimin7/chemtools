@@ -761,7 +761,10 @@ elif menu == "🎮 Tebak Warna Reaksi":
 # 3. ANALISIS KESALAHAN
 # =========================
 elif menu == "🧠 Analisis Kesalahan":
-    st.markdown(f"<h1 style='color:{theme['accent']};'>🧠 Analisis Kesalahan Praktikum</h1>", unsafe_allow_html=True)
+    st.markdown(
+        f"<h1 style='color:{theme['accent']};'>🧠 Analisis Kesalahan Praktikum</h1>", 
+        unsafe_allow_html=True
+    )
     st.write("🔍 Hadapi masalah saat praktikum? Dapatkan analisis dan solusi terbaik di sini!")
     
     col1, col2 = st.columns([3, 1])
