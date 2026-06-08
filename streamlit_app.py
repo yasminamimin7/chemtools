@@ -822,7 +822,7 @@ elif menu == "🧠 Analisis Kesalahan":
             
             with col3:
                 st.markdown(f"""
-                ### 🟢 Pencegahan Ke Depan
+                ### 🟢 Pencegahan Ke Depannya
                 ✅ Catat tanggal kadaluarsa reagen
                 
                 ✅ Simpan di tempat gelap & sejuk
@@ -861,7 +861,7 @@ elif menu == "🧠 Analisis Kesalahan":
             
             with col3:
                 st.markdown(f"""
-                ### 🟢 Pencegahan Ke Depan
+                ### 🟢 Pencegahan Ke Depannya
                 ✅ Latih pembacaan meniskus
                 
                 ✅ Gunakan lampu untuk pembacaan
@@ -901,7 +901,7 @@ elif menu == "🧠 Analisis Kesalahan":
 
             with col3:
                 st.markdown("""
-                ### 🟢 Pencegahan Ke Depan
+                ### 🟢 Pencegahan Ke Depannya
                 ✅ Standarisasi larutan terlebih dahulu
         
                 ✅ Gunakan buret yang terkalibrasi
@@ -911,6 +911,91 @@ elif menu == "🧠 Analisis Kesalahan":
                 ✅ Catat volume dengan teliti
         
                 ✅ Tambahkan titran setetes demi setetes mendekati end point
+                """)
+               
+        elif masalah == "🧂 Kristal tidak terbentuk":
+
+            st.markdown(
+                f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>",
+                unsafe_allow_html=True
+             )
+
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.markdown("""
+                ### 🔴 Kemungkinan Penyebab
+                1. Larutan belum jenuh
+                2. Pendinginan terlalu cepat
+                3. Terdapat pengotor
+                4. Konsentrasi larutan terlalu rendah
+                5. pH tidak sesuai
+                """)
+
+            with col2:
+                st.markdown("""
+                ### 🟡 Solusi Praktis
+                1. Pekatkan larutan dengan pemanasan
+                2. Dinginkan secara perlahan
+                3. Gunakan larutan yang lebih murni
+                4. Tambahkan kristal inti (seed crystal)
+                5. Sesuaikan kondisi pH
+                """)
+
+            with col3:
+                st.markdown("""
+                ### 🟢 Pencegahan Ke Depan
+                ✅ Gunakan bahan kimia berkualitas
+        
+                ✅ Kontrol suhu dengan baik
+        
+                ✅ Hindari kontaminasi
+        
+                ✅ Ikuti prosedur kristalisasi
+        
+                ✅ Catat kondisi percobaan
+                """)
+        elif masalah == "🫧 Gas tidak keluar":
+
+            st.markdown(
+                f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>",
+                unsafe_allow_html=True
+                )
+
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.markdown("""
+                ### 🔴 Kemungkinan Penyebab
+                1. Reaktan tidak bereaksi
+                2. Konsentrasi terlalu rendah
+                3. Suhu terlalu rendah
+                4. Reagen sudah rusak
+                5. Kesalahan pencampuran
+                """)
+
+            with col2:
+                st.markdown("""
+                ### 🟡 Solusi Praktis
+                1. Periksa kembali reaktan
+                2. Tingkatkan konsentrasi larutan
+                3. Berikan pemanasan jika diperlukan
+                4. Gunakan reagen baru
+                5. Ulangi prosedur sesuai SOP
+                """)
+        
+            with col3:
+                st.markdown("""
+                ### 🟢 Pencegahan Ke Depan
+                ✅ Verifikasi reagen sebelum digunakan
+        
+                ✅ Perhatikan suhu reaksi
+        
+                ✅ Gunakan alat yang bersih
+        
+                ✅ Ikuti urutan pencampuran yang benar
+        
+                ✅ Lakukan uji skala kecil terlebih dahulu
                 """)
 
 # =========================
