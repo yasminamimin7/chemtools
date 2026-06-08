@@ -701,6 +701,40 @@ elif menu == "🎮 Tebak Warna Reaksi":
             "jawaban": "Merah darah",
             "penjelasan": "Kompleks [Fe(SCN)]²⁺ memberikan warna merah darah yang kuat. Sangat sensitif untuk deteksi Fe³⁺! 🔴"
         }
+        {
+            "pertanyaan": "Pada titrasi EDTA, indikator Eriochrome Black T sebelum titik akhir berwarna?",
+            "pilihan": ["Biru", "Merah anggur", "Hijau", "Kuning"],
+            "jawaban": "Merah anggur",
+            "penjelasan": "EBT membentuk kompleks dengan ion logam sehingga berwarna merah anggur sebelum titik akhir. 🍷"
+        },
+        
+        {
+            "pertanyaan": "Pada titrasi EDTA, warna larutan pada titik akhir adalah?",
+            "pilihan": ["Merah", "Biru", "Hijau", "Kuning"],
+            "jawaban": "Biru",
+            "penjelasan": "Setelah semua ion logam terikat EDTA, indikator bebas berwarna biru. 🔵"
+        },
+        
+        {
+            "pertanyaan": "Ag⁺ + CrO₄²⁻ menghasilkan endapan berwarna?",
+            "pilihan": ["Putih", "Kuning", "Merah bata", "Hijau"],
+            "jawaban": "Merah bata",
+            "penjelasan": "Ag₂CrO₄ merupakan endapan merah bata yang menjadi indikator titik akhir metode Mohr. 🧱"
+        },
+        
+        {
+            "pertanyaan": "Larutan KMnO₄ memiliki warna?",
+            "pilihan": ["Hijau", "Biru", "Ungu", "Merah"],
+            "jawaban": "Ungu",
+            "penjelasan": "Kalium permanganat memiliki warna ungu pekat yang sangat khas. 🟣"
+        },
+        
+        {
+            "pertanyaan": "Pada permanganometri, kelebihan satu tetes KMnO₄ setelah titik akhir menghasilkan warna?",
+            "pilihan": ["Merah muda pucat", "Hijau", "Biru", "Kuning"],
+            "jawaban": "Merah muda pucat",
+            "penjelasan": "Titik akhir permanganometri ditandai munculnya warna merah muda pucat yang bertahan sekitar 30 detik. 🌸"
+        },
     ]
     
     # Score Display
