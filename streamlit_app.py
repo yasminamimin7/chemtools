@@ -340,14 +340,19 @@ st.markdown(f"""
 # =========================
 if menu == "🏠 Beranda":
 
-    st.markdown("""
+    st.markdown(f"""
     <div style="
-        background: linear-gradient(135deg,#1e3a8a,#2563eb);
+        background: linear-gradient(
+            135deg,
+            {theme['secondary']},
+            {theme['primary']}
+        );
         padding:35px;
         border-radius:20px;
         text-align:center;
         color:white;
         margin-bottom:20px;
+        box-shadow:0px 8px 20px rgba(0,0,0,0.3);
     ">
         <h1>👋 Selamat Datang di SPEKTRA</h1>
         <h3>Sistem Pendukung Eksperimen Kimia Terapan</h3>
