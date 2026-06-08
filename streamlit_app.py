@@ -373,20 +373,6 @@ if menu == "🏠 Beranda":
     if selected is not None:
 
         st.markdown("## 💬 Kritik dan Saran")
-
-        # KOTAK PUTIH MULAI
-        st.markdown("""
-        <div style="
-            background-color:white;
-            padding:20px;
-            border-radius:15px;
-            box-shadow:0px 2px 10px rgba(0,0,0,0.1);
-            margin-top:10px;
-            margin-bottom:15px;
-        ">
-        """, unsafe_allow_html=True)
-
-        st.markdown("## 💬 Kritik dan Saran")
     
         ulasan = st.text_area(
             "Tulis komentar Anda:",
