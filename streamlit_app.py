@@ -734,7 +734,7 @@ elif menu == "🎮 Tebak Warna Reaksi":
             "pilihan": ["Merah muda pucat", "Hijau", "Biru", "Kuning"],
             "jawaban": "Merah muda pucat",
             "penjelasan": "Titik akhir permanganometri ditandai munculnya warna merah muda pucat yang bertahan sekitar 30 detik. 🌸"
-        },
+        }
     ]
     
     # Score Display
