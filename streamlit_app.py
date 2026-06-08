@@ -872,6 +872,46 @@ elif menu == "🧠 Analisis Kesalahan":
                 
                 ✅ Lakukan warming up practice
                 """)
+        elif masalah == "⏱️ End point terlalu cepat":
+
+            st.markdown(
+                f"<h3 style='color:{theme['accent']};'>📋 Analisis Masalah</h3>",
+                unsafe_allow_html=True
+            )
+
+    col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.markdown("""
+                ### 🔴 Kemungkinan Penyebab
+                1. Konsentrasi titran terlalu tinggi
+                2. Penambahan titran terlalu cepat
+                3. Sampel terlalu sedikit
+                4. Kesalahan pengenceran larutan
+                """)
+
+            with col2:
+                st.markdown("""
+                ### 🟡 Solusi Praktis
+                1. Encerkan titran sesuai kebutuhan
+                2. Teteskan lebih perlahan mendekati end point
+                3. Gunakan volume sampel yang sesuai
+                4. Periksa kembali perhitungan pengenceran
+                """)
+
+            with col3:
+                st.markdown("""
+                ### 🟢 Pencegahan Ke Depan
+                ✅ Standarisasi larutan terlebih dahulu
+        
+                ✅ Gunakan buret yang terkalibrasi
+        
+                ✅ Lakukan titrasi pendahuluan
+        
+                ✅ Catat volume dengan teliti
+        
+                ✅ Tambahkan titran setetes demi setetes mendekati end point
+                """)
 
 # =========================
 # 4. PANDUAN LENGKAP
