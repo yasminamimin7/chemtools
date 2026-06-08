@@ -355,11 +355,14 @@ if menu == "🏠 Beranda":
     </div>
     """, unsafe_allow_html=True)
     
-    st.header("Bagaimana pengalamanmu menggunakan website ini?")
+    st.markdown("#### ⭐ Bagaimana pengalamanmu menggunakan website ini?")
     import streamlit as st
 
     sentiment_mapping = ["one", "two", "three", "four", "five"]
     selected = st.feedback("stars")
+    
+    st.markdown("😊 **Tulis rating di sini yaaa!**")
+    
     if selected is not None:
         st.markdown(f"You selected {sentiment_mapping[selected]} star(s).")
 
