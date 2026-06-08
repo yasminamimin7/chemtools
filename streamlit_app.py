@@ -700,7 +700,7 @@ elif menu == "🎮 Tebak Warna Reaksi":
             "pilihan": ["Kuning", "Merah darah", "Ungu", "Hijau"],
             "jawaban": "Merah darah",
             "penjelasan": "Kompleks [Fe(SCN)]²⁺ memberikan warna merah darah yang kuat. Sangat sensitif untuk deteksi Fe³⁺! 🔴"
-        }
+        },
         {
             "pertanyaan": "Pada titrasi EDTA, indikator Eriochrome Black T sebelum titik akhir berwarna?",
             "pilihan": ["Biru", "Merah anggur", "Hijau", "Kuning"],
