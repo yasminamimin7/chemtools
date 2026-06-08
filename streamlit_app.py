@@ -366,38 +366,39 @@ if menu == "🏠 Beranda":
 
     sentiment_mapping = [":material/thumb_down:", ":material/thumb_up:"]
     selected = st.feedback("thumbs")
+    
     if selected is not None:
 
-    st.markdown("## 💬 Kritik dan Saran")
+        st.markdown("## 💬 Kritik dan Saran")
 
-    # KOTAK PUTIH MULAI
-    st.markdown("""
-    <div style="
-        background-color:white;
-        padding:20px;
-        border-radius:15px;
-        box-shadow:0px 2px 10px rgba(0,0,0,0.1);
-        margin-top:10px;
-        margin-bottom:15px;
-    ">
-    """, unsafe_allow_html=True)
+        # KOTAK PUTIH MULAI
+        st.markdown("""
+        <div style="
+            background-color:white;
+            padding:20px;
+            border-radius:15px;
+            box-shadow:0px 2px 10px rgba(0,0,0,0.1);
+            margin-top:10px;
+            margin-bottom:15px;
+        ">
+        """, unsafe_allow_html=True)
 
-    st.markdown("## 💬 Kritik dan Saran")
-
-    ulasan = st.text_area(
-        "Tulis komentar Anda:",
-        placeholder="Berikan kritik, saran, atau pengalaman Anda menggunakan SPEKTRA...",
-        height=150
-    )
-
-    if st.button("📨 Kirim Ulasan", use_container_width=True):
-
-        if ulasan.strip() == "":
-            st.warning("Silakan isi komentar terlebih dahulu.")
-        else:
-            st.success("✅ Terima kasih! Ulasan Anda berhasil dikirim.")
-            st.balloons()
-    st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("## 💬 Kritik dan Saran")
+    
+        ulasan = st.text_area(
+            "Tulis komentar Anda:",
+            placeholder="Berikan kritik, saran, atau pengalaman Anda menggunakan SPEKTRA...",
+            height=150
+        )
+    
+        if st.button("📨 Kirim Ulasan", use_container_width=True):
+    
+            if ulasan.strip() == "":
+                st.warning("Silakan isi komentar terlebih dahulu.")
+            else:
+                st.success("✅ Terima kasih! Ulasan Anda berhasil dikirim.")
+                st.balloons()
+        st.markdown("</div>", unsafe_allow_html=True)
     
     st.divider()
     
