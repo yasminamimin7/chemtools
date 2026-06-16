@@ -279,7 +279,7 @@ with st.sidebar:
 chemical_db = {
 
     "HCl": {
-        "nama":"Hydrochloric Acid",
+        "nama":"Asam Klorida",
         "rumus":"HCl",
         "mr":"36.46",
         "bahaya":"Korosif",
@@ -290,7 +290,7 @@ chemical_db = {
     },
 
     "NaOH": {
-        "nama":"Sodium Hydroxide",
+        "nama":"Natrium Hidroksida",
         "rumus":"NaOH",
         "mr":"40.00",
         "bahaya":"Korosif kuat",
@@ -300,8 +300,8 @@ chemical_db = {
         "reaktivitas":"Bereaksi dengan asam"
     },
 
-    "KMnO4": {
-        "nama":"Potassium Permanganate",
+    "KMnO₄": {
+        "nama":"Kalium Permanganat",
         "rumus":"KMnO₄",
         "mr":"158.03",
         "bahaya":"Oksidator kuat",
@@ -311,8 +311,8 @@ chemical_db = {
         "reaktivitas":"Bereaksi dengan reduktor"
     },
 
-    "AgNO3": {
-        "nama":"Silver Nitrate",
+    "AgNO₃": {
+        "nama":"Perak Nitrat",
         "rumus":"AgNO₃",
         "mr":"169.87",
         "bahaya":"Oksidator",
@@ -696,7 +696,7 @@ elif menu == "🎮 Tebak Warna Reaksi":
             "pertanyaan": "Pada titrasi EDTA, indikator Eriochrome Black T sebelum titik akhir berwarna?",
             "pilihan": ["Biru", "Merah anggur", "Hijau", "Kuning"],
             "jawaban": "Merah anggur",
-            "penjelasan": "EBT membentuk kompleks dengan ion logam sehingga berwarna merah anggur sebelum titik akhir. 🍷"
+            "penjelasan": "EDTA membentuk kompleks dengan ion logam sehingga berwarna merah anggur sebelum titik akhir. 🍷"
         },
         
         {
@@ -1211,7 +1211,7 @@ elif menu == "⚗️ Reaksi Titrasi":
         )
 
         st.success(
-            "Perubahan warna indikator PP: tidak berwarna → merah muda"
+            "Perubahan warna indikator PP: Tidak berwarna → Merah muda seulas"
         )
 
     elif jenis == "Permanganometri":
@@ -1221,7 +1221,7 @@ elif menu == "⚗️ Reaksi Titrasi":
         )
 
         st.success(
-            "Warna ungu KMnO₄ menghilang"
+            "Warna ungu KMnO₄ menghilang: Tidak berwarna → Merah muda seulas"
         )
 
     elif jenis == "Argentometri":
@@ -1231,7 +1231,7 @@ elif menu == "⚗️ Reaksi Titrasi":
         )
 
         st.success(
-            "Terbentuk endapan putih AgCl"
+            "Larutan warna kuning → Terbentuk endapan putih AgCl"
         )
 
     elif jenis == "Kompleksometri":
@@ -1241,7 +1241,7 @@ elif menu == "⚗️ Reaksi Titrasi":
         )
 
         st.success(
-            "Terjadi pembentukan kompleks logam-EDTA"
+            "Terjadi pembentukan kompleks logam-EDTA: Warna merah anggur tidak berwarna → Larutan warna biru"
         )
 # =========================
 # QUIZ CENTER
