@@ -279,7 +279,7 @@ with st.sidebar:
 chemical_db = {
 
     "HCl": {
-        "nama":"Hydrochloric Acid",
+        "nama":"Asam Klorida",
         "rumus":"HCl",
         "mr":"36.46",
         "bahaya":"Korosif",
@@ -290,7 +290,7 @@ chemical_db = {
     },
 
     "NaOH": {
-        "nama":"Sodium Hydroxide",
+        "nama":"Natrium Hidroksida",
         "rumus":"NaOH",
         "mr":"40.00",
         "bahaya":"Korosif kuat",
@@ -301,7 +301,7 @@ chemical_db = {
     },
 
     "KMnO4": {
-        "nama":"Potassium Permanganate",
+        "nama":"Kalium Permangant",
         "rumus":"KMnO₄",
         "mr":"158.03",
         "bahaya":"Oksidator kuat",
@@ -312,7 +312,7 @@ chemical_db = {
     },
 
     "AgNO3": {
-        "nama":"Silver Nitrate",
+        "nama":"Perak Nitrat",
         "rumus":"AgNO₃",
         "mr":"169.87",
         "bahaya":"Oksidator",
@@ -1211,7 +1211,7 @@ elif menu == "⚗️ Reaksi Titrasi":
         )
 
         st.success(
-            "Perubahan warna indikator PP: tidak berwarna → merah muda"
+            "Perubahan warna indikator PP: tidak berwarna → merah muda seulas"
         )
 
     elif jenis == "Permanganometri":
@@ -1221,7 +1221,7 @@ elif menu == "⚗️ Reaksi Titrasi":
         )
 
         st.success(
-            "Warna ungu KMnO₄ menghilang"
+            "Warna ungu KMnO₄ menghilang: Tidak berwarna → merah muda seulas"
         )
 
     elif jenis == "Argentometri":
@@ -1231,7 +1231,7 @@ elif menu == "⚗️ Reaksi Titrasi":
         )
 
         st.success(
-            "Terbentuk endapan putih AgCl"
+            "Larutan kuning → terbentuk endapan putih AgCl"
         )
 
     elif jenis == "Kompleksometri":
@@ -1241,7 +1241,7 @@ elif menu == "⚗️ Reaksi Titrasi":
         )
 
         st.success(
-            "Terjadi pembentukan kompleks logam-EDTA"
+            "Terjadi pembentukan kompleks logam-EDTA: Merah anggur → Warna biru"
         )
 # =========================
 # QUIZ CENTER
