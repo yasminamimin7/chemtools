@@ -279,7 +279,7 @@ with st.sidebar:
 chemical_db = {
 
     "HCl": {
-        "nama":"Hydrochloric Acid",
+        "nama":"Asam Klorida",
         "rumus":"HCl",
         "mr":"36.46",
         "bahaya":"Korosif",
@@ -290,7 +290,7 @@ chemical_db = {
     },
 
     "NaOH": {
-        "nama":"Sodium Hydroxide",
+        "nama":"Natrium Hidroksida",
         "rumus":"NaOH",
         "mr":"40.00",
         "bahaya":"Korosif kuat",
@@ -301,7 +301,7 @@ chemical_db = {
     },
 
     "KMnO4": {
-        "nama":"Potassium Permanganate",
+        "nama":"Kalium Permangant",
         "rumus":"KMnO₄",
         "mr":"158.03",
         "bahaya":"Oksidator kuat",
@@ -312,7 +312,7 @@ chemical_db = {
     },
 
     "AgNO3": {
-        "nama":"Silver Nitrate",
+        "nama":"Perak Nitrat",
         "rumus":"AgNO₃",
         "mr":"169.87",
         "bahaya":"Oksidator",
